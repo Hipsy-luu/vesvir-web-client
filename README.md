@@ -31,7 +31,7 @@
 ## Installation
 
 ```bash
-$ npm install
+$ npm installr
 ```
 
 ## Running the app
