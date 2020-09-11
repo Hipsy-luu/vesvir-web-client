@@ -1,0 +1,20 @@
+<!-- Visitas a la aplicación, monto de ventas, de donde proceden los usuarios, porcentaje de 
+    usuarios por sexo, porcentaje de usuarios por edad, estado de procedencia, top 5 de marcas mas vendidas. -->
+
+
+<app-info-card 
+    [onlineUsers]="users"
+    [usersToday]="usersToday"
+    [totalSales]="0"
+    ></app-info-card>
+<app-sales-income></app-sales-income>
+<app-top-selling-products></app-top-selling-products>
+
+<div class="row">
+    <div class="col-6">
+        <app-recent-comments></app-recent-comments>
+    </div>
+    <div class="col-6">
+        <app-reviews-stats></app-reviews-stats>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+.full-centered {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+}
+
+.full-left {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: left;
+}
+
+.full-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.margin-hori-10-5{
+    margin: 10px 5px;
+}
+
+.ma-l-70{
+  margin-left: 70px;
+}
+
+.bg-header-images {
+  background-color: #a8a8a8 !important;
+}
+
+.font-normal{
+    font-size: medium;
+}
+
+.no-padding{
+  padding: 0px;
+}
+
+.pd-10-l {
+  padding-left: 10px;
+}
+
+.pd-10-r {
+  padding-right: 10px;
+}
+
+.pd-10-t-b{
+  padding: 10px 0px;
+}
+
+.shadow-box {
+    margin: 5px;
+    padding: 5px 10px;
+    box-shadow: inset 0px 0px 9.5px -1.5px #00000069;
+    border-radius: 15px;
+    background-color: snow;
+    color: #3e5569;
+    cursor:move;
+}
+
+.position-selector{
+    margin: 5px;
+    padding: 10px;
+    border-radius: 15px;
+    cursor:move;
+}
+
+.position-selector:hover {
+    background-color: #48226b;
+    color: white;
+}
+
+.genre-label{
+    padding: 2px 10px;
+    margin: 5px 0px;
+    border-radius: 15px;
+    color: whitesmoke;
+}

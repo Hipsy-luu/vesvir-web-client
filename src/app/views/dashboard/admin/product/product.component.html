@@ -1,0 +1,313 @@
+<div class="row">
+  <div class="card col-2">
+    <div class="p-l-10 p-r-10 p-t-10 p-b-10 d-flex align-items-center">
+      <div class="row">
+        <div class="col-12">
+          <div class="input-field m-t-0 m-b-0">
+            <label class="form-control border-0" type="text">Información</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="m-t-0" />
+    <ul class="mailbox list-style-none">
+      <li>
+        <div class="" style="height: calc(100vh - 410px);margin: 40px 3px;">
+          <div class="row">
+            <div class="col-12 full-centered">
+              <img
+                class="image-product"
+                src="assets/images/product/chair3.png"
+                alt="user"
+              />
+            </div>
+          </div>
+          
+          <!-- REFERENCE -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Referencia</label>
+            </div>
+            <div class="col-8 full-centered">
+              ss
+            </div>
+          </div>
+          <!-- Name -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Nombre</label>
+            </div>
+            <div class="col-8 full-centered">
+              ss
+            </div>
+          </div>
+          <!-- CATEGORY -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Categoría</label>
+            </div>
+            <div class="col-8 full-centered">
+              ss
+            </div>
+          </div>
+          <!-- GENRES -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Género</label>
+            </div>
+            <div class="col-8 full-centered">
+              <div class="row full-centered margin-hori-10-5">
+                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
+                  Niña
+                </label>
+                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #2b3de2;margin-bottom: 5px;">
+                  Niño
+                </label>
+              </div>
+              <div class="row full-centered margin-hori-10-5">
+                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22bc3;margin-bottom: 5px;">
+                  Mujer
+                </label>
+                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
+                  Hombre
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- UNITS -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Unidades</label>
+            </div>
+            <div class="col-8 full-centered">
+              12
+            </div>
+          </div>
+          <!-- STATE -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label>Estado</label>
+            </div>
+            <div class="col-8 full-centered">
+              <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #469b58;margin-bottom: 5px;">
+                Activado
+              </label>
+            </div>
+          </div>
+          <!-- PRICE -->
+          <div class="row pd-10-t-b">
+            <div class="col-4 full-right">
+              <label class="no-margin">Precio</label>
+            </div>
+            <div class="col-8 full-centered">
+              $250.00
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-10">
+    <div class="card">
+      <!-- TITLE -->
+      <div
+        class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center"
+      >
+        <div class="text-white m-b-0 m-l-15 font-18">Stickers</div>
+        <div class="text-white m-b-0 m-l-15 font-20 no-margin">
+          <label class="label-images-count">{{ images.length }}</label>
+        </div>
+      </div>
+
+      <!-- ADD IMAGE -->
+      <div class="card-body border-top">
+        <form class="no-margin">
+          <div class="form-group no-margin">
+            <div class="row">
+              <div class="col-4">
+                <div
+                  class="row full-centered full-right"
+                  style="height: 49px; margin-right: 10px;"
+                >
+                  <div class="input-field m-t-0 m-b-0">
+                    <label>Añadir un nuevo sticker para este producto</label>
+                  </div>
+                </div>
+                <div
+                  class="row full-centered full-right"
+                  style="height: 49px; margin-right: 10px;"
+                >
+                  <div class="input-field m-t-0 m-b-0">
+                    <label>Titulo</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="row">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Subir</span>
+                    </div>
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        id="inputGroupFile01"
+                      />
+                      <label class="custom-file-label" for="inputGroupFile01"
+                        >Añadir archivo PNG</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row full-centered">
+                  <input
+                    type="text"
+                    class="form-control"
+                    maxlength="50"
+                    id="maxval"
+                    aria-describedby="maxval"
+                    placeholder="Nombre del Sticker"
+                  />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row full-centered">
+                  <div class="col-12">
+                    <span
+                      class="card full-centered"
+                      style="
+                        background-image: url('assets/images/product/fondo-stiker.jpg');
+                        width: fit-content;
+                        background-size: cover;
+                      "
+                    >
+                      <img
+                        class="image-product"
+                        src="assets/images/product/chair2.png"
+                        alt="user"
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 full-centered">
+                <button
+                  type="button"
+                  class="btn btn-info waves-effect waves-light"
+                >
+                  <i class="fas fa-upload"></i> Subir
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr class="m-t-0" />
+      <form>
+        <div class="form-group form-inline pd-10-l">
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="searchValue"
+            (ngModelChange)="filterByName($event)"
+            placeholder="Buscar por Titulo"
+            class="form-control ml-2"
+            type="text"
+          />
+          <i class="pd-10-l fas fa-search"></i>
+        </div>
+      </form>
+      <!-- EDIT IMAGES -->
+      <div class="card-body p-t-0 p-r-0">
+        <div
+          class="chat-box p-r-15"
+          style="height: calc(100vh - 600px); position: relative;"
+          [perfectScrollbar]="config"
+        >
+          <!-- ITEMS -->
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr class="row">
+                  <th scope="col" class="col-2 full-centered">Imagen</th>
+                  <th scope="col" class="col-4 full-left">Titulo</th>
+                  <th scope="col" class="col-3 full-centered">Posición</th>
+                  <th scope="col" class="col-3 full-centered">Acciones</th>
+                </tr>
+              </thead>
+              <tbody
+                class="dragndrop"
+                [dragula]="'images-list'"
+                [(dragulaModel)]="imagesFiltered"
+              >
+                <!-- <div >
+                  <div *ngFor='let text of many2' [innerHtml]='text'></div>
+               </div> -->
+                <tr
+                  class="row"
+                  *ngFor="let image of imagesFiltered; index as i"
+                >
+                  <th scope="col" class="col-2 full-centered">
+                    <img
+                      [src]="image.image"
+                      class="mr-2"
+                      style="width: 40px;"
+                    />
+                  </th>
+                  <th scope="col" class="col-4 full-left">{{ image.name }}</th>
+                  <th scope="col" class="col-3 full-centered">
+                    <span class="position-selector">
+                      <i class="fas fa-arrows-alt pd-10-r"></i>
+                      <label class="no-margin shadow-box">
+                        {{ image.position + 1 }}
+                      </label>
+                    </span>
+                  </th>
+                  <th scope="col" class="col-3 full-centered">
+                    <button
+                      (click)="deleteImage(image.id)"
+                      class="btn mr-0 btn-outline-secondary"
+                      type="button"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                      Borrar esta imagen
+                    </button>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <hr class="m-t-0" />
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6 full-left">
+            <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options" type="button">
+              <div class="row full-centered">
+                <i class="fas fa-window-close "></i>
+              </div>
+              <div class="row full-centered font-normal">
+                Cancelar
+              </div>
+            </button>
+          </div>
+          <div class="col-6 full-right">
+            <button class="btn mr-0 btn-outline-secondary button-options" type="button">
+              <div class="row full-centered">
+                <i class="fas fa-save"></i>
+              </div>
+              <div class="row full-centered font-normal">
+                Guardar
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
