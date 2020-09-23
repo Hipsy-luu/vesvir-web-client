@@ -1,3 +1,7 @@
+body, p{
+  margin: 0 !important;
+}
+
 /* You can add global styles to this file, and also import other style files */
 .full-centered {
   display: flex !important;
@@ -80,4 +84,8 @@
     margin: 5px 0px;
     border-radius: 15px;
     color: whitesmoke;
+}
+
+.m-width{
+  max-width: 300px;
 }

@@ -8,6 +8,7 @@ import { BlankComponent } from './layouts/blank/blank.component';
 //Vistas de las paginas con carga normal
 import { LoginComponent } from './views/login/login.component';
 import { NotfoundComponent } from './views/404/not-found.component';
+import { LandingPageComponent } from './views/landing-page/landing-page.component';
 
 
 export const Approutes: Routes = [
@@ -28,6 +29,10 @@ export const Approutes: Routes = [
     path: '',
     component: BlankComponent,
     children: [
+      {
+        path: 'landing-page',
+        component: LandingPageComponent
+      },
       {
         path: 'login',
         component: LoginComponent
