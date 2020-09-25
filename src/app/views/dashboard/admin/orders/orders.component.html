@@ -1,1 +1,191 @@
-<p>orders works!</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            Pedidos
+            <span class="no-margin genre-label margin-hori-10-5"
+                style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                {{dataOrders.length}}
+            </span></h4>
+        <hr class="m-t-0" />
+        <form>
+            <div class="form-group form-inline pd-10-l">
+                <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+                    (ngModelChange)="filterByProviderName($event)" placeholder="Nombre del cliente"
+                    class="form-control ml-2" type="text" />
+                <i class="pd-10-l fas fa-search"></i>
+                <!-- Modificar cantidad de desplegados -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
+                        No. Pedidos {{ pageSize }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="pageSize = 5">5</button>
+                        <button ngbDropdownItem (click)="pageSize = 10">10</button>
+                        <button ngbDropdownItem (click)="pageSize = 15">15</button>
+                    </div>
+                </div>
+
+                <!-- Filtrar por estado -->
+                <!-- <div ngbDropdown class="d-inline-block">
+            <button
+              class="outline-btn btn btn-outline-secondary ma-l-70"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+                <span *ngIf="statusSelected == 'all'">Todos</span>
+                <span *ngIf="statusSelected == 'new'">Nuevos</span>
+                <span *ngIf="statusSelected == 'approved'">Aprobados</span>
+                <span *ngIf="statusSelected == 'disapproved'">Desaprobados</span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button (click)="changeStateSelected('all')" ngbDropdownItem>
+                Todos
+              </button>
+              <button (click)="changeStateSelected('new')" ngbDropdownItem>
+                Nuevos 
+              </button>
+              <button (click)="changeStateSelected('approved')" ngbDropdownItem>
+                Aprobados
+              </button>
+              <button (click)="changeStateSelected('disapproved')" ngbDropdownItem>
+                  Desaprobados
+              </button>
+            </div>
+          </div> -->
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-12">
+                <div class="">
+                    <div class="card-body p-t-0 p-r-0">
+                        <div class="chat-box p-r-15" style="position: relative;">
+                            <!-- ITEMS -->
+
+                            <div class="">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="row">
+                                            <th scope="col" class="col-1 full-centered">ID</th>
+                                            <th scope="col" class="col-2 full-left">Cliente</th>
+                                            <th scope="col" class="col-2 full-left">Destino</th>
+                                            <th scope="col" class="col-1 full-left">Total</th>
+                                            <th scope="col" class="col-1 full-centered">Pago</th>
+                                            <th scope="col" class="col-2 full-centered">Estado</th>
+                                            <th scope="col" class="col-1 full-centered">Fecha</th>
+                                            <th scope="col" class="col-1 full-centered">No. <i
+                                                    class="fas fa-shopping-cart"></i></th>
+                                            <th scope="col" class="col-1 full-centered">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <div >
+                                            <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                        </div> -->
+                                        <tr class="row" *ngFor="
+                                            let order of dataOrdersFiltered
+                                                | slice
+                                                : (page - 1) * pageSize
+                                                : (page - 1) * pageSize + pageSize;
+                                            index as i
+                                            ">
+
+                                            <th scope="col" class="col-1 full-centered">
+                                                {{order.idOrder}}
+                                            </th>
+                                            <th scope="col" class="col-2 full-left">
+                                                {{order.nameClient}}
+                                            </th>
+                                            <th scope="col" class="col-2 full-left">
+                                                {{order.destinationCity}}
+                                            </th>
+                                            <th scope="col" class="col-1 full-left">
+                                               $ {{order.total}}
+                                            </th>
+                                            <th scope="col" class="col-1 full-centered">
+                                                <label *ngIf="order.paymentMethod == 0" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                    Tarjeta
+                                                </label>
+                                                <label *ngIf="order.paymentMethod == 1" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                    Transferencia electronica
+                                                </label>
+                                                <label *ngIf="order.paymentMethod == 2" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #23a12e;  margin-bottom: 5px;">
+                                                    Puntos de pago
+                                                </label>
+                                            </th>
+
+                                            <th scope="col" class="col-2 full-centered">
+                                                <label *ngIf="order.status == 0" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #a15523;  margin-bottom: 5px;">
+                                                    Cancelada
+                                                </label>
+                                                <label *ngIf="order.status == 1" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #236fa1;  margin-bottom: 5px;">
+                                                    En espera de pago Conecta <!-- TO DO: Aquí pueden ir algunos otros -->
+                                                </label>
+                                                <label *ngIf="order.status == 2" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #3023a1;  margin-bottom: 5px;">
+                                                    En espera de pago por transferencia electronica
+                                                </label>
+                                                <label *ngIf="order.status == 3" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #a12323;  margin-bottom: 5px;">
+                                                    Error de pago
+                                                </label>
+                                                <label *ngIf="order.status == 4" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #a1238c;  margin-bottom: 5px;">
+                                                    Reembolsado
+                                                </label>
+                                                 <!-- Estados de la app y posibles del proveedor-->
+                                                 <label *ngIf="order.status == 5" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #0f249b;  margin-bottom: 5px;">
+                                                    Pedido entregado
+                                                </label>
+                                                <label *ngIf="order.status == 6" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #afac00;  margin-bottom: 5px;">
+                                                    En transito
+                                                </label>
+                                                <label *ngIf="order.status == 7" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #174646;  margin-bottom: 5px;">
+                                                    Preparando Pedido
+                                                </label>
+                                                <label *ngIf="order.status == 8" class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #164d1a;  margin-bottom: 5px;">
+                                                    Pago Realizado
+                                                </label>
+                                            </th>
+                                            <th scope="col" class="col-1 full-centered">
+                                                {{utilitiesService.formatDate1(order.date)}}
+                                            </th>
+                                            <th scope="col" class="col-1 full-centered">
+                                                {{order.noProducts}}
+                                            </th>
+
+                                            <th scope="col" class="col-1 full-centered">
+                                                <button (click)="openOrder(order.idOrder)"
+                                                    class="btn mr-0 btn-outline-secondary" type="button">
+                                                    <i class="fas fa-search-plus"></i>
+                                                    Ver
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col" style="text-align: right;">
+                                        <ngb-pagination [(page)]="page" [pageSize]="pageSize"
+                                            [collectionSize]="dataOrdersFiltered.length"
+                                            style="width: -webkit-fill-available; text-align: right;"
+                                            class="justify-end">
+                                        </ngb-pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

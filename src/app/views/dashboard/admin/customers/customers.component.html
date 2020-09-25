@@ -1,1 +1,185 @@
-<p>customers works!</p>
+
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">
+        Administre sus clientes 
+        <span class="no-margin genre-label margin-hori-10-5"
+            style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; " >
+            {{dataCustomers.length}}
+        </span></h4>
+      <hr class="m-t-0" />
+      <form>
+        <div class="form-group form-inline pd-10-l">
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="searchValue"
+            (ngModelChange)="filterByCustomerName($event)"
+            placeholder="Buscar por nombre del cliente"
+            class="form-control ml-2"
+            type="text"
+          />
+          <i class="pd-10-l fas fa-search"></i>
+          <!-- Modificar cantidad de deplegados -->
+          <div ngbDropdown class="d-inline-block">
+            <button
+              class="outline-btn btn btn-outline-secondary ma-l-70"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              No. Clientes {{ pageSize }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="pageSize = 5">5</button>
+              <button ngbDropdownItem (click)="pageSize = 10">10</button>
+              <button ngbDropdownItem (click)="pageSize = 15">15</button>
+            </div>
+          </div>
+  
+          <!-- Filtrar por estado -->
+          <!-- <div ngbDropdown class="d-inline-block">
+            <button
+              class="outline-btn btn btn-outline-secondary ma-l-70"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+                <span *ngIf="statusSelected == 'all'">Todos</span>
+                <span *ngIf="statusSelected == 'new'">Nuevos</span>
+                <span *ngIf="statusSelected == 'approved'">Aprobados</span>
+                <span *ngIf="statusSelected == 'disapproved'">Desaprobados</span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button (click)="changeStateSelected('all')" ngbDropdownItem>
+                Todos
+              </button>
+              <button (click)="changeStateSelected('new')" ngbDropdownItem>
+                Nuevos 
+              </button>
+              <button (click)="changeStateSelected('approved')" ngbDropdownItem>
+                Aprobados
+              </button>
+              <button (click)="changeStateSelected('disapproved')" ngbDropdownItem>
+                  Desaprobados
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-12">
+          <div class="">
+            <div class="card-body p-t-0 p-r-0">
+              <div class="chat-box p-r-15" style="position: relative;">
+                <!-- ITEMS -->
+    
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr class="row">
+                        <th scope="col" class="col-1 full-centered">ID</th>
+                        <th scope="col" class="col-1 full-left">Nombre</th>
+                        <th scope="col" class="col-2 full-left">Apellidos</th>
+                        <th scope="col" class="col-2 full-left">Correo electrónico</th>
+                        <th scope="col" class="col-1 full-centered">Genero</th>
+                        <th scope="col" class="col-1 full-centered">Preferencia</th>
+                        <th scope="col" class="col-1 full-centered">Fecha de registro</th>
+                        <th scope="col" class="col-1 full-centered">Ultimo Login</th>
+                        <th scope="col" class="col-1 full-centered">No. <i class="fas fa-home"></i></th>
+                        <th scope="col" class="col-1 full-centered">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <div >
+                          <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                       </div> -->
+                      <tr
+                        class="row"
+                        *ngFor="
+                          let customer of dataCustomersFiltered
+                            | slice
+                              : (page - 1) * pageSize
+                              : (page - 1) * pageSize + pageSize;
+                          index as i
+                        "
+                      >
+                       
+                        <th scope="col" class="col-1 full-centered">
+                          {{customer.idUser}}
+                        </th>
+                        <th scope="col" class="col-1 full-left">
+                          {{customer.name}}
+                        </th>
+                        <th scope="col" class="col-2 full-left">
+                          {{customer.surnames}}
+                        </th>
+                        <th scope="col" class="col-2 full-left">
+                          {{customer.email}}
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          <label *ngIf="customer.genre == 3" class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
+                              Niña
+                          </label>
+                          <label *ngIf="customer.genre == 2" class="row no-margin genre-label margin-hori-10-5" style="background-color: #2b3de2;margin-bottom: 5px;">
+                              Niño
+                          </label>
+                          <label *ngIf="customer.genre == 1" class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22bc3;margin-bottom: 5px;">
+                              Mujer
+                          </label>
+                          <label *ngIf="customer.genre == 0" class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
+                              Hombre
+                          </label>
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          <label *ngIf="customer.actualPreference == 3" class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
+                              Niña
+                          </label>
+                          <label *ngIf="customer.actualPreference == 2" class="row no-margin genre-label margin-hori-10-5" style="background-color: #2b3de2;margin-bottom: 5px;">
+                              Niño
+                          </label>
+                          <label *ngIf="customer.actualPreference == 1" class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22bc3;margin-bottom: 5px;">
+                              Mujer
+                          </label>
+                          <label *ngIf="customer.actualPreference == 0" class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
+                              Hombre
+                          </label>
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          {{utilitiesService.formatDate1(customer.createDate)}}
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          {{utilitiesService.formatDate1(customer.lastLogin)}}
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          {{customer.noDirections}}
+                        </th>
+                        <th scope="col" class="col full-centered">
+                          <button
+                            (click)="openCustomer(customer.idUser)"
+                            class="btn mr-0 btn-outline-secondary"
+                            type="button"
+                          >
+                            <i class="fas fa-edit"></i>
+                            Modificar
+                          </button>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col" style="text-align: right;">
+                      <ngb-pagination
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [collectionSize]="dataCustomersFiltered.length"
+                        style="width: -webkit-fill-available; text-align: right;"
+                        class="justify-end"
+                      >
+                      </ngb-pagination>
+                    </div>
+                  </div>
+                </div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

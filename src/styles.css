@@ -21,8 +21,20 @@
   margin: 0px;
 }
 
+.full-width{
+  width: 100%;
+}
+
 .margin-hori-10-5{
     margin: 10px 5px;
+}
+
+.ma-0-10{
+  margin: 0px 15px;
+}
+
+.ma-l-40{
+  margin-left: 40px;
 }
 
 .ma-l-70{
@@ -41,6 +53,10 @@
   padding: 0px;
 }
 
+.pd-10{
+  padding: 10px;
+}
+
 .pd-10-l {
   padding-left: 10px;
 }
@@ -52,6 +68,7 @@
 .pd-10-t-b{
   padding: 10px 0px;
 }
+
 
 .shadow-box {
     margin: 5px;
@@ -80,4 +97,8 @@
     margin: 5px 0px;
     border-radius: 15px;
     color: whitesmoke;
+}
+
+.size-8 {
+  font-size: 1.5rem;
 }

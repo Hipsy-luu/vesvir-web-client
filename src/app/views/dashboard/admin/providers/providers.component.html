@@ -1,1 +1,161 @@
-<p>providers works!</p>
+
+<div class="card">
+    <div class="card-body">
+      <h4 class="card-title">
+        Administre sus Proveedores 
+        <span class="no-margin genre-label margin-hori-10-5"
+            style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; " >
+            {{dataProviders.length}}
+        </span></h4>
+      <hr class="m-t-0" />
+      <form>
+        <div class="form-group form-inline pd-10-l">
+          <input
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="searchValue"
+            (ngModelChange)="filterByProviderName($event)"
+            placeholder="Nombre del proveedor"
+            class="form-control ml-2"
+            type="text"
+          />
+          <i class="pd-10-l fas fa-search"></i>
+          <!-- Modificar cantidad de desplegados -->
+          <div ngbDropdown class="d-inline-block">
+            <button
+              class="outline-btn btn btn-outline-secondary ma-l-70"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              No. Proveedores {{ pageSize }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="pageSize = 5">5</button>
+              <button ngbDropdownItem (click)="pageSize = 10">10</button>
+              <button ngbDropdownItem (click)="pageSize = 15">15</button>
+            </div>
+          </div>
+  
+          <!-- Filtrar por estado -->
+          <!-- <div ngbDropdown class="d-inline-block">
+            <button
+              class="outline-btn btn btn-outline-secondary ma-l-70"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+                <span *ngIf="statusSelected == 'all'">Todos</span>
+                <span *ngIf="statusSelected == 'new'">Nuevos</span>
+                <span *ngIf="statusSelected == 'approved'">Aprobados</span>
+                <span *ngIf="statusSelected == 'disapproved'">Desaprobados</span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button (click)="changeStateSelected('all')" ngbDropdownItem>
+                Todos
+              </button>
+              <button (click)="changeStateSelected('new')" ngbDropdownItem>
+                Nuevos 
+              </button>
+              <button (click)="changeStateSelected('approved')" ngbDropdownItem>
+                Aprobados
+              </button>
+              <button (click)="changeStateSelected('disapproved')" ngbDropdownItem>
+                  Desaprobados
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-12">
+          <div class="">
+            <div class="card-body p-t-0 p-r-0">
+              <div class="chat-box p-r-15" style="position: relative;">
+                <!-- ITEMS -->
+    
+                <div class="">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr class="row">
+                        <th scope="col" class="col-1 full-centered">ID</th>
+                        <th scope="col" class="col-2 full-left">Nombre</th>
+                        <th scope="col" class="col-2 full-left">Contacto</th>
+                        <th scope="col" class="col-1 full-left">Teléfono</th>
+                        <th scope="col" class="col-2 full-centered">Correo</th>
+                        <th scope="col" class="col-1 full-centered">Fecha de registro</th>
+                        <th scope="col" class="col-1 full-centered">Ultimo Login</th>
+                        <th scope="col" class="col-1 full-centered">No. <i class="fas fa-tags"></i></th>
+                        <th scope="col" class="col-1 full-centered">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- <div >
+                          <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                       </div> -->
+                      <tr
+                        class="row"
+                        *ngFor="
+                          let customer of dataProvidersFiltered
+                            | slice
+                              : (page - 1) * pageSize
+                              : (page - 1) * pageSize + pageSize;
+                          index as i
+                        "
+                      >
+                       
+                      <th scope="col" class="col-1 full-centered">
+                        {{customer.idUser}}
+                      </th>
+                      <th scope="col" class="col-2 full-left">
+                        {{customer.businessName}}
+                      </th>
+                      <th scope="col" class="col-2 full-left">
+                        {{customer.nameContact}}
+                      </th>
+                      <th scope="col" class="col-1 full-left">
+                        {{customer.phoneContact}}
+                      </th>
+                      <th scope="col" class="col-2 full-centered">
+                        {{customer.emailContact}}
+                      </th>
+
+                        <th scope="col" class="col-1 full-centered">
+                          {{utilitiesService.formatDate1(customer.createDate)}}
+                        </th>
+                        <th scope="col" class="col-1 full-centered">
+                          {{utilitiesService.formatDate1(customer.lastLogin)}}
+                        </th>
+                        <th scope="col" class="col-1 full-centered">
+                          {{customer.noProducts}}
+                        </th>
+
+                        <th scope="col" class="col-1 full-centered">
+                          <button
+                            (click)="openProvider(customer.idUser)"
+                            class="btn mr-0 btn-outline-secondary"
+                            type="button"
+                          >
+                            <i class="fas fa-edit"></i>
+                            Modificar
+                          </button>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col" style="text-align: right;">
+                      <ngb-pagination
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [collectionSize]="dataProvidersFiltered.length"
+                        style="width: -webkit-fill-available; text-align: right;"
+                        class="justify-end"
+                      >
+                      </ngb-pagination>
+                    </div>
+                  </div>
+                </div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

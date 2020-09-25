@@ -24,4 +24,19 @@ export class UtilitiesService {
     this.toastr.info(message);
   }
   //END. TOAST
+
+  //XX/XX
+  formatDate1(dateToFix : Date) : string {
+    return dateToFix.toLocaleDateString("es-MX",{day: "2-digit",month : "2-digit",year: "numeric"});
+  }
+
+  formatDate2(dateToFix : Date) : string {
+    return dateToFix.toLocaleDateString("es-MX",{year: "numeric"})+ '-'+
+    dateToFix.toLocaleDateString("es-MX",{month : "2-digit"})+ '-'+
+    dateToFix.toLocaleDateString("es-MX",{day: "2-digit"});
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

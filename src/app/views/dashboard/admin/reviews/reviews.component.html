@@ -1,90 +1,274 @@
 <div class="row">
-    <div class="col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3>40%</h3>
-                                <h6 class="card-subtitle">Reseñas Negativas (1)</h6>
-                            </div>
-                            <div class="ml-auto">
-                                <span class="text-info display-6">
-                                    <i class="mdi mdi-emoticon-sad display-5 text-muted"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 40%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
+  <div class="col-lg-4 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <h3>{{((negativeReviews / dataReviews.length) * 100).toFixed(2)}}%</h3>
+                <h6 class="card-subtitle">Reseñas Negativas (1)</h6>
+              </div>
+              <div class="ml-auto">
+                <span class="text-info display-6">
+                  <i class="mdi mdi-emoticon-sad display-5 text-muted"></i>
+                </span>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3>56%</h3>
-                                <h6 class="card-subtitle">Reseñas Neutrales (3-2)</h6>
-                            </div>
-                            <div class="ml-auto">
-                                <span class="text-cyan display-6">
-                                    <i class="mdi mdi-emoticon-neutral display-5 text-muted"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-cyan" role="progressbar" style="width: 56%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div
+                class="progress-bar bg-info"
+                role="progressbar"
+                [style]="'width: '+((negativeReviews / dataReviews.length) * 100).toFixed(2)+'%; height: 6px'"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col-lg-4 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex no-block align-items-center">
-                            <div>
-                                <h3>26%</h3>
-                                <h6 class="card-subtitle">Reseñas Positivas (5-4)</h6>
-                            </div>
-                            <div class="ml-auto">
-                                <span class="text-dark display-6">
-                                    <i class="mdi mdi-emoticon-happy display-5 text-muted"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-inverse" role="progressbar" style="width: 26%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <h3>{{((neutralReviews / dataReviews.length) * 100).toFixed(2)}}%</h3>
+                <h6 class="card-subtitle">Reseñas Neutrales (3-2)</h6>
+              </div>
+              <div class="ml-auto">
+                <span class="text-cyan display-6">
+                  <i class="mdi mdi-emoticon-neutral display-5 text-muted"></i>
+                </span>
+              </div>
             </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div
+                class="progress-bar bg-cyan"
+                role="progressbar"
+                [style]="'width: '+((neutralReviews / dataReviews.length) * 100).toFixed(2)+'%; height: 6px'"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="d-flex no-block align-items-center">
+              <div>
+                <h3>{{((positiveReviews / dataReviews.length) * 100).toFixed(2)}}%</h3>
+                <h6 class="card-subtitle">Reseñas Positivas (5-4)</h6>
+              </div>
+              <div class="ml-auto">
+                <span class="text-dark display-6">
+                  <i class="mdi mdi-emoticon-happy display-5 text-muted"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="progress">
+              <div
+                class="progress-bar bg-inverse"
+                role="progressbar"
+                [style]="'width: '+((positiveReviews / dataReviews.length) * 100).toFixed(2)+'%; height: 6px'"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Reseñas</h4>
-        
+  <div class="card-body">
+    <h4 class="card-title">Reseñas</h4>
+    <!-- <hr class="m-t-0" /> -->
+    <form>
+      <div class="form-group form-inline pd-10-l">
+        <input
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="searchValue"
+          (ngModelChange)="filterByProductName($event)"
+          placeholder="Buscar por producto"
+          class="form-control ml-2"
+          type="text"
+        />
+        <i class="pd-10-l fas fa-search"></i>
+        <!-- Modificar cantidad de deplegados -->
+        <div ngbDropdown class="d-inline-block">
+          <button
+            class="outline-btn btn btn-outline-secondary ma-l-70"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            Productos {{ pageSize }}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem (click)="pageSize = 5">5</button>
+            <button ngbDropdownItem (click)="pageSize = 10">10</button>
+            <button ngbDropdownItem (click)="pageSize = 15">15</button>
+          </div>
+        </div>
+
+        <!-- Filtrar por estado -->
+        <div ngbDropdown class="d-inline-block">
+          <button
+            class="outline-btn btn btn-outline-secondary ma-l-70"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+          <span *ngIf="statusSelected == 'all'">Todos</span>
+          <span *ngIf="statusSelected == 'new'">Nuevos</span>
+          <span *ngIf="statusSelected == 'approved'">Aprobados</span>
+          <span *ngIf="statusSelected == 'disapproved'">Desaprobados</span>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button (click)="changeStateSelected('all')" ngbDropdownItem>
+              Todos
+            </button>
+            <button (click)="changeStateSelected('new')" ngbDropdownItem>
+              Nuevos 
+            </button>
+            <button (click)="changeStateSelected('approved')" ngbDropdownItem>
+              Aprobados
+            </button>
+            <button (click)="changeStateSelected('disapproved')" ngbDropdownItem>
+                Desaprobados
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-12">
+        <div class="">
+          <div class="card-body table-responsive">
+            <div class="row card pd-10" 
+                *ngFor="let review of dataReviewsFiltered | slice : (page - 1) * pageSize : (page - 1) * pageSize + pageSize; index as i">
+              <div class="col-12">
+                <div class="d-flex no-block align-items-center">
+                  <div class="row" style="width: 49%">
+                    <div class="col-1">
+                        <div class="user-pic">
+                            <img [src]="review.imageUser" alt="users" class="rounded-circle img-fluid size-review-user-img" />
+                        </div>
+                    </div>
+                    <div class="col-11">
+                      <h4>{{review.nameUser}} <span class="size-date">- {{utilitiesService.formatDate1(review.date)}}</span></h4>
+                      <h5 class="card-subtitle">{{review.nameProduct}}</h5>
+                    </div>
+                  </div>
+                  <div class="ml-auto">
+                    <span class="text-dark size-8">
+                      <!-- <i class="mdi mdi-emoticon-happy display-5 text-muted"></i> -->
+                      <i class="fas fa-star" *ngIf="review.qualification >= 1"></i>
+                      <i class="fas fa-star" *ngIf="review.qualification >= 2"></i>
+                      <i class="fas fa-star" *ngIf="review.qualification >= 3"></i>
+                      <i class="fas fa-star" *ngIf="review.qualification >= 4"></i>
+                      <i class="fas fa-star" *ngIf="review.qualification == 5"></i>
+
+                      <i class="far fa-star" *ngIf="review.qualification < 2"></i>
+                      <i class="far fa-star" *ngIf="review.qualification < 3"></i>
+                      <i class="far fa-star" *ngIf="review.qualification < 4"></i>
+                      <i class="far fa-star" *ngIf="review.qualification < 5"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-8">
+                    <label class="size-8"> "{{review.review}}"</label>
+                  </div>
+                  <div class="col-2">
+                    <label
+                        *ngIf="review.status == 'new'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="
+                            background-color: #3923b4;
+                            margin-bottom: 5px;
+                        "
+                    >
+                      Nuevo
+                    </label>
+                    <label
+                        *ngIf="review.status == 'approved'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="
+                            background-color: #23a12e;
+                            margin-bottom: 5px;
+                        "
+                    >
+                      Aprobado
+                    </label>
+                    <label
+                        *ngIf="review.status == 'disapproved'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="
+                            background-color: #e22b34;
+                            margin-bottom: 5px;
+                        "
+                    >
+                        Desaprobado
+                    </label>
+                  </div>
+                  <div class="col-2">
+                    <button
+                        *ngIf="review.status != 'approved'"
+                      class="btn mr-0 btn-outline-secondary full-width"
+                      type="button"
+                    >
+                      <i class="far fa-thumbs-up"></i>
+                      Aprobar
+                    </button>
+                    <button
+                        *ngIf="review.status == 'approved'"
+                      class="btn mr-0 btn-outline-secondary full-width"
+                      type="button"
+                    >
+                      <i class="far fa-thumbs-down"></i>
+                      Ocultar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col" style="text-align: right;">
+                  <ngb-pagination
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    [collectionSize]="dataReviewsFiltered.length"
+                    style="width: -webkit-fill-available; text-align: right;"
+                    class="justify-end"
+                  >
+                  </ngb-pagination>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
