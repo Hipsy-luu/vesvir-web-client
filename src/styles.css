@@ -89,3 +89,34 @@ body, p{
 .m-width{
   max-width: 300px;
 }
+
+/*TEXT*/
+.fw-400{
+  font-weight: 400;
+}
+.a-link-white{
+  font-size: 18px;
+  color: white;
+  opacity: .7;
+  transition: .3s ease-in-out;
+}
+.a-link-white:hover{
+  color: white;
+  opacity: 1;
+}
+
+.white-40{
+  font-size: 40px;
+  color: white;
+}
+.white-25{
+  font-size: 25px;
+  color: white;
+}
+/*PADDINGS*/
+.p-t-30{
+  padding-top: 30px;
+}
+.p-t-20{
+  padding-top: 20px;
+}
