@@ -20,6 +20,11 @@ body, p{
   align-items: center !important;
   justify-content: flex-end;
 }
+.space-around{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .no-margin {
   margin: 0px;
@@ -86,11 +91,22 @@ body, p{
     color: whitesmoke;
 }
 
+.text-al-center{
+  text-align: center;
+}
 .m-width{
   max-width: 300px;
 }
-
+.max-width-page{
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  padding: 0 30px;
+}
 /*TEXT*/
+.fw-500{
+  font-weight: 500;
+}
 .fw-400{
   font-weight: 400;
 }
@@ -113,10 +129,29 @@ body, p{
   font-size: 25px;
   color: white;
 }
+.black-25{
+  font-size: 25px;
+  color: black;
+}
+.black-18{
+  font-size: 18px;
+  color: black;
+}
+.blu-20{
+  font-size: 20px;
+  color: #3B1283;
+}
 /*PADDINGS*/
+.p-t-80{
+  padding-top: 80px;
+}
+.p-b-60{
+  padding-bottom: 60px;
+}
 .p-t-30{
   padding-top: 30px;
 }
+
 .p-t-20{
   padding-top: 20px;
 }
