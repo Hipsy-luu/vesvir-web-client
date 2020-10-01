@@ -178,30 +178,7 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-footer{
-  background: black;
-  width: 100%;
-  min-height: 250px;
-  height: 100%;
-  padding: 60px 0;
-}
-.white-btn{
-  background: white;
-  color: #3b1283;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 25px;
-  font-size: 20px;
-  transition: .3s ease-in-out;
-}
-.white-btn:hover{
-  cursor: pointer;
-  background: #3b1283;
-  color: white;
-}
-.white-btn:focus{
-  outline: none;
-}
+
 
 .img-350{
   max-width: 350px;
