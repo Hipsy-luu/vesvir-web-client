@@ -25,7 +25,14 @@ body, p{
   justify-content: space-around;
   align-items: center;
 }
-
+.justify-center{
+  display: flex;
+  justify-content: center;
+}
+.flex-wrap-reverse{
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
 .no-margin {
   margin: 0px;
 }
@@ -110,6 +117,10 @@ body, p{
 .fw-400{
   font-weight: 400;
 }
+
+.text-underline{
+  text-decoration: underline;
+}
 .a-link-white{
   font-size: 18px;
   color: white;
@@ -120,7 +131,6 @@ body, p{
   color: white;
   opacity: 1;
 }
-
 .white-40{
   font-size: 40px;
   color: white;
@@ -128,6 +138,14 @@ body, p{
 .white-25{
   font-size: 25px;
   color: white;
+}
+.black-40{
+  font-size: 40px;
+  color: black;
+}
+.black-30{
+  font-size: 30px;
+  color: #000;
 }
 .black-25{
   font-size: 25px;
@@ -137,13 +155,31 @@ body, p{
   font-size: 18px;
   color: black;
 }
+.blu-30{
+  font-size: 30px;
+  color: #3B1283;
+}
 .blu-20{
   font-size: 20px;
   color: #3B1283;
 }
+.white-25{
+  font-size: 25px;
+  color: white;
+}
+
+.fs-30{
+  font-size: 30px;
+}
 /*PADDINGS*/
+.p-t-120{
+  padding-top: 120px;
+}
 .p-t-80{
   padding-top: 80px;
+}
+.p-t-60{
+  padding-top: 60px;
 }
 .p-b-60{
   padding-bottom: 60px;
@@ -151,7 +187,112 @@ body, p{
 .p-t-30{
   padding-top: 30px;
 }
-
+.p-b-20{
+  padding-bottom: 20px;
+}
 .p-t-20{
   padding-top: 20px;
+}
+.p-10-0{
+  padding: 10px 0;
+}
+/*Media Queries*/
+@media screen and (max-width: 1200px){
+  .main-landing .background .left-background{
+    width: 70%;
+  }
+  .main-landing .background .right-background{
+    width: 30%;
+  }
+}
+@media screen and (max-width: 992px){
+  .main-landing .background .left-background .left-triangle{
+    display: none;
+  }
+  .main-landing .background .right-background .right-triangle{
+    display: none;
+  }
+  .main-landing .background .right-background .phone{
+    right: 0;
+    left: unset;
+  }
+  .white-40{
+
+    font-size: 30px;
+  }
+  .white-25{
+    font-size: 20px;
+  }
+  .text-box p{
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 768px){
+  .main-landing .background .left-background{
+    width: 100%;
+    background: linear-gradient(102.39deg, rgba(0,0,0,1) 0%, rgba(59,18,131,1) 78%, rgba(255,210,0,1) 100%);
+  }
+  .main-landing .background .right-background{
+    width: 0%;
+  }
+  .main-landing .background .left-background .yellow-triangle{
+    display: none;
+  }
+  .main-landing .background .right-background .phone{
+    display: none;
+  }
+  .main-landing .background .text-box{
+    text-align: center;
+  }
+  .main-landing .background .text-box p{
+    margin: auto !important;
+  }
+  .main-landing .background {
+    height: 60vh !important;
+  }
+  .main-landing .background-1, .main-landing .background-2, .main-landing .background-3{
+    max-height: 600px !important;
+  }
+  .invisible-line{
+    width: 100%;
+    height: 1px;
+    background: white;
+    opacity: .5;
+  }
+  .main-landing .social-links div{
+    display: flex;
+    justify-content: center;
+  }
+  .white-25{
+    font-size: 20px;
+  }
+  .fs-30{
+    font-size: 25px;
+  }
+  .main-landing .box-align-c{
+    text-align: center;
+  }
+}
+@media screen and (max-width: 576px){
+  .main-landing .card-box{
+    height: 190px !important;
+  }
+  .main-landing .card-box img{
+    max-width: 80px;
+    width: 100%;
+    height: auto;
+  }
+  .img-350{
+    max-width: 300px !important;
+  }
+  .black-30{
+    font-size: 25px;
+  }
+  .black-40{
+    font-size: 30px;
+  }
+  .blu-30{
+    font-size: 25px;
+  }
+  
 }
