@@ -1,0 +1,824 @@
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="btn btn-circle btn-lg date-bg">
+                                    <i class="ti-calendar text-white"></i>
+                                </span>
+                            </div>
+                            <div class="ma-l-40">
+                                <h4>Fecha</h4>
+                                <h4 class="card-subtitle date-font-col">
+                                    {{ utilitiesService.formatDate1( orderDetail.dateOrder ) }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="btn btn-circle btn-lg total-bg">
+                                    <i class="ti-money text-white"></i>
+                                </span>
+                            </div>
+                            <div class="ma-l-40">
+                                <h4>Total</h4>
+                                <h4 class="card-subtitle total-font-col">$ {{ orderDetail.total.toFixed(2) }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <span class="btn btn-circle btn-lg product-bg">
+                                    <i class="ti-shopping-cart text-white"></i>
+                                </span>
+                            </div>
+                            <div class="ma-l-40">
+                                <h4>Productos</h4>
+                                <h4 class="card-subtitle product-font-col">{{orderDetail.productList.length}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body">
+    <div class="row">
+        <div class="card col-sm-12 col-md-7">
+            <h4 class="card-title row">
+                <div class="col-6 full-left">
+                    <i class="fas fa-file-alt ma-r-10"></i>
+                    <span class="ma-r-10">Pedido</span>
+                    <span class="no-margin genre-label margin-hori-10-5"
+                        style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                        N<sup>o</sup> {{orderDetail.idOrder}}
+                    </span>
+                </div>
+                <div class="col-6 full-centered full-right">
+                    <button class="btn mr-0 btn-outline-primary button-options ma-15-0 ma-r-10" type="button">
+                        <div class="row full-centered font-normal">
+                            <i class="fas fa-print ma-r-10"></i>
+                            Imprimir pedido
+                        </div>
+                    </button>
+                </div>
+            </h4>
+            <hr class="m-t-0" />
+            <div class="card">
+                <h5 class="card-title row">
+                    <span class="ma-10-30">
+                        <i class="fas fa-book ma-r-10"></i>
+                        Historial del pedido</span>
+                    <span class="no-margin genre-label margin-hori-10-5 no-margin full-centered"
+                        style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                        {{orderDetail.orderHistory.length}}
+                    </span>
+                </h5>
+                <div class="card-body p-t-0 p-r-0 no-padding">
+                    <div class="chat-box p-r-15">
+                        <!-- ITEMS -->
+                        <div class="col-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="row">
+                                        <th scope="col" class="col-1 full-centered">N<sup>o</sup></th>
+                                        <th scope="col" class="col full-left">Estado</th>
+                                        <th scope="col" class="col full-left">Usuario</th>
+                                        <th scope="col" class="col-1 full-centered">
+                                            <!-- <i class="far fa-calendar ma-r-10"></i> -->Fecha</th>
+                                        <th scope="col" class="col-3 full-centered">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <div >
+                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                    </div> -->
+                                    <tr class="row" *ngFor='let orderHis of orderDetail.orderHistory;let i = index'>
+                                        <th scope="col" class="col-1 full-centered">
+                                            {{i}}
+                                        </th>
+                                        <th scope="col" class="col full-left">
+                                            <span *ngIf="orderHis.status == 0">Cancelada</span>
+                                            <span *ngIf="orderHis.status == 1">En espera de pago Conecta</span>
+                                            <span *ngIf="orderHis.status == 2">En espera de pago por transferencia
+                                                electronica</span>
+                                            <span *ngIf="orderHis.status == 3">Error de pago</span>
+                                            <span *ngIf="orderHis.status == 4">Reembolsado</span>
+                                            <span *ngIf="orderHis.status == 5">Pedido entregado</span>
+                                            <span *ngIf="orderHis.status == 6">En transito</span>
+                                            <span *ngIf="orderHis.status == 7">Preparando Pedido</span>
+                                            <span *ngIf="orderHis.status == 8">Pago Realizado</span>
+                                            <!-- <i class="fas fa-search-plus ma-r-10"></i> Enviado -->
+                                        </th>
+                                        <th scope="col" class="col full-left">
+                                            {{orderHis.userUpdate}}
+                                        </th>
+                                        <th scope="col" class="col-1 full-centered">
+                                            {{ utilitiesService.formatDate1( orderHis.date )}}
+                                        </th>
+                                        <th scope="col" class="col-3 full-centered">
+                                            <button (click)="resentEmail(orderHis.status)"
+                                                class="btn mr-0 btn-outline-secondary" type="button">
+                                                <i class="fas fa-share ma-r-10"></i>
+                                                Reenviar Email
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 no-margin">
+                    <div class="row no-margin">
+                        <div class="col-8">
+                            <div ngbDropdown class="d-inline-block  full-width">
+                                <button class="btn btn-outline-secondary mr-2 full-width" id="dropdownBasic1"
+                                    ngbDropdownAnchor ngbDropdownToggle>
+                                    <span *ngIf="newStatusSelected == -1">Elige el un nuevo estado</span>
+                                    <span *ngIf="newStatusSelected == 0">Cancelada</span>
+                                    <span *ngIf="newStatusSelected == 1">En espera de pago Conecta</span>
+                                    <span *ngIf="newStatusSelected == 2">En espera de pago por transferencia electronica</span>
+                                    <span *ngIf="newStatusSelected == 3">Error de pago</span>
+                                    <span *ngIf="newStatusSelected == 4">Reembolsado</span>
+                                    <span *ngIf="newStatusSelected == 5">Pedido entregado</span>
+                                    <span *ngIf="newStatusSelected == 6">En transito</span>
+                                    <span *ngIf="newStatusSelected == 7">Preparando Pedido</span>
+                                    <span *ngIf="newStatusSelected == 8">Pago Realizado</span>
+                                </button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
+                                    <button disabled ngbDropdownItem (click)="newStatusSelected = -1">Elige el nuevo
+                                        estado</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 0">Cancelada</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 1">En espera de pago
+                                        Conecta</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 2">En espera de pago por
+                                        transferencia electronica</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 3">Error de pago</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 4">Reembolsado</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 5">Pedido entregado</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 6">En transito</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 7">Preparando Pedido</button>
+                                    <button ngbDropdownItem (click)="newStatusSelected = 8">Pago Realizado</button>
+                                    <!-- <button ngbDropdownItem (click)="pageSize = 9">fdnfdfdf</button>
+                                    <button ngbDropdownItem (click)="pageSize = 10">fdnfdfdf</button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button (click)="addNewStatus(newStatusSelected)" class="btn mr-0 btn-outline-primary full-width" type="button">
+                                ACTUALIZAR ESTADO
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="m-t-0" />
+            <div class="card">
+                <h5 class="card-title row">
+                    <span class="ma-10-30">
+                        <i class="fas fa-box-open ma-r-10"></i>
+                        Envíos</span>
+                    <span class="no-margin genre-label margin-hori-10-5 no-margin full-centered"
+                        style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                        {{orderDetail.shippingPackagesData.length}}
+                    </span>
+                </h5>
+                <div class="card-body p-t-0 p-r-0 no-padding">
+                    <div class="chat-box p-r-15">
+                        <!-- ITEMS -->
+                        <div class="col-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="row">
+                                        <th scope="col" class="col-2 full-left">Fecha</th>
+                                        <th scope="col" class="col full-left">
+                                            <i class="fas fa-building"></i>Proveedor
+                                        </th>
+                                        <th scope="col" class="col full-centered">Peso</th>
+                                        <th scope="col" class="col full-centered">Costo Envió</th>
+                                        <th scope="col" class="col full-centered">N<sup>o</sup>Seguimiento</th>
+                                        <th scope="col" class="col full-centered"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <div >
+                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                    </div> -->
+                                    <tr *ngFor='let shippingPackage of orderDetail.shippingPackagesData;let i = index' class="row">
+                                        <th scope="col" class="col-2 full-left">
+                                            {{ utilitiesService.formatDate1( shippingPackage.date ) }}
+                                        </th>
+                                        <!-- <th scope="col" class="col full-left">
+                                            Fedex
+                                        </th> -->
+                                        <th scope="col" class="col full-left">
+                                            {{shippingPackage.providerData.nameProvider}}
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            {{shippingPackage.packageWeight.toFixed(2)}} Kg
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            $ {{shippingPackage.costDelivery.toFixed(2)}}
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            {{shippingPackage.guideCode}}
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            <button class="btn mr-0 btn-outline-secondary"
+                                                (click)="openModalShippingDetails(shippingPackage)" type="button">
+                                                <i class="fas fa-share ma-r-10"></i>
+                                                Ver
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="m-t-0" />
+            <div class="card">
+                <h5 class="card-title row">
+                    <span class="ma-10-30">
+                        <i class="fas fa-shopping-cart ma-r-10"></i>
+                        Productos</span>
+                </h5>
+                <div class="card-body p-t-0 p-r-0 no-padding">
+                    <div class="chat-box p-r-15">
+                        <!-- ITEMS -->
+                        <div class="col-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="row">
+                                        <th scope="col" class="col-1 full-centered">ID</th>
+                                        <th scope="col" class="col-1 full-centered">Imagen</th>
+                                        <th scope="col" class="col full-left">Nombre</th>
+                                        <th scope="col" class="col full-centered">Precio U</th>
+                                        <th scope="col" class="col-1 full-centered">Cantidad</th>
+                                        <th scope="col" class="col full-centered">Estado</th>
+                                        <th scope="col" class="col-2 full-centered">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <div >
+                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                     </div> -->
+                                    <tr class="row" *ngFor="
+                                        let product of orderDetail.productList">
+                                        <th scope="col" class="col-1 full-centered">{{product.idProduct}}</th>
+                                        <th scope="col" class="col-1 full-centered">
+                                            <img [src]="product.image" class="mr-2" style="width: 40px;" />
+                                        </th>
+                                        <th scope="col" class="col full-left">
+                                            {{product.name}}
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            {{product.price}}
+                                        </th>
+                                        <th scope="col" class="col-1 full-centered">
+                                            {{product.quantity}}
+                                        </th>
+                                        <th scope="col" class="col full-centered">
+                                            <label *ngIf="product.status == 'agotado'"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style="background-color: #b12d1c; margin-bottom: 5px;">
+                                                Agotado
+                                            </label>
+                                            <label *ngIf="product.status == 'activado'"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style="background-color: #29852e; margin-bottom: 5px;">
+                                                Activado
+                                            </label>
+                                            <label *ngIf="product.status == 'pausado'"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style="background-color: #1c44b1; margin-bottom: 5px;">
+                                                Pausado
+                                            </label>
+                                        </th>
+                                        <th scope="col" class="col-2 full-centered">
+                                            $ 1500.00
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-sm-12 col-md-5">
+            <h4 class="card-title row">
+                <div class="col-6 full-left">
+                    <i class="fas fa-user ma-r-10"></i>
+                    Cliente
+                </div>
+                <div class="col-6 full-right">
+                    <span class="no-margin genre-label margin-hori-10-5"
+                        style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                        N<sup>o</sup> 12
+                    </span>
+                </div>
+            </h4>
+            <hr class="m-t-0" />
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card " style="padding: 15px 18px;font-size: small;">
+                            <h5 class="">Correo electrónico</h5>
+                            <span>
+                                <i class="fas fa-envelope ma-r-10"></i>
+                                <a href="mailto:luismi.luu@gmail.com" class="">luismi.luu@gmail.com</a>
+                            </span>
+
+                            <h5 class="">Cuenta registrada</h5>
+                            <span>
+                                <i class="fas fa-calendar  ma-r-10"></i>
+                                19/01/2000
+                            </span>
+
+                            <h5 class="">Pedidos validos realizados</h5>
+                            <span>
+                                <span class="no-margin genre-label margin-hori-10-5"
+                                    style=" background-color: #2BA8E3 !important;  margin-bottom: 5px; border-color: #3f0058; ">
+                                    2
+                                </span>
+                            </span>
+
+                            <h5 class="">Total gastado desde su registro</h5>
+                            <span>
+                                <span class="no-margin genre-label margin-hori-10-5"
+                                    style=" background-color: #22c6ab;  margin-bottom: 5px; border-color: #3f0058; ">
+                                    $ 1,200.00
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="row">
+                            <h4 class="">
+                                <i class="fas fa-sticky-note ma-r-10"></i>
+                                Nota Privada
+                            </h4>
+                        </div>
+                        <div class="row ">
+                            <textarea rows="8" cols="50" class=""></textarea>
+                            <div class="col-12 full-right">
+                                <button class="btn mr-0 btn-outline-primary button-options ma-15-0" type="button">
+                                    <div class="row full-centered font-normal">
+                                        <i class="fas fa-save ma-r-10"></i>
+                                        Guardar
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row card">
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                        <li [ngbNavItem]="1">
+                            <a ngbNavLink>
+                                <i class="fas fa-truck-moving ma-r-10"></i>
+                                Dirección de envió
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class=" p-r-15" style="position: relative;">
+                                    <!-- ITEMS -->
+                                    <!-- <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-form-label">Seleccione la dirección de envió</label>
+                                                <div ngbDropdown class="">
+                                                    <button
+                                                      class="form-control"
+                                                      id="dropdownUserType"
+                                                      ngbDropdownToggle
+                                                    >
+                                                        <span>1 - Avenida 26 Pte, Delicias</span>
+                                                    </button>
+                                                    <div ngbDropdownMenu aria-labelledby="dropdownUserType" class="full-width">
+                                                        <button ngbDropdownItem >1 - Avenida 26 Pte, Delicias</button>
+                                                        <button ngbDropdownItem >2 - Calle villa de lira, Chihuahua</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idnamem" class="control-label col-form-label">*
+                                                    Nombre</label>
+                                                <input type="text" class="form-control" id="idnamem"
+                                                    placeholder="Nombre de la persona que recibe">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idsurm" class="control-label col-form-label">*
+                                                    Apellidos</label>
+                                                <input type="text" class="form-control" id="idsurm"
+                                                    placeholder="Escriba sus apellidos">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="iddirm" class="control-label col-form-label">* Calle</label>
+                                                <textarea type="text" class="form-control" id="iddirm"
+                                                    placeholder="Escriba la calle aquí"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idtelm" class="control-label col-form-label">*
+                                                    Teléfono</label>
+                                                <input type="text" class="form-control" id="idtelm"
+                                                    placeholder="Escriba su teléfono">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idintm" class="control-label col-form-label">* No
+                                                    Interior</label>
+                                                <input type="text" class="form-control" id="idintm"
+                                                    placeholder="Numero interior">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idnoem" class="control-label col-form-label"> No
+                                                    Exterior</label>
+                                                <input type="text" class="form-control" id="idnoem"
+                                                    placeholder="Numero exterior">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idestm" class="control-label col-form-label">*
+                                                    Estado</label>
+                                                <input type="text" class="form-control" id="idestm"
+                                                    placeholder="Nombre del estado">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idcium" class="control-label col-form-label">*
+                                                    Ciudad</label>
+                                                <input type="text" class="form-control" id="idcium"
+                                                    placeholder="Nombre de la ciudad">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idcolm" class="control-label col-form-label">*
+                                                    Colonia</label>
+                                                <input type="text" class="form-control" id="idcolm"
+                                                    placeholder="Nombre de la colonia">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="idcodm" class="control-label col-form-label">* Código
+                                                    postal</label>
+                                                <input type="text" class="form-control" id="idcodm"
+                                                    placeholder="Código postal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-12 full-right">
+                                            <button class="btn mr-0 btn-outline-primary button-options ma-15-0"
+                                                type="button">
+                                                <div class="row full-centered font-normal">
+                                                    <i class="fas fa-save ma-r-10"></i>
+                                                    Guardar
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                        <li [ngbNavItem]="2">
+                            <a ngbNavLink>
+                                <i class="far fa-file-alt  ma-r-10"></i>
+                                Datos Facturación
+                            </a>
+                            <ng-template ngbNavContent>
+                                <div class=" p-r-15" style="position: relative;">
+                                    <!-- ITEMS -->
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idraz" class="control-label col-form-label">Razón
+                                                    social</label>
+                                                <label type="text" class="form-control" id="idraz">sdsd</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idrfc" class="control-label col-form-label">RFC</label>
+                                                <label type="text" class="form-control" id="idrfc"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="idtel3"
+                                                    class="control-label col-form-label">Teléfono</label>
+                                                <label type="text" class="form-control" id="idtel3"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-4">
+                                            <div class="form-group">
+                                                <label for="inemal2" class="control-label col-form-label">Correo
+                                                    Electrónico</label>
+                                                <label type="text" class="form-control" id="inemal2"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="inedo2" class="control-label col-form-label">Estado</label>
+                                                <label type="text" class="form-control" id="inedo2"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label for="incity2" class="control-label col-form-label">Ciudad</label>
+                                                <label type="text" class="form-control" id="incity2"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-2">
+                                            <div class="form-group">
+                                                <label for="incod2" class="control-label col-form-label">Código
+                                                    postal</label>
+                                                <label type="text" class="form-control" id="incod2"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-2">
+                                            <div class="form-group">
+                                                <label for="incol2" class="control-label col-form-label">Colonia</label>
+                                                <label type="text" class="form-control" id="incol2"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-2">
+                                            <div class="form-group">
+                                                <label for="innumber"
+                                                    class="control-label col-form-label">Numero</label>
+                                                <label type="text" class="form-control" id="innumber"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label for="instreet" class="control-label col-form-label">Calle</label>
+                                                <label type="text" class="form-control" id="instreet"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </li>
+                    </ul>
+
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+                <!-- <hr class="m-t-0" /> -->
+                <div class="card">
+                    <h5 class="card-title row">
+                        <span class="ma-10-30">
+                            <i class="fas fa-hand-holding-usd ma-r-10"></i>
+                            Pagos</span>
+                        <span class="no-margin genre-label margin-hori-10-5"
+                            style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                            {{orderDetail.orderHistory.length}}
+                        </span>
+                    </h5>
+                    <div class="card-body p-t-0 p-r-0 no-padding">
+                        <div class="chat-box p-r-15">
+                            <!-- ITEMS -->
+                            <div class="col-12">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="row">
+                                            <th scope="col" class="col-2 full-left">Fecha</th>
+                                            <th scope="col" class="col full-left">Método de pago</th>
+                                            <th scope="col" class="col full-centered">ID de Transacción</th>
+                                            <th scope="col" class="col full-centered">Importe</th>
+                                            <th scope="col" class="col full-centered">Req Factura</th>
+                                            <th scope="col" class="col full-centered">Estado Factura</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <div >
+                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                    </div> -->
+                                        <tr class="row" *ngFor='let text of [1,1,1]'>
+                                            <th scope="col" class="col-2 full-left">
+                                                19/02/2020
+                                            </th>
+                                            <th scope="col" class="col full-left">
+                                                <label class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                    Tarjeta
+                                                </label>
+                                                <!--  <label *ngIf="order.paymentMethod == 0"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                Tarjeta
+                                            </label>
+                                            <label *ngIf="order.paymentMethod == 1"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                Transferencia electronica
+                                            </label>
+                                            <label *ngIf="order.paymentMethod == 2"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style=" background-color: #23a12e;  margin-bottom: 5px;">
+                                                Puntos de pago
+                                            </label> -->
+                                            </th>
+                                            <th scope="col" class="col full-centered">
+                                                156216561
+                                            </th>
+                                            <th scope="col" class="col full-centered">
+                                                $ 150.00
+                                            </th>
+                                            <th scope="col" class="col full-centered">
+                                                <label class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #1d9932;  margin-bottom: 5px;">
+                                                    SI
+                                                </label>
+                                                <!-- <label *ngIf="order.paymentMethod == 0"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                Tarjeta
+                                            </label>
+                                            <label *ngIf="order.paymentMethod == 1"
+                                                class="row no-margin genre-label margin-hori-10-5"
+                                                style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                Transferencia electronica
+                                            </label> -->
+                                            </th>
+                                            <th scope="col" class="col full-centered">
+                                                <button class="btn mr-0 btn-outline-secondary" type="button">
+                                                    <i class="fas fa-check-circle ma-r-10"></i>
+                                                    OK
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12  per-card">
+                        <div class="row">
+                            <div class="col-7 full-right">
+                                <h5>Productos</h5>
+                            </div>
+                            <div class="col-5 full-right">
+                                <h5>$ 732.00</h5>
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                        <div class="row">
+                            <div class="col-7 full-right">
+                                <h5>Envió</h5>
+                            </div>
+                            <div class="col-5 full-right">
+                                <h5>$ 732.00</h5>
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                        <div class="row">
+                            <div class="col-7 full-right">
+                                <h5>Total</h5>
+                            </div>
+                            <div class="col-5 full-right">
+                                <h5>$ <strong>732.00</strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Direction -->
+<ng-template #modalShippingDetails let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Información del Envió </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idnamem" class="control-label col-form-label">Fecha</label>
+                    <label type="text" class="form-control" id="idraz">{{ utilitiesService.formatDate1( selectedShippingDetails.date )}}</label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idsurm" class="control-label col-form-label">Transportista</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idnamem" class="control-label col-form-label">Peso</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idsurm" class="control-label col-form-label">Transportista</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idnamem" class="control-label col-form-label">Costo de envió</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="idsurm" class="control-label col-form-label">Numero de seguimiento</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="form-group">
+                    <label for="idnamem" class="control-label col-form-label">Proveedor</label>
+                    <label type="text" class="form-control" id="idraz">sdsd</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Save click');" class="btn mr-0 btn mr-0 btn-primary button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-window-close ma-0-10"></i> <span class="ma-0-10">
+                    Aceptar
+                </span>
+            </div>
+        </button>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+</ng-template>

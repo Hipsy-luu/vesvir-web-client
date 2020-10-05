@@ -37,8 +37,32 @@ body, p{
   margin: 0px;
 }
 
+.full-width{
+  width: 100%;
+}
+
 .margin-hori-10-5{
-    margin: 10px 5px;
+  margin: 10px 5px;
+}
+
+.ma-15-0{
+  margin: 10px 5px;
+}
+
+.ma-10-30{
+  margin: 10px 30px;
+}
+
+.ma-0-10{
+  margin: 0px 15px;
+}
+
+.ma-r-10{
+  margin-right: 10px;
+}
+
+.ma-l-40{
+  margin-left: 40px;
 }
 
 .ma-l-70{
@@ -57,6 +81,10 @@ body, p{
   padding: 0px;
 }
 
+.pd-10{
+  padding: 10px;
+}
+
 .pd-10-l {
   padding-left: 10px;
 }
@@ -68,6 +96,7 @@ body, p{
 .pd-10-t-b{
   padding: 10px 0px;
 }
+
 
 .shadow-box {
     margin: 5px;
@@ -98,6 +127,15 @@ body, p{
     color: whitesmoke;
 }
 
+
+.size-8 {
+  font-size: 1.5rem;
+}
+
+.per-card{
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 5px;
+=======
 .text-al-center{
   text-align: center;
 }
@@ -373,5 +411,4 @@ body, p{
   .blu-30{
     font-size: 25px;
   }
-  
 }

@@ -9,33 +9,57 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: []
     },
-    {
+    /* {
         path: '/dashboard/admin/messages',
         title: 'Mensajes',
         icon: 'icon-Car-Wheel',
         class: '',
         extralink: false,
         submenu: []
-    },
+    }, */
     {
         path: '/dashboard/admin/products/product',
-        title: 'Productos',
+        title: 'Administrador',
         icon: 'icon-Car-Wheel',
         class: 'has-arrow',
         extralink: false,
         submenu: [
             {
-                path: '/dashboard/admin/products/categorys',
-                title: 'Categorías',
-                icon: '',
+                path: '/dashboard/admin/products/reviews',
+                title: 'Reseñas',
+                icon: 'icon-Car-Wheel ',
+                class: 'fas fa-search-minus ma-l-40',
+                extralink: false,
+                submenu: []
+            },
+            {
+                path: '/dashboard/admin/providers',
+                title: 'Proveedores',
+                icon: 'icon-Car-Wheel',
                 class: '',
                 extralink: false,
                 submenu: []
             },
             {
-                path: '/dashboard/admin/products/reviews',
-                title: 'Reseñas',
-                icon: '',
+                path: '/dashboard/admin/customers/customers',
+                title: 'Clientes',
+                icon: 'icon-Car-Wheel',
+                class: '',
+                extralink: false,
+                submenu: []
+            },
+            {
+                path: '/dashboard/admin/products/categorys',
+                title: 'Categorías',
+                icon: 'icon-Car-Wheel',
+                class: '',
+                extralink: false,
+                submenu: []
+            },
+            {
+                path: '/dashboard/admin/products/categorys',
+                title: 'Métodos de Envió',
+                icon: 'icon-Car-Wheel',
                 class: '',
                 extralink: false,
                 submenu: []
@@ -44,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/dashboard/admin/categorys/',
-        title: 'Categorías',
+        title: 'Productos',
         icon: 'icon-Car-Wheel',
         class: 'has-arrow',
         extralink: false,
@@ -176,42 +200,10 @@ export const ROUTES: RouteInfo[] = [
             },
         ]
     },
-    {
-        path: '/dashboard/admin/customers/customers',
-        title: 'Clientes',
-        icon: 'icon-Car-Wheel',
-        class: 'has-arrow',
-        extralink: false,
-        submenu: [
-            {
-                path: '/dashboard/admin/customers/customers',
-                title: 'Clientes',
-                icon: '',
-                class: '',
-                extralink: false,
-                submenu: []
-            },
-            {
-                path: '/dashboard/admin/customers/carts',
-                title: 'Carritos',
-                icon: '',
-                class: '',
-                extralink: false,
-                submenu: []
-            },
-        ]
-    },
+    
     {
         path: '/dashboard/admin/orders',
         title: 'Pedidos',
-        icon: 'icon-Car-Wheel',
-        class: '',
-        extralink: false,
-        submenu: []
-    },
-    {
-        path: '/dashboard/admin/providers',
-        title: 'Proveedores',
         icon: 'icon-Car-Wheel',
         class: '',
         extralink: false,

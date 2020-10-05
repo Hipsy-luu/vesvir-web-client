@@ -6,14 +6,15 @@
         <div class="row full-width">
             <div class="col-6 full-centered full-left">
                 <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
-                    Datos de facturación de la empresa
+                    Proveedor
                 </div>
             </div>
             <div class="col-6 full-right">
-                <!-- <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteProvider()">
+                <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteProvider()">
+                    <!-- <span aria-hidden="true">&times;</span> -->
                     <i class="fas fa-trash"></i>
                     Eliminar Proveedor
-                </button> -->
+                </button>
             </div>
         </div>
         <!-- <div class="text-white m-b-0 m-l-15 font-18">
@@ -114,7 +115,7 @@
         <div class="row full-width">
             <div class="col-6 full-centered full-left">
                 <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
-                    Información de la cuenta
+                    Datos de Contacto del proveedor
                 </div>
             </div>
             <div class="col-6 full-right">
@@ -205,27 +206,36 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 col-md-2">
+                                <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label col-form-label">Nueva Contraseña</label>
-                                        <input  type="text" class="form-control" id="inpass" placeholder="Escriba la nueva contraseña">
+                                        <label class="control-label col-form-label">Grupo de usuarios</label>
+                                        <div ngbDropdown class="">
+                                            <button
+                                              class="form-control"
+                                              id="dropdownUserType"
+                                              ngbDropdownToggle
+                                            >
+                                                <span *ngIf="customer.userType == 2">Cliente</span>
+                                                <span *ngIf="customer.userType == 1">Proveedor</span>
+                                                <span *ngIf="customer.userType == 0">Administrador</span>
+                                            </button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownUserType">
+                                                <button ngbDropdownItem (click)="customer.userType = 2">Cliente</button>
+                                                <button ngbDropdownItem (click)="customer.userType = 1">Proveedor</button>
+                                                <button ngbDropdownItem (click)="customer.userType = 0">Administrador</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 col-md-2">
+                                <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label col-form-label">Confirmar Contraseña</label>
-                                        <input   type="text" class="form-control" id="inconfpass" placeholder="Confirmar contraseña">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-2" style="padding: 20px 10px;">
-                                    <!-- <div class="form-group"> -->
-                                        
-                                        <button class="btn mr-0 btn-danger button-reset " type="button" style="height: 100%;">
+                                        <label class="control-label col-form-label">Restablecer la Contraseña</label>
+                                        <button class="btn mr-0 btn-danger button-reset " type="button">
                                             <div class="row full-centered font-normal">
-                                                <i class="fas fa-key ma-0-10"></i> CAMBIAR
+                                                <i class="fas fa-key ma-0-10"></i> RESTABLECER
                                             </div>
                                         </button>
-                                    <!-- </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +249,7 @@
     <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center" >
         <div class="text-white m-b-0 m-l-15 font-18">
             <i class="fas fa-home"></i>
-            Dirección de la empresa
+            Dirección de envíos
             <!-- <span class="no-margin genre-label margin-hori-10-5"
                 style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; " >
             2</span> -->
@@ -348,14 +358,14 @@
     <div class="card-body">
         <div class="row">
             <div class="col-6 full-left">
-                <!-- <button class="btn mr-0 btn-outline-secondary button-options" type="button">
-                    <div class="row full-centered">
-                        <i class="fas fa-window-close "></i>
-                    </div>
-                    <div class="row full-centered font-normal">
-                        Cancelar
-                    </div>
-                </button> -->
+                <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options" type="button">
+                <div class="row full-centered">
+                    <i class="fas fa-window-close "></i>
+                </div>
+                <div class="row full-centered font-normal">
+                    Cancelar
+                </div>
+                </button>
             </div>
             <div class="col-6 full-right">
                 <button class="btn mr-0 btn-outline-secondary button-options" type="button">
@@ -370,3 +380,26 @@
         </div>
     </div>
 </div>
+ 
+<!-- Modal Confirm Delete Client -->
+<ng-template #modalConfirmProviderDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmar Eliminación del proveedor</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-window-close ma-0-10"></i> Cancelar
+            </div>
+        </button>
+        <button  class="btn mr-0 btn-success button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-trash ma-0-10"></i> Eliminar
+            </div>
+        </button>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+</ng-template>

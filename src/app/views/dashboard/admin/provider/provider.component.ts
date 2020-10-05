@@ -7,11 +7,13 @@ import { dataCustomer } from './provider';
 import { UtilitiesService } from '../../../../services/utilities/utilities.service';
 
 @Component({
-  selector: 'app-account-settings',
-  templateUrl: './account-settings.component.html',
-  styleUrls: ['./account-settings.component.css']
+  selector: 'app-provider',
+  templateUrl: './provider.component.html',
+  styleUrls: ['./provider.component.css']
 })
-export class AccountSettingsComponent implements OnInit {
+export class ProviderComponent implements OnInit {
+
+  @ViewChild("modalConfirmProviderDelete") modalConfirmProviderDelete;
 
   customer : Customer = new Customer();
   modelCustomerBirthDay : NgbDateStruct;
@@ -35,7 +37,20 @@ export class AccountSettingsComponent implements OnInit {
       day: parseInt( this.customer.birthDay.toLocaleDateString("es-MX",{day : "2-digit"}) )
     }
   }
-  
+
+  openModalConfirmDeleteProvider( ) {
+		this.modalService.open(this.modalConfirmProviderDelete, {ariaLabelledBy: 'modal-basic-title',centered: true}).result.then((result) => {
+			//this.closeResult = `Closed with: ${result}`;
+		}, (reason) => {
+			//this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		});
+  }
+
+  confirmDeleteDirection( directionId ) {
+
+		this.modalService.dismissAll();
+  }
+
   backClicked() {
     this._location.back();
   }

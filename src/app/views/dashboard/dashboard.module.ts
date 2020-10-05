@@ -18,14 +18,18 @@ import { DashboardRoutes } from './dashboard.routing';
 //Views - Administrator Dashboard
 import { HomeComponent } from './admin/home/home.component';
 import { MessagesComponent } from './admin/messages/messages.component';
+
 import { ProductsComponent } from './admin/products/products.component';
+import { ProductComponent } from './admin/product/product.component';
+
 import { CustomersComponent } from './admin/customers/customers.component';
+import { CustomerComponent } from './admin/customer/customer.component';
+
 import { OrdersComponent } from './admin/orders/orders.component';
 import { CartsComponent } from './admin/carts/carts.component';
 import { ProvidersComponent } from './admin/providers/providers.component';
 import { ReviewsComponent } from './admin/reviews/reviews.component';
 import { AccountSettingsComponent } from './admin/account-settings/account-settings.component';
-import { ProductComponent } from './admin/product/product.component';
 
 //Components
 import {InfocardComponent} from '../../components/dashboard-components/info-card/info-card.component';
@@ -34,6 +38,8 @@ import {TopSellingProductsComponent} from '../../components/dashboard-components
 import { RecentCommentsComponent } from '../../components/dashboard-components/recent-comments/recent-comments.component';
 import { ReviewsStatsComponent } from '../../components/dashboard-components/reviews-stats/reviews-stats.component';
 import { CategorysComponent } from './admin/categorys/categorys.component';
+import { ProviderComponent } from './admin/provider/provider.component';
+import { OrderComponent } from './admin/order/order.component';
 
 
 @NgModule({
@@ -73,6 +79,9 @@ import { CategorysComponent } from './admin/categorys/categorys.component';
         RecentCommentsComponent,
         ReviewsStatsComponent,
         CategorysComponent,
+        CustomerComponent,
+        ProviderComponent,
+        OrderComponent,
         
     ]
 })

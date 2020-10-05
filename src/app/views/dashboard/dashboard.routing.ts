@@ -11,6 +11,9 @@ import { HomeComponent } from './admin/home/home.component';
 import { MessagesComponent } from './admin/messages/messages.component';
 import { CustomersComponent } from './admin/customers/customers.component';
 import { ProductComponent } from './admin/product/product.component';
+import { CustomerComponent } from './admin/customer/customer.component';
+import { ProviderComponent } from './admin/provider/provider.component';
+import { OrderComponent } from './admin/order/order.component';
 
 export const DashboardRoutes: Routes = [
   { path: '', redirectTo: '/dashboard/admin/home', pathMatch: 'full' },
@@ -160,6 +163,17 @@ export const DashboardRoutes: Routes = [
             }
           },
           {
+            path: 'customer/:id',
+            component: CustomerComponent,
+            data: {
+              title: 'Edición de Cliente',
+              urls: [
+                { title: 'Inicio', url: '/dashboard/admin/home' },
+                { title: 'Clientes' }
+              ]
+            }
+          },
+          {
             path: 'carts',
             component: CartsComponent,
             data: {
@@ -184,10 +198,32 @@ export const DashboardRoutes: Routes = [
         }
       },
       {
+        path: 'order/:id',
+        component: OrderComponent,
+        data: {
+          title: '',
+          urls: [
+            { title: 'Inicio', url: '/dashboard/admin/home' },
+            { title: 'Pedido' }
+          ]
+        }
+      },
+      {
         path: 'providers',
         component: ProvidersComponent,
         data: {
           title: 'Proveedores',
+          urls: [
+            { title: 'Inicio', url: '/dashboard/admin/home' },
+            { title: 'Proveedores' }
+          ]
+        }
+      },
+      {
+        path: 'provider/:id',
+        component: ProviderComponent,
+        data: {
+          title: 'Proveedor',
           urls: [
             { title: 'Inicio', url: '/dashboard/admin/home' },
             { title: 'Proveedores' }
