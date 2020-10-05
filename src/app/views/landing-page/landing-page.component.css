@@ -1,0 +1,187 @@
+.main-landing {
+  width: 100%;
+  height: 100%;
+  background: #f8f8f8;
+}
+.background {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background: #f8f8f8;
+  display: flex;
+}
+.left-background {
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(93.27deg, #000000 0.37%, #3b1283 96.7%);
+  position: relative;
+}
+.right-background {
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(102.39deg, #3b1283 58.26%, #ffd200 106.8%);
+  position: relative;
+}
+.left-triangle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(
+    to bottom right,
+    transparent 0%,
+    transparent 50%,
+    #f8f8f8 50%,
+    #f8f8f8 100%
+  );
+  background: #f8f8f8;
+  clip-path: polygon(105% 0, 0 101%, 101% 101%);
+}
+.right-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(
+    to bottom left,
+    transparent 0%,
+    transparent 50%,
+    #f8f8f8 50%,
+    #f8f8f8 100%
+  );
+  background: #f8f8f8;
+  clip-path: polygon(-4% 1%, 0 101%, 101% 101%);
+}
+.yellow-triangle {
+  position: absolute;
+  right: 10%;
+  bottom: 30%;
+}
+.yellow-triangle img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+}
+.black-triangle {
+  position: absolute;
+  right: 0;
+  top: 40%;
+}
+.blue-triangle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+.phone {
+  position: absolute;
+  top: 10%;
+  right: 35%;
+  left: -225px;
+}
+.navagation-bar {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 30px;
+  margin: auto;
+  z-index: 2;
+}
+.navagation-bar nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 1440px;
+  width: 100%;
+  padding: 0 30px;
+  margin: auto;
+}
+
+.transparent-btn {
+  background: #0000;
+  width: 250px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}
+.transparent-btn img {
+  width: 100%;
+  height: 100%;
+}
+.transparent-btn:hover{
+  transform: scale(1.1);
+  opacity: 1;
+}
+.transparent-btn:focus{
+  border: none;
+  outline: none;
+}
+
+.card-box{
+  background-color: white;
+  padding: 20px;
+  border: solid 2px #EDEBEB;
+  border-radius: 10px;
+  max-width: 200px;
+  width: 100%;
+  height: 240px;
+  transition: .3s ease-in-out;
+}
+.card-box:hover{
+  border: solid 2px #3B1283;
+
+}
+.background-1{
+  width: 100%;
+  max-height: 450px;
+  height: 100%;
+  background: url('/assets/images/left-triangles.svg');
+  background-size: contain;
+  background-position: left;
+  background-repeat: no-repeat;
+}
+.background-2{
+  width: 100%;
+  max-height: 450px;
+  height: 100%;
+  background: url('/assets/images/middle-triangles.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.background-3{
+  width: 100%;
+  max-height: 450px;
+  height: 100%;
+  background: url('/assets/images/right-triangles.svg');
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+.background-4{
+  width: 100%;
+  max-height: 300px;
+  height: 100%;
+  background: url('/assets/images/yellow-triangles.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.img-350{
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}

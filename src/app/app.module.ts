@@ -40,6 +40,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 import { deployConf } from './utils/config';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { LandingPageComponent } from './views/landing-page/landing-page.component';
+import { TermsConditionsComponent } from './views/terms-conditions/terms-conditions.component';
+import { AboutUsComponent } from './views/about-us/about-us.component';
+import { FaqComponent } from './views/faq/faq.component';
 
 const config: SocketIoConfig = { url: deployConf.apiUrl, options: {}};
 
@@ -57,6 +61,10 @@ const config: SocketIoConfig = { url: deployConf.apiUrl, options: {}};
         SpinnerComponent,
         //Pages
         LoginComponent,
+        LandingPageComponent,
+        TermsConditionsComponent,
+        AboutUsComponent,
+        FaqComponent,
     ],
     imports: [
         CommonModule,
