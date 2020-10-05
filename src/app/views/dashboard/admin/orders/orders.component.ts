@@ -13,7 +13,8 @@ export class OrdersComponent implements OnInit {
   dataOrdersFiltered = [];
 
   searchValue: String = "";
-  statusSelected : string = "all";
+  statusSelected : number = -1;
+  payMethodSelected : number = -1;
   page = 1;
   pageSize = 10;
 
@@ -40,6 +41,34 @@ export class OrdersComponent implements OnInit {
         return order.nameClient.toLowerCase().includes(ssearchValue);
       });
     }
+  }
+
+  changePayMethodSelected(opc : number){
+    this.payMethodSelected = opc;
+    this.statusSelected = -1;
+    this.dataOrdersFiltered = Array.from(this.dataOrders);
+      if (this.payMethodSelected == -1) {
+        this.dataOrdersFiltered = Array.from(this.dataOrders);
+      }else{
+        this.dataOrdersFiltered = this.dataOrders.filter((dataProduct) => {
+          return dataProduct.paymentMethod == this.payMethodSelected;
+        });
+      }
+  }
+
+  changeStateSelected(opc : number){
+    this.statusSelected = opc;
+      if (this.statusSelected == -1) {
+        this.dataOrdersFiltered = Array.from(this.dataOrders);
+      } else if( this.payMethodSelected == -1 ){
+        this.dataOrdersFiltered = this.dataOrders.filter((dataProduct) => {
+          return dataProduct.status == this.statusSelected ;
+        });
+      }else{
+        this.dataOrdersFiltered = this.dataOrders.filter((dataProduct) => {
+          return dataProduct.status == this.statusSelected && dataProduct.paymentMethod == this.payMethodSelected;
+        });
+      }
   }
 
   openOrder(idOrder){

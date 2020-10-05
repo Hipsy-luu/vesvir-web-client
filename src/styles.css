@@ -26,11 +26,23 @@
 }
 
 .margin-hori-10-5{
-    margin: 10px 5px;
+  margin: 10px 5px;
+}
+
+.ma-15-0{
+  margin: 10px 5px;
+}
+
+.ma-10-30{
+  margin: 10px 30px;
 }
 
 .ma-0-10{
   margin: 0px 15px;
+}
+
+.ma-r-10{
+  margin-right: 10px;
 }
 
 .ma-l-40{
@@ -101,4 +113,9 @@
 
 .size-8 {
   font-size: 1.5rem;
+}
+
+.per-card{
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px 5px;
 }

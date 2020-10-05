@@ -13,6 +13,79 @@
                     (ngModelChange)="filterByProviderName($event)" placeholder="Nombre del cliente"
                     class="form-control ml-2" type="text" />
                 <i class="pd-10-l fas fa-search"></i>
+
+                <!-- Filtrar por estado -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
+                        <span *ngIf="payMethodSelected == -1">Todos los pagos</span>
+                        <span *ngIf="payMethodSelected == 0">Tarjeta</span>
+                        <span *ngIf="payMethodSelected == 1">Transferencia electronica</span>
+                        <span *ngIf="payMethodSelected == 2">Puntos de pago</span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="changePayMethodSelected(-1)" ngbDropdownItem>
+                            Todos los pagos
+                        </button>
+                        <button (click)="changePayMethodSelected(0)" ngbDropdownItem>
+                            Tarjeta
+                        </button>
+                        <button (click)="changePayMethodSelected(1)" ngbDropdownItem>
+                            Transferencia electronica
+                        </button>
+                        <button (click)="changePayMethodSelected(2)" ngbDropdownItem>
+                            Puntos de pago
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtrar por estado -->
+                <div ngbDropdown class="d-inline-block">
+                    <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
+                        <span *ngIf="statusSelected == -1">Todos los estados</span>
+                        <span *ngIf="statusSelected == 0">Cancelada</span>
+                        <span *ngIf="statusSelected == 1">En espera de pago Conecta</span>
+                        <span *ngIf="statusSelected == 2">En espera de pago por transferencia electronica</span>
+                        <span *ngIf="statusSelected == 3">Error de pago</span>
+                        <span *ngIf="statusSelected == 4">Reembolsado</span>
+                        <span *ngIf="statusSelected == 5">Pedido entregado</span>
+                        <span *ngIf="statusSelected == 6">En transito</span>
+                        <span *ngIf="statusSelected == 7">Preparando Pedido</span>
+                        <span *ngIf="statusSelected == 8">Pago Realizado</span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="changeStateSelected(-1)" ngbDropdownItem>
+                            Todos
+                        </button>
+                        <button (click)="changeStateSelected(0)" ngbDropdownItem>
+                            Cancelada
+                        </button>
+                        <button (click)="changeStateSelected(1)" ngbDropdownItem>
+                            En espera de pago Conecta
+                        </button>
+                        <button (click)="changeStateSelected(2)" ngbDropdownItem>
+                            En espera de pago por transferencia electronica
+                        </button>
+                        <button (click)="changeStateSelected(3)" ngbDropdownItem>
+                            Error de pago
+                        </button>
+                        <button (click)="changeStateSelected(4)" ngbDropdownItem>
+                            Reembolsado
+                        </button>
+                        <button (click)="changeStateSelected(5)" ngbDropdownItem>
+                            Pedido entregado
+                        </button>
+                        <button (click)="changeStateSelected(6)" ngbDropdownItem>
+                            En transito
+                        </button>
+                        <button (click)="changeStateSelected(7)" ngbDropdownItem>
+                            Preparando Pedido
+                        </button>
+                        <button (click)="changeStateSelected(8)" ngbDropdownItem>
+                            Pago Realizado
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Modificar cantidad de desplegados -->
                 <div ngbDropdown class="d-inline-block">
                     <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
@@ -24,34 +97,6 @@
                         <button ngbDropdownItem (click)="pageSize = 15">15</button>
                     </div>
                 </div>
-
-                <!-- Filtrar por estado -->
-                <!-- <div ngbDropdown class="d-inline-block">
-            <button
-              class="outline-btn btn btn-outline-secondary ma-l-70"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-            >
-                <span *ngIf="statusSelected == 'all'">Todos</span>
-                <span *ngIf="statusSelected == 'new'">Nuevos</span>
-                <span *ngIf="statusSelected == 'approved'">Aprobados</span>
-                <span *ngIf="statusSelected == 'disapproved'">Desaprobados</span>
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button (click)="changeStateSelected('all')" ngbDropdownItem>
-                Todos
-              </button>
-              <button (click)="changeStateSelected('new')" ngbDropdownItem>
-                Nuevos 
-              </button>
-              <button (click)="changeStateSelected('approved')" ngbDropdownItem>
-                Aprobados
-              </button>
-              <button (click)="changeStateSelected('disapproved')" ngbDropdownItem>
-                  Desaprobados
-              </button>
-            </div>
-          </div> -->
             </div>
         </form>
         <div class="row">
@@ -99,59 +144,72 @@
                                                 {{order.destinationCity}}
                                             </th>
                                             <th scope="col" class="col-1 full-left">
-                                               $ {{order.total}}
+                                                $ {{order.total}}
                                             </th>
                                             <th scope="col" class="col-1 full-centered">
-                                                <label *ngIf="order.paymentMethod == 0" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                <label *ngIf="order.paymentMethod == 0"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #1d3099;  margin-bottom: 5px;">
                                                     Tarjeta
                                                 </label>
-                                                <label *ngIf="order.paymentMethod == 1" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                <label *ngIf="order.paymentMethod == 1"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #2392a1;  margin-bottom: 5px;">
                                                     Transferencia electronica
                                                 </label>
-                                                <label *ngIf="order.paymentMethod == 2" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #23a12e;  margin-bottom: 5px;">
+                                                <label *ngIf="order.paymentMethod == 2"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #23a12e;  margin-bottom: 5px;">
                                                     Puntos de pago
                                                 </label>
                                             </th>
 
                                             <th scope="col" class="col-2 full-centered">
-                                                <label *ngIf="order.status == 0" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #a15523;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 0"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #a15523;  margin-bottom: 5px;">
                                                     Cancelada
                                                 </label>
-                                                <label *ngIf="order.status == 1" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #236fa1;  margin-bottom: 5px;">
-                                                    En espera de pago Conecta <!-- TO DO: Aquí pueden ir algunos otros -->
+                                                <label *ngIf="order.lastStatus == 1"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #236fa1;  margin-bottom: 5px;">
+                                                    En espera de pago Conecta
+                                                    <!-- TO DO: Aquí pueden ir algunos otros -->
                                                 </label>
-                                                <label *ngIf="order.status == 2" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #3023a1;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 2"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #3023a1;  margin-bottom: 5px;">
                                                     En espera de pago por transferencia electronica
                                                 </label>
-                                                <label *ngIf="order.status == 3" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #a12323;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 3"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #a12323;  margin-bottom: 5px;">
                                                     Error de pago
                                                 </label>
-                                                <label *ngIf="order.status == 4" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #a1238c;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 4"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #a1238c;  margin-bottom: 5px;">
                                                     Reembolsado
                                                 </label>
-                                                 <!-- Estados de la app y posibles del proveedor-->
-                                                 <label *ngIf="order.status == 5" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #0f249b;  margin-bottom: 5px;">
+                                                <!-- Estados de la app y posibles del proveedor-->
+                                                <label *ngIf="order.lastStatus == 5"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #0f249b;  margin-bottom: 5px;">
                                                     Pedido entregado
                                                 </label>
-                                                <label *ngIf="order.status == 6" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #afac00;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 6"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #afac00;  margin-bottom: 5px;">
                                                     En transito
                                                 </label>
-                                                <label *ngIf="order.status == 7" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #174646;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 7"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #174646;  margin-bottom: 5px;">
                                                     Preparando Pedido
                                                 </label>
-                                                <label *ngIf="order.status == 8" class="row no-margin genre-label margin-hori-10-5"
-                                                        style=" background-color: #164d1a;  margin-bottom: 5px;">
+                                                <label *ngIf="order.lastStatus == 8"
+                                                    class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #164d1a;  margin-bottom: 5px;">
                                                     Pago Realizado
                                                 </label>
                                             </th>

@@ -9,7 +9,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -18,7 +18,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 2,
-    "status" : 1,
+    "lastStatus" : 1,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -27,7 +27,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 1,
-    "status" : 3,
+    "lastStatus" : 3,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -36,7 +36,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 8,
+    "lastStatus" : 8,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -45,7 +45,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -54,7 +54,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -63,7 +63,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -72,7 +72,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -81,7 +81,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -90,7 +90,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -99,7 +99,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -108,7 +108,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -117,7 +117,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },{
@@ -126,7 +126,7 @@ export const dataOrders = [
     "destinationCity" : "Delicias , Chihuahua",
     "total" : "3302.36",
     "paymentMethod": 0,
-    "status" : 0,
+    "lastStatus" : 0,
     "date" : new Date(),
     "noProducts" : 2,
   },

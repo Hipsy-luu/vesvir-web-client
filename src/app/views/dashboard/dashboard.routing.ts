@@ -201,7 +201,7 @@ export const DashboardRoutes: Routes = [
         path: 'order/:id',
         component: OrderComponent,
         data: {
-          title: 'Pedido',
+          title: '',
           urls: [
             { title: 'Inicio', url: '/dashboard/admin/home' },
             { title: 'Pedido' }
