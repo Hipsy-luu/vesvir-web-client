@@ -72,7 +72,7 @@ export class OrdersComponent implements OnInit {
   }
 
   openOrder(idOrder){
-    this.dataSessionService.navigateByUrl("/dashboard/admin/order/"+idOrder);
+    this.dataSessionService.navigateByUrl("/dashboard-admin/order/"+idOrder);
   }
 
   genStatus(){

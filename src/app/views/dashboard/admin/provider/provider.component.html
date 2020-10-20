@@ -13,7 +13,7 @@
                 <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteProvider()">
                     <!-- <span aria-hidden="true">&times;</span> -->
                     <i class="fas fa-trash"></i>
-                    Eliminar Proveedor
+                    Desactivar Proveedor
                 </button>
             </div>
         </div>
@@ -32,21 +32,27 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="idraz" class="control-label col-form-label">* Nombre de la empresa/Razón social</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Nombre de la empresa/Razón social
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.businessName" type="text" class="form-control" 
                                         id="idraz" placeholder="Nombre de la empresa/ Razón social">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
-                                    <label for="idrfc" class="control-label col-form-label">* RFC</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> RFC
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.rfc" type="text" class="form-control" 
                                         id="idrfc" placeholder="RFC">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
-                                    <label for="idtel3" class="control-label col-form-label">* Teléfono</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Teléfono
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.phone" type="text" class="form-control" 
                                         id="idtel3" placeholder="Numero de teléfono">
                                 </div>
@@ -55,21 +61,27 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="inemal2" class="control-label col-form-label">* Correo Electrónico</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Correo Electrónico
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.email" type="text" class="form-control" 
                                         id="inemal2" placeholder="Escriba el correo electrónico de la empresa">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
-                                    <label for="inedo2" class="control-label col-form-label">* Estado</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Estado
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.state" type="text" class="form-control" 
                                         id="inedo2" placeholder="Escriba el estado">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
-                                    <label for="incity2" class="control-label col-form-label">* Ciudad</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Ciudad
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.city" type="text" class="form-control" 
                                         id="incity2" placeholder="Escriba la ciudad aquí">
                                 </div>
@@ -78,28 +90,36 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-2">
                                 <div class="form-group">
-                                    <label for="incod2" class="control-label col-form-label">* Código postal</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Código postal
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.postalCode" type="text" class="form-control" 
                                         id="incod2" placeholder="Escriba el código postal aquí">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-2">
                                 <div class="form-group">
-                                    <label for="incol2" class="control-label col-form-label">* Colonia</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Colonia
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.colony" type="text" class="form-control" 
                                         id="incol2" placeholder="Escriba la colonia aqui">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-2">
                                 <div class="form-group">
-                                    <label for="innumber" class="control-label col-form-label">* Numero</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Numero
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.number" type="text" class="form-control" 
                                         id="innumber" placeholder="Escriba el numero aquí">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="instreet" class="control-label col-form-label">* Calle</label>
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Calle
+                                    </label>
                                     <input [(ngModel)]="customer.billingInformation.street" type="text" class="form-control" 
                                         id="instreet" placeholder="Escriba la dirección aquí">
                                 </div>
@@ -143,25 +163,33 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="idnom" class="control-label col-form-label">* Nombre</label>
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Nombre
+                                        </label>
                                         <input [(ngModel)]="customer.name" type="text" class="form-control" id="idnom" placeholder="Escriba su nombre aqui">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="insur" class="control-label col-form-label">* Apellidos</label>
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Apellidos
+                                        </label>
                                         <input [(ngModel)]="customer.surnames" type="text" class="form-control" id="insur" placeholder="Escriba sus apellidos aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="inele" class="control-label col-form-label">* Correo Electrónico</label>
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Correo Electrónico
+                                        </label>
                                         <input [(ngModel)]="customer.email" type="text" class="form-control" id="inele" placeholder="Escriba un email valido aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="infech" class="control-label col-form-label">Fecha de nacimiento</label>
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Fecha de nacimiento
+                                        </label>
                                        <!--  <input [(ngModel)]="customer.birthDay"  type="date" class="form-control" >
                                         <input [(ngModel)]="customeBirthDay" (change)="setBirthDay()" type="date" id="infech" class="form-control"> -->
                                         <div class="input-group">
@@ -179,13 +207,17 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="inputcom" class="control-label col-form-label">* Teléfono</label>
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Teléfono
+                                        </label>
                                         <input [(ngModel)]="customer.phone"  type="text" class="form-control" id="inputcom" placeholder="Company Here">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label col-form-label">Genero</label>
+                                        <label class="control-label form-label">
+                                            <!-- <span style="color: red;">*</span>  -->Genero
+                                        </label>
                                         <div ngbDropdown class="">
                                             <button
                                               class="form-control"
@@ -208,7 +240,9 @@
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label col-form-label">Grupo de usuarios</label>
+                                        <label class="control-label form-label">
+                                            <!-- <span style="color: red;">*</span>  -->Grupo de usuarios
+                                        </label>
                                         <div ngbDropdown class="">
                                             <button
                                               class="form-control"
@@ -261,13 +295,17 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idnamem" class="control-label col-form-label">* Nombre</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Nombre
+                        </label>
                         <input [(ngModel)]="customer.directions[0].name" type="text" class="form-control" id="idnamem" placeholder="Nombre de la persona que recibe">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idsurm" class="control-label col-form-label">* Apellidos</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Apellidos
+                        </label>
                         <input [(ngModel)]="customer.directions[0].surnames" type="text" class="form-control" id="idsurm" placeholder="Escriba sus apellidos">
                     </div>
                 </div>
@@ -275,7 +313,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <label for="iddirm" class="control-label col-form-label">* Calle</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Calle
+                        </label>
                         <textarea [(ngModel)]="customer.directions[0].street" type="text" class="form-control" id="iddirm" placeholder="Escriba la calle aquí"></textarea>
                     </div>
                 </div>
@@ -283,19 +323,25 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
-                        <label for="idtelm" class="control-label col-form-label">* Teléfono</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Teléfono
+                        </label>
                         <input [(ngModel)]="customer.directions[0].phone" type="text" class="form-control" id="idtelm" placeholder="Escriba su teléfono">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="form-group">
-                        <label for="idintm" class="control-label col-form-label">* No Interior</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> No Interior
+                        </label>
                         <input [(ngModel)]="customer.directions[0].number"  type="text" class="form-control" id="idintm" placeholder="Numero interior">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="form-group">
-                        <label for="idnoem" class="control-label col-form-label"> No Exterior</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> No Exterior
+                        </label>
                         <input [(ngModel)]="customer.directions[0].extNumber"  type="text" class="form-control" id="idnoem" placeholder="Numero exterior">
                     </div>
                 </div>
@@ -304,13 +350,17 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idestm" class="control-label col-form-label">* Estado</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Estado
+                        </label>
                         <input [(ngModel)]="customer.directions[0].state" type="text" class="form-control" id="idestm" placeholder="Company Here">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idcium" class="control-label col-form-label">* Ciudad</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Ciudad
+                        </label>
                         <input [(ngModel)]="customer.directions[0].city" type="text" class="form-control" id="idcium" placeholder="Company Here">
                     </div>
                 </div>
@@ -319,13 +369,17 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idcolm" class="control-label col-form-label">* Colonia</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Colonia
+                        </label>
                         <input [(ngModel)]="customer.directions[0].colony" type="text" class="form-control" id="idcolm" placeholder="Company Here">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
-                        <label for="idcodm" class="control-label col-form-label">* Código postal</label>
+                        <label class="control-label form-label">
+                            <span style="color: red;">*</span> Código postal
+                        </label>
                         <input [(ngModel)]="customer.directions[0].postalCode" type="text" class="form-control" id="idcodm" placeholder="Company Here">
                     </div>
                 </div>

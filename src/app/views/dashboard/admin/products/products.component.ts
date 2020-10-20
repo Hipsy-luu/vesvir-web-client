@@ -53,6 +53,6 @@ export class ProductsComponent implements OnInit {
 
   onSelect( idProduct ) {
     console.log('Select Event', idProduct);
-    this.dataSessionService.navigateByUrl("/dashboard/admin/categorys/product/"+idProduct);
+    this.dataSessionService.navigateByUrl("/dashboard-admin/categorys/product/"+idProduct);
   }
 }

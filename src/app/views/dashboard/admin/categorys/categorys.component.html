@@ -2,9 +2,7 @@
   <div class="col-12">
     <div class="card">
       <!-- TITLE -->
-      <div
-        class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center"
-      >
+      <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
         <div class="text-white m-b-0 m-l-15 font-18">Añadiendo Categoría</div>
         <div class="text-white m-b-0 m-l-15 font-20 no-margin">
           <!-- <label class="label-images-count">{{ images.length }}</label> -->
@@ -17,87 +15,72 @@
           <div class="form-group no-margin">
             <div class="row">
               <div class="col-4">
-                <div
-                  class="row full-centered full-right"
-                  style="height: 49px; margin-right: 10px;"
-                >
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
                   <div class="input-field m-t-0 m-b-0">
-                    <label>Nombre de la categoría</label>
+                    <label class="control-label form-label">
+                      <span style="color: red;">*</span> Nombre de la categoría
+                    </label>
                   </div>
                 </div>
-                <div
-                  class="row full-centered full-right"
-                  style="height: 49px; margin-right: 10px;"
-                >
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
                   <div class="input-field m-t-0 m-b-0">
-                    <label>Seleccione Genero</label>
+                    <label class="control-label form-label">
+                      <span style="color: red;">*</span> Seleccione Genero
+                    </label>
                   </div>
                 </div>
               </div>
               <div class="col-5">
                 <div class="row">
                   <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      maxlength="50"
-                      id="maxval"
-                      aria-describedby="maxval"
-                      placeholder="Nombre de la categoría"
-                    />
+                    <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
+                      placeholder="Nombre de la categoría" />
                   </div>
                 </div>
                 <div class="row full-centered full-right">
-                    <div class="col-5">
-                        <div ngbDropdown class="d-inline-block">
-                            <button
-                            class="outline-btn btn btn-outline-secondary ma-l-70"
-                            id="dropdownBasic1"
-                            ngbDropdownToggle
-                            > 
-                            <span *ngIf="actualCategory.genre == 0">Hombres</span>
-                            <span *ngIf="actualCategory.genre == 1">Mujeres</span>
-                            <span *ngIf="actualCategory.genre == 2">Niños</span>
-                            <span *ngIf="actualCategory.genre == 3">Niñas</span>
-                            </button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                <button (click)="actualCategory.genre = 0" ngbDropdownItem>Hombres</button>
-                                <button (click)="actualCategory.genre = 1" ngbDropdownItem>Mujeres</button>
-                                <button (click)="actualCategory.genre = 2" ngbDropdownItem>Niños</button>
-                                <button (click)="actualCategory.genre = 3" ngbDropdownItem>Niñas</button>
-                            </div>
-                        </div>
+                  <div class="col-5">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1"
+                        ngbDropdownToggle>
+                        <span *ngIf="actualCategory.genre == 0">Hombres</span>
+                        <span *ngIf="actualCategory.genre == 1">Mujeres</span>
+                        <span *ngIf="actualCategory.genre == 2">Niños</span>
+                        <span *ngIf="actualCategory.genre == 3">Niñas</span>
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="actualCategory.genre = 0" ngbDropdownItem>Hombres</button>
+                        <button (click)="actualCategory.genre = 1" ngbDropdownItem>Mujeres</button>
+                        <button (click)="actualCategory.genre = 2" ngbDropdownItem>Niños</button>
+                        <button (click)="actualCategory.genre = 3" ngbDropdownItem>Niñas</button>
+                      </div>
                     </div>
-                    <div class="col-2 full-centered full-right">
-                        <div class="input-field m-t-0 m-b-0">
-                            <label>Estatus</label>
-                        </div>
+                  </div>
+                  <div class="col-2 full-centered full-right">
+                    <div class="input-field m-t-0 m-b-0">
+                      <label class="control-label form-label">
+                        <span style="color: red;">*</span> Estatus
+                      </label>
                     </div>
-                    <div class="col-5">
-                        <div ngbDropdown class="d-inline-block">
-                            <button
-                            class="outline-btn btn btn-outline-secondary ma-l-70"
-                            id="dropdownBasic1"
-                            ngbDropdownToggle
-                            > 
-                            <span *ngIf="actualCategory.active == true">Activo</span>
-                            <span *ngIf="actualCategory.active == false">Desactivado</span>
-                            </button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                <button (click)="actualCategory.active = true" ngbDropdownItem>Activado</button>
-                                <button (click)="actualCategory.active = false" ngbDropdownItem>Desactivado</button>
-                            </div>
-                        </div>
+                  </div>
+                  <div class="col-5">
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1"
+                        ngbDropdownToggle>
+                        <span *ngIf="actualCategory.active == true">Activo</span>
+                        <span *ngIf="actualCategory.active == false">Desactivado</span>
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="actualCategory.active = true" ngbDropdownItem>Activado</button>
+                        <button (click)="actualCategory.active = false" ngbDropdownItem>Desactivado</button>
+                      </div>
                     </div>
+                  </div>
                 </div>
               </div>
               <div class="col-3">
                 <div class="row full-centered">
                   <div class="col-12">
-                    <button
-                      class="btn mr-0 btn-outline-secondary button-options"
-                      type="button"
-                    >
+                    <button class="btn mr-0 btn-outline-secondary button-options" type="button">
                       <div class="row full-centered">
                         <i class="fas fa-save"></i>
                       </div>
@@ -109,10 +92,7 @@
                 </div>
                 <div class="row full-centered">
                   <div class="col-12">
-                    <button
-                      class="btn mr-0 btn-outline-secondary button-options"
-                      type="button"
-                    >
+                    <button class="btn mr-0 btn-outline-secondary button-options" type="button">
                       <div class="row full-centered">
                         <i class="fas fa-save"></i>
                       </div>
@@ -130,62 +110,46 @@
       <hr class="m-t-0" />
       <form>
         <div class="form-group form-inline pd-10-l">
-          <input
-            [ngModelOptions]="{ standalone: true }"
-            [(ngModel)]="searchValue"
-            (ngModelChange)="filterByName($event)"
-            placeholder="Buscar por nombre"
-            class="form-control ml-2"
-            type="text"
-          />
+          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+            (ngModelChange)="filterByName($event)" placeholder="Buscar por nombre" class="form-control ml-2"
+            type="text" />
           <i class="pd-10-l fas fa-search"></i>
           <!-- Filtrar por genero -->
           <div ngbDropdown class="d-inline-block">
-            <button
-            class="outline-btn btn btn-outline-secondary ma-l-70"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-            > 
-            <span *ngIf="selectedGenre == -1">Todos</span>
-            <span *ngIf="selectedGenre == 0">Hombres</span>
-            <span *ngIf="selectedGenre == 1">Mujeres</span>
-            <span *ngIf="selectedGenre == 2">Niños</span>
-            <span *ngIf="selectedGenre == 3">Niñas</span>
+            <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
+              <span *ngIf="selectedGenre == -1">Todos</span>
+              <span *ngIf="selectedGenre == 0">Hombres</span>
+              <span *ngIf="selectedGenre == 1">Mujeres</span>
+              <span *ngIf="selectedGenre == 2">Niños</span>
+              <span *ngIf="selectedGenre == 3">Niñas</span>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button (click)="changeGenreSelected(-1)" ngbDropdownItem>Todos</button>
-                <button (click)="changeGenreSelected(0)" ngbDropdownItem>Hombres</button>
-                <button (click)="changeGenreSelected(1)" ngbDropdownItem>Mujeres</button>
-                <button (click)="changeGenreSelected(2)" ngbDropdownItem>Niños</button>
-                <button (click)="changeGenreSelected(3)" ngbDropdownItem>Niñas</button>
+              <button (click)="changeGenreSelected(-1)" ngbDropdownItem>Todos</button>
+              <button (click)="changeGenreSelected(0)" ngbDropdownItem>Hombres</button>
+              <button (click)="changeGenreSelected(1)" ngbDropdownItem>Mujeres</button>
+              <button (click)="changeGenreSelected(2)" ngbDropdownItem>Niños</button>
+              <button (click)="changeGenreSelected(3)" ngbDropdownItem>Niñas</button>
             </div>
           </div>
 
           <div ngbDropdown class="d-inline-block">
-            <button
-            class="outline-btn btn btn-outline-secondary ma-l-70"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-            > 
-            <span *ngIf="selectedStatus == -1">Activos y Desactivados</span>
-            <span *ngIf="selectedStatus == 0">Activos</span>
-            <span *ngIf="selectedStatus == 1">Desactivados</span>
+            <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
+              <span *ngIf="selectedStatus == -1">Activos y Desactivados</span>
+              <span *ngIf="selectedStatus == 0">Activos</span>
+              <span *ngIf="selectedStatus == 1">Desactivados</span>
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button (click)="changeStatusSelected(-1)" ngbDropdownItem>Activos y Desactivados</button>
-                <button (click)="changeStatusSelected(0)" ngbDropdownItem>Activos</button>
-                <button (click)="changeStatusSelected(1)" ngbDropdownItem>Desactivados</button>
+              <button (click)="changeStatusSelected(-1)" ngbDropdownItem>Activos y Desactivados</button>
+              <button (click)="changeStatusSelected(0)" ngbDropdownItem>Activos</button>
+              <button (click)="changeStatusSelected(1)" ngbDropdownItem>Desactivados</button>
             </div>
           </div>
         </div>
       </form>
       <!-- EDIT IMAGES -->
       <div class="card-body p-t-0 p-r-0">
-        <div
-          class="chat-box p-r-15"
-          style="height: calc(100vh - 550px); position: relative;"
-          [perfectScrollbar]="config"
-        >
+        <div class="chat-box p-r-15" style="height: calc(100vh - 550px); position: relative;"
+          [perfectScrollbar]="config">
           <!-- ITEMS -->
 
           <div class="table-responsive">
@@ -199,54 +163,47 @@
                   <th scope="col" class="col-2 full-centered">Acciones</th>
                 </tr>
               </thead>
-              <tbody
-                class="dragndrop"
-                [dragula]="'images-list'"
-                [(dragulaModel)]="categorysFiltered"
-              >
+              <tbody class="dragndrop" [dragula]="'images-list'" [(dragulaModel)]="categorysFiltered">
                 <!-- <div >
                     <div *ngFor='let text of many2' [innerHtml]='text'></div>
                  </div> -->
-                <tr
-                  class="row"
-                  *ngFor="let category of categorysFiltered; index as i"
-                >
+                <tr class="row" *ngFor="let category of categorysFiltered; index as i">
                   <th scope="col" class="col-1 full-centered">{{category.idCategory}}</th>
                   <th scope="col" class="col-5 full-left">{{ category.name }}</th>
                   <th scope="col" class="col-2 full-centered">
-                    <label *ngIf="category.genre == 3" class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
-                        Niña
+                    <label *ngIf="category.genre == 3" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: blueviolet;margin-bottom: 5px;">
+                      Niña
                     </label>
-                    <label *ngIf="category.genre == 2" class="row no-margin genre-label margin-hori-10-5" style="background-color: #2b3de2;margin-bottom: 5px;">
-                        Niño
+                    <label *ngIf="category.genre == 2" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: #2b3de2;margin-bottom: 5px;">
+                      Niño
                     </label>
-                    <label *ngIf="category.genre == 1" class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22bc3;margin-bottom: 5px;">
-                        Mujer
+                    <label *ngIf="category.genre == 1" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: #e22bc3;margin-bottom: 5px;">
+                      Mujer
                     </label>
-                    <label *ngIf="category.genre == 0" class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
-                        Hombre
-                    </label>
-                  </th>
-                  <th scope="col" class="col-2 full-centered">
-                    <label *ngIf="category.active == true" class="row no-margin genre-label margin-hori-10-5" style="background-color: rgb(44, 185, 31);margin-bottom: 5px;">
-                        Activo
-                    </label>
-                    <label *ngIf="category.active == false" class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22b2b;margin-bottom: 5px;">
-                        Desactivado
+                    <label *ngIf="category.genre == 0" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: #160e81;margin-bottom: 5px;">
+                      Hombre
                     </label>
                   </th>
                   <th scope="col" class="col-2 full-centered">
-                    <button
-                      class="btn mr-0 btn-outline-secondary"
-                      type="button"
-                    >
+                    <label *ngIf="category.active == true" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: rgb(44, 185, 31);margin-bottom: 5px;">
+                      Activo
+                    </label>
+                    <label *ngIf="category.active == false" class="row no-margin genre-label margin-hori-10-5"
+                      style="background-color: #e22b2b;margin-bottom: 5px;">
+                      Desactivado
+                    </label>
+                  </th>
+                  <th scope="col" class="col-2 full-centered">
+                    <button class="btn mr-0 btn-outline-secondary" type="button">
                       <i class="fas fa-trash-alt"></i>
                       Desactivar
                     </button>
-                    <button
-                      class="btn mr-0 btn-outline-secondary"
-                      type="button"
-                    >
+                    <button class="btn mr-0 btn-outline-secondary" type="button">
                       <i class="fas fa-trash-alt"></i>
                       Editar
                     </button>

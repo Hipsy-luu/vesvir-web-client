@@ -40,6 +40,6 @@ export class ProvidersComponent implements OnInit {
   }
 
   openProvider(idProvider){
-    this.dataSessionService.navigateByUrl("/dashboard/admin/provider/"+idProvider);
+    this.dataSessionService.navigateByUrl("/dashboard-admin/provider/"+idProvider);
   }
 }

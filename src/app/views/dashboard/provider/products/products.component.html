@@ -1,0 +1,212 @@
+<div class="row">
+  <!-- column -->
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <!--  <form class="w-50 m-b-30">
+            <input type='text' class="form-control" placeholder='Escriba para buscar por nombre...' (keyup)='updateFilter($event)' />
+          </form>
+          <ngx-datatable #table class='material' 
+            [columnMode]="'force'" 
+            [headerHeight]="50" 
+            [footerHeight]="50"
+            [rowHeight]="'auto'" 
+            [limit]="10" 
+            [rows]='rows'
+            [selectionType]="'single'"
+            (select)="onSelect($event)"
+            >
+            
+            <ngx-datatable-column name="price" [headerClass]="'full-right'" [cellClass]="'full-right'">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Precio 
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <strong> $ {{ value }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+
+            
+            <ngx-datatable-column name="quantity" [width]="100" [headerClass]="'full-right'" [cellClass]="'full-right'">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Cantidad 
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+
+            >
+            <ngx-datatable-column name="status" [headerClass]="'full-centered'" [cellClass]="'full-centered'">
+                <ng-template let-column="column" ngx-datatable-header-template>
+                    Estado 
+                </ng-template>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </ngx-datatable-column>
+
+          </ngx-datatable> -->
+
+        <hr class="m-t-0" />
+        <form>
+          <div class="form-group form-inline pd-10-l">
+            <input
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="searchValue"
+              (ngModelChange)="filterByName($event)"
+              placeholder="Buscar por Titulo"
+              class="form-control ml-2"
+              type="text"
+            />
+            <i class="pd-10-l fas fa-search"></i>
+            <!-- Modificar cantidad de deplegados -->
+            <div ngbDropdown class="d-inline-block">
+              <button
+                class="outline-btn btn btn-outline-secondary ma-l-70"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Productos {{ pageSize }}
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem (click)="pageSize = 5">5</button>
+                <button ngbDropdownItem (click)="pageSize = 10">10</button>
+                <button ngbDropdownItem (click)="pageSize = 15">15</button>
+              </div>
+            </div>
+
+            <!-- Filtrar por estado -->
+            <div ngbDropdown class="d-inline-block">
+              <button
+                class="outline-btn btn btn-outline-secondary ma-l-70"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Estado : 
+                <span *ngIf="statusSelected=='all'">Todos</span>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button (click)="changeStateSelected('all')" ngbDropdownItem>Todos</button>
+                <button (click)="changeStateSelected('agotado')" ngbDropdownItem>Agotado</button>
+                <button (click)="changeStateSelected('activado')" ngbDropdownItem>Activado</button>
+                <button (click)="changeStateSelected('pausado')" ngbDropdownItem>Pausado</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- EDIT IMAGES -->
+        <div class="card-body p-t-0 p-r-0">
+          <div class="chat-box p-r-15" style="position: relative;">
+            <!-- ITEMS -->
+
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr class="row">
+                    <th scope="col" class="col-1 full-centered">ID</th>
+                    <th scope="col" class="col-1 full-centered">Imagen</th>
+                    <th scope="col" class="col-4 full-left">Nombre</th>
+                    <th scope="col" class="col full-centered">Stickers</th>
+                    <th scope="col" class="col full-centered">Referencia</th>
+                    <th scope="col" class="col full-centered">Categoría</th>
+                    <th scope="col" class="col full-centered">Precio</th>
+                    <th scope="col" class="col full-centered">Cantidad</th>
+                    <th scope="col" class="col full-centered">Estado</th>
+                    <th scope="col" class="col full-centered">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <div >
+                      <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                   </div> -->
+                  <tr
+                    class="row"
+                    *ngFor="
+                      let product of dataProductsFiltered
+                        | slice
+                          : (page - 1) * pageSize
+                          : (page - 1) * pageSize + pageSize;
+                      index as i
+                    "
+                  >
+                    <th scope="col" class="col-1 full-centered">
+                      {{ product.id }}
+                    </th>
+                    <th scope="col" class="col-1 full-centered">
+                      <img
+                        [src]="product.image"
+                        class="mr-2"
+                        style="width: 40px;"
+                      />
+                    </th>
+                    <th scope="col" class="col-4 full-left">
+                      {{ product.name }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      {{ product.numArch }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      {{ product.reference }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      {{ product.category }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      {{ product.price }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      {{ product.price }}
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      <label *ngIf="product.status == 'agotado'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="background-color: #b12d1c; margin-bottom: 5px;"
+                      >
+                        Agotado
+                      </label>
+                      <label *ngIf="product.status == 'activado'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="background-color: #29852e; margin-bottom: 5px;"
+                      >
+                        Activado
+                      </label>
+                      <label *ngIf="product.status == 'pausado'"
+                        class="row no-margin genre-label margin-hori-10-5"
+                        style="background-color: #1c44b1; margin-bottom: 5px;"
+                      >
+                        Pausado
+                      </label>
+                    </th>
+                    <th scope="col" class="col full-centered">
+                      <button
+                        (click)="onSelect(product.id)"
+                        class="btn mr-0 btn-outline-secondary"
+                        type="button"
+                      >
+                        <i class="fas fa-edit"></i>
+                        Editar
+                      </button>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col" style="text-align: right;">
+                  <ngb-pagination
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    [collectionSize]="dataProductsFiltered.length"
+                    style="width: -webkit-fill-available; text-align: right;"
+                    class="justify-end"
+                  >
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

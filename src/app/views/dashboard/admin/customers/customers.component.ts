@@ -40,7 +40,7 @@ export class CustomersComponent implements OnInit {
   }
 
   openCustomer(idCustomer){
-    this.dataSessionService.navigateByUrl("/dashboard/admin/customers/customer/"+idCustomer);
+    this.dataSessionService.navigateByUrl("/dashboard-admin/customers/customer/"+idCustomer);
   }
 
 }

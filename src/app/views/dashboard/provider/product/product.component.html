@@ -1,0 +1,683 @@
+<div class="row ">
+    <div class="d-flex full-width">
+        <div class="col-3">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills card" orientation="vertical">
+                <li [ngbNavItem]="1" class="">
+                    <a ngbNavLink>
+                        <h4 class="no-margin ma-10-30">
+                            <i class="fas fa-info ma-r-10"></i>
+                            Información
+                        </h4>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="p-l-0 p-r-25 p-t-10 p-b-10 d-flex align-items-center">
+                            <div class="row full-width">
+                                <div class="col-6 full-centered full-left">
+                                    <div class="m-b-0 font-18">
+                                        <i class="fas fa-info"></i>
+                                        INFORMACIÓN
+                                    </div>
+                                </div>
+                                <div class="col-6 full-right">
+                                    <button (click)="deleteProduct()" type="button" class="btn btn-outline-secondary"
+                                        aria-label="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                        Eliminar Producto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-t-0" />
+                        <div class="row ma-10-30">
+                            <div class="col-12">
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label">
+                                            Activo
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <!-- <input placeholder="sdsd" class="form-control"> -->
+                                        <!-- Default switch -->
+                                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"
+                                            [(ngModel)]="actualProduct.activated">
+                                            <label ngbButtonLabel class="btn mr-0 btn-outline-primary">
+                                                <input ngbButton type="radio" [value]="true"> SI
+                                            </label>
+                                            <label ngbButtonLabel class="btn mr-0 btn-outline-primary">
+                                                <input ngbButton type="radio" [value]="false"> NO
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Nombre del articulo
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <input [(ngModel)]="actualProduct.name"
+                                            placeholder="Ingrese el nombre del articulo" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- <div class="row pd-10">
+                                  <div class="col-lg-2 col-md-4 col-sm-4  full-right">
+                                      <label class="control-label col-form-label form-label">
+                                           Código de Referencia
+                                      </label>
+                                  </div>
+                                  <div class="col-lg-4 col-md-8 col-sm-8 full-left">
+                                      <input placeholder="sdsd" class="form-control">
+                                  </div>
+                                  <div class="col-lg-2 col-md-4 full-right">
+                                      <label class="control-label col-form-label form-label">
+                                          <span style="color: red;">*</span> Marca
+                                      </label>
+                                  </div>
+                                  <div class="col-lg-4 col-md-8 full-left">
+                                      <input placeholder="sdsd" class="form-control">
+                                  </div>
+                              </div> -->
+                                <div class="row pd-10">
+                                    <div class="col-4  full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <!-- <span style="color: red;">*</span> --> Código de Referencia
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 full-left">
+                                        <input [(ngModel)]="actualProduct.referenceCode"
+                                            placeholder="Ingrese su código de referencia" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4  full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <!-- <span style="color: red;">*</span> --> Código de Barras
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 full-left">
+                                        <input [(ngModel)]="actualProduct.barCode" placeholder="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Marca
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <input [(ngModel)]="actualProduct.brand" placeholder="Marca del producto"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4  full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Genero
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 full-left">
+                                        <div ngbDropdown class="d-inline-block  full-width">
+                                            <button class="btn btn-outline-secondary mr-2 full-width"
+                                                id="dropdownBasic1" ngbDropdownAnchor ngbDropdownToggle>
+                                                <span *ngIf="actualProduct.gender == -1">Elige el genero del
+                                                    producto</span>
+                                                <span *ngIf="actualProduct.gender == 0">Niño</span>
+                                                <span *ngIf="actualProduct.gender == 1">Niña</span>
+                                                <span *ngIf="actualProduct.gender == 2">Mujer</span>
+                                                <span *ngIf="actualProduct.gender == 3">Hombre</span>
+                                            </button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
+                                                <button disabled ngbDropdownItem
+                                                    (click)="actualProduct.gender = -1">Elige un genero </button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.gender = 0;actualProduct.category = -1">Niño</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.gender = 1;actualProduct.category = -1">Niña</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.gender = 2;actualProduct.category = -1">Mujer</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.gender = 3;actualProduct.category = -1">Hombre</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Categoría
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <div ngbDropdown class="d-inline-block  full-width">
+                                            <button class="btn btn-outline-secondary mr-2 full-width"
+                                                id="dropdownBasic1" ngbDropdownAnchor ngbDropdownToggle>
+                                                <span *ngIf="actualProduct.category == -1">Elige una categoría</span>
+                                                <span *ngIf="actualProduct.category == 0">Niño</span>
+                                                <span *ngIf="actualProduct.category == 1">Niña</span>
+                                                <span *ngIf="actualProduct.category == 2">Mujer</span>
+                                                <span *ngIf="actualProduct.category == 3">Hombre</span>
+                                            </button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
+                                                <button disabled ngbDropdownItem
+                                                    (click)="actualProduct.category = -1">Elige una categoría </button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.category = 0">Niño</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.category = 1">Niña</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.category = 2">Mujer</button>
+                                                <button ngbDropdownItem
+                                                    (click)="actualProduct.category = 3">Hombre</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Material
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <input [(ngModel)]="actualProduct.material"
+                                            placeholder="Principal material del producto" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Descripción corta
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <input [(ngModel)]="actualProduct.shortDescription"
+                                            placeholder="Añada una descripción corta" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Descripción
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <textarea [(ngModel)]="actualProduct.description" rows="5"
+                                            placeholder="Descripción del producto" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Especificaciones
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <textarea [(ngModel)]="actualProduct.specs" rows="5"
+                                            placeholder="Especificaciones del producto" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Precio unitario de venta con IVA
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <!-- <input [(ngModel)]="actualProduct.price" placeholder="Precio del producto"
+                                            class="form-control" type="number" step="0.01"> -->
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input [(ngModel)]="actualProduct.price" placeholder="Precio del producto"
+                                                class="form-control" type="number" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2" class="">
+                    <a ngbNavLink>
+                        <h4 class="no-margin ma-10-30">
+                            <i class="ti-ruler-alt-2 ma-r-10"></i>
+                            Dimensiones
+                        </h4>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="p-l-0 p-r-25 p-t-10 p-b-10 d-flex align-items-center">
+                            <div class="row full-width">
+                                <div class="col-12 full-centered full-left">
+                                    <div class="m-b-0 font-18">
+                                        <i class="ti-ruler-alt-2"></i>
+                                        DIMENSIONES DEL PRODUCTO PARA EL ENVIÓ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-t-0" />
+                        <div class="row ma-10-30">
+                            <div class="col-12">
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Anchura
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <!-- <input placeholder="sdsd" class="form-control"> -->
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">cm</span>
+                                            </div>
+                                            <input [(ngModel)]="actualProduct.width" type="number"
+                                                placeholder="Anchura del paquete" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Altura
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">cm</span>
+                                            </div>
+                                            <input [(ngModel)]="actualProduct.height" type="number"
+                                                placeholder="Altura del paquete" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Profundidad
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">cm</span>
+                                                </div>
+                                                <input [(ngModel)]="actualProduct.depth" type="number"
+                                                    placeholder="Profundidad del paquete" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Peso
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Kg</span>
+                                            </div>
+                                            <input [(ngModel)]="actualProduct.weight" type="number"
+                                                placeholder="Peso del Producto" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3" class="">
+                    <a ngbNavLink>
+                        <h4 class="no-margin ma-10-30">
+                            <i class="fas fa-tasks ma-r-10"></i>
+                            Cantidades
+                        </h4>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="p-l-0 p-r-25 p-t-10 p-b-10 d-flex align-items-center">
+                            <div class="row full-width">
+                                <div class="col-12 full-centered full-left">
+                                    <div class="m-b-0 font-18">
+                                        <i class="fas fa-tasks"></i>
+                                        CANTIDADES DISPONIBLES PARA LA VENTA
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="m-t-0" />
+                        <div class="row ma-10-30">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="row pd-10">
+                                            <div class="col-4 full-right">
+                                                <label class="control-label col-form-label form-label">
+                                                    <span style="color: red;">*</span> Cantidad
+                                                </label>
+                                            </div>
+                                            <div class="col full-left">
+                                                <input [(ngModel)]="newQuantity.quantity" type="number"
+                                                    placeholder="Cantidad de unidades disponibles" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row pd-10">
+                                            <div class="col-4 full-right">
+                                                <label class="control-label col-form-label form-label">
+                                                    <span style="color: red;">*</span> Talla
+                                                </label>
+                                            </div>
+                                            <div class="col full-left">
+                                                <input [(ngModel)]="newQuantity.size" type="text"
+                                                    placeholder="Nombre de la medida" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row pd-10">
+                                            <div class="col-4 full-right">
+                                                <label class="control-label col-form-label form-label">
+                                                    <span style="color: red;">*</span> Color
+                                                </label>
+                                            </div>
+                                            <div class="col full-left">
+                                                <input [(ngModel)]="newQuantity.color" type="text"
+                                                    placeholder="Color del producto" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row pd-10">
+                                            <div class="col-4 full-right">
+                                                <label class="control-label col-form-label form-label">
+                                                    <!-- <span style="color: red;">*</span> --> Descripción
+                                                </label>
+                                            </div>
+                                            <div class="col full-left">
+                                                <input [(ngModel)]="newQuantity.description" type="text"
+                                                    placeholder="Nombre de la medida" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 full-left">
+                                        <button (click)="addQuantity()" class="btn mr-0 btn-outline-primary"
+                                            type="button">
+                                            <div class="row full-centered">
+                                                <i class="fas fa-plus ma-0-10"></i>
+                                                <label class="no margin ma-0-10">
+                                                    Añadir
+                                                </label>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                        <div class="row ma-10-30">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr class="row">
+                                                        <th scope="col" class="col-1 full-centered">ID</th>
+                                                        <th scope="col" class="col-2 full-left">Disponibles</th>
+                                                        <th scope="col" class="col-2 full-left">Talla</th>
+                                                        <th scope="col" class="col-2 full-left">Color</th>
+                                                        <th scope="col" class="col-5 full-left">Descripción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <div >
+                                              <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                          </div> -->
+                                                    <tr class="row"
+                                                        *ngFor=" let quantity of actualProduct.quantities; index as i ">
+                                                        <th scope="col" class="col-1 full-centered">
+                                                            {{quantity.idQuantity}}
+                                                        </th>
+                                                        <th scope="col" class="col-2 full-left">
+                                                            <input [(ngModel)]="quantity.quantity" type="number"
+                                                                placeholder="Ingrese un numero" class="form-control">
+                                                        </th>
+                                                        <th scope="col" class="col-2 full-left">
+                                                            <input [(ngModel)]="quantity.size" type="text"
+                                                                placeholder="Ingrese la talla del producto"
+                                                                class="form-control">
+                                                        </th>
+                                                        <th scope="col" class="col-2 full-left">
+                                                            <input [(ngModel)]="quantity.color" type="text"
+                                                                placeholder="Color del producto" class="form-control">
+                                                        </th>
+                                                        <th scope="col" class="col-5 full-left">
+                                                            <input [(ngModel)]="quantity.description" type="text"
+                                                                placeholder="Ingrese una descripción"
+                                                                class="form-control">
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="4" class="">
+                    <a ngbNavLink>
+                        <h4 class="no-margin ma-10-30">
+                            <i class="fas fa-images ma-r-10"></i>
+                            Imágenes
+                        </h4>
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="p-l-0 p-r-25 p-t-10 p-b-10 d-flex align-items-center">
+                            <div class="row full-width">
+                                <div class="col-12 full-centered full-left">
+                                    <div class="m-b-0 font-18">
+                                        <i class="fas fa-images"></i>
+                                        IMÁGENES
+                                        <!-- <span class="no-margin genre-label margin-hori-10-5"
+                                          style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                                          6
+                                      </span> -->
+                                        <span class="no-margin genre-label margin-hori-10-5"
+                                            style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                                            {{actualProduct.images.length}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADD IMAGE -->
+                        <div class="card-body border-top">
+                            <form class="no-margin">
+                                <div class="form-group no-margin">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="row full-centered full-right"
+                                                style="height: 49px; margin-right: 10px;">
+                                                <div class="input-field m-t-0 m-b-0">
+                                                    <label class="control-label col-form-label form-label">Añadir una
+                                                        nueva imagen del producto</label>
+                                                </div>
+                                            </div>
+                                            <div class="row full-centered full-right"
+                                                style="height: 49px; margin-right: 10px;">
+                                                <div class="input-field m-t-0 m-b-0">
+                                                    <label class="control-label col-form-label form-label">
+                                                        <span style="color: red;">*</span>Nombre
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="row">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Subir</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input (change)="updateSource($event)" type="file"
+                                                            accept="image/jpeg" class="custom-file-input"
+                                                            id="inputGroupFile01" />
+                                                        <label class="custom-file-label" for="inputGroupFile01">Añadir
+                                                            archivo JPG</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row full-centered">
+                                                <input type="text" class="form-control" maxlength="50" id="maxval"
+                                                    aria-describedby="maxval" placeholder="Nombre de la imagen" />
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="row full-centered full-width full-height">
+                                                <div class="col-12 full-width full-height">
+                                                    <span *ngIf="source.length == 0"
+                                                        class="card full-centered full-height">
+                                                        <img class=" full-width full-height" style="object-fit: cover;"
+                                                            src="assets/images/product/no-image.jpg" alt="Sin Imagen" />
+                                                    </span>
+
+                                                    <span *ngIf="source.length > 0">
+                                                        <div class="card">
+                                                            <img *ngIf="source.length > 0"
+                                                                class=" full-width full-height"
+                                                                style="object-fit: cover;" [src]="source">
+                                                        </div>
+                                                        <div class="full-width full-centered pd-10">
+                                                            <button (click)="cancelImage()"
+                                                                class="btn mr-0 btn-outline-secondary" type="button">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                                Borrar imagen
+                                                            </button>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 full-centered">
+                                            <button (click)="uploadImage()" type="button"
+                                                class="btn mr-0 btn-outline-primary">
+                                                <i class="fas fa-upload"></i> Subir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- <hr class="m-t-0" />
+                      <form>
+                          <div class="form-group form-inline pd-10-l">
+                              <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+                                  (ngModelChange)="filterByName($event)" placeholder="Buscar por Titulo"
+                                  class="form-control ml-2" type="text" />
+                              <i class="pd-10-l fas fa-search"></i>
+                          </div>
+                      </form> -->
+                        <!-- EDIT IMAGES -->
+                        <div class="card-body p-t-0 p-r-0">
+                            <div class="chat-box p-r-15">
+                                <!-- ITEMS -->
+
+                                <div style="height: calc(100vh - 500px); position: relative;"
+                                    [perfectScrollbar]="config">
+                                    <table class="table table-hover">
+                                        <thead style="position: relative;">
+                                            <div style="position: sticky;top: 0;background: white;z-index: 2;">
+                                                <tr class="row">
+                                                    <th scope="col" class="col-2 full-centered">Imagen</th>
+                                                    <th scope="col" class="col-4 full-left">Nombre</th>
+                                                    <th scope="col" class="col-3 full-centered">Posición</th>
+                                                    <th scope="col" class="col-3 full-centered">Acciones</th>
+                                                </tr>
+                                            </div>
+                                        </thead>
+
+                                        <tbody class="dragndrop" [dragula]="'images-list'"
+                                            [(dragulaModel)]="imagesFiltered">
+
+                                            <!-- <div >
+                                                  <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                              </div> -->
+                                            <tr class="row" *ngFor="let image of imagesFiltered; index as i">
+                                                <th scope="col" class="col-2 full-centered">
+                                                    <img [src]="image.urlImage" class="mr-2" style="width: 40px;" />
+                                                </th>
+                                                <th scope="col" class="col-4 full-left">{{ image.name }}</th>
+                                                <th scope="col" class="col-3 full-centered">
+                                                    <span class="position-selector">
+                                                        <i class="fas fa-arrows-alt pd-10-r"></i>
+                                                        <label class="no-margin shadow-box">
+                                                            {{ image.position + 1 }}
+                                                        </label>
+                                                    </span>
+                                                </th>
+                                                <th scope="col" class="col-3 full-centered">
+                                                    <button (click)="deleteImage(image.idProductImage)"
+                                                        class="btn mr-0 btn-outline-secondary" type="button">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        Borrar esta imagen
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                    </ng-template>
+                </li>
+
+            </ul>
+        </div>
+        <div class="col-9 card">
+            <div [ngbNavOutlet]="nav" class=""></div>
+
+            <hr class="m-t-0" />
+            <div *ngIf="active != 4" class="card-body">
+                <div class="row">
+                    <div class="col-6 full-left">
+                        <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
+                            type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-window-close "></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Cancelar
+                            </div>
+                        </button>
+                    </div>
+                    <div class="col-6 full-right">
+                        <button class="btn mr-0 btn-outline-primary button-options" type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Guardar
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

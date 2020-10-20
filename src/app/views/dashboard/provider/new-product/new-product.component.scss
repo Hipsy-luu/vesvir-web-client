@@ -1,0 +1,43 @@
+/* .no-margin{
+    margin: 0px;
+} */
+
+.label-images-count{
+    width: 36px;
+    margin: 0px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 5px 20px 5px;
+    background: #393939;
+}
+
+.image-product{
+    width: 40%;
+    margin: 0px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.dragndrop {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px 15px;
+    > div {
+      border: 1px dashed rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      cursor: move;
+      margin: 5px 0;
+      &.ex-moved {
+        background: red;
+        color: white;
+      }
+    }
+  }
+  
+  .button-options{
+    width: 60%;
+    margin: 0px 10% 0px 10%;
+    font-size: 40px;
+  }

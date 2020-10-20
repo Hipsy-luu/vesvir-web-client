@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 //Layout para crear una capa donde se renderizan dentro otras vistas
-import { FullComponent } from './layouts/full/full.component';
+import { FullAdminComponent } from './layouts/full-admin/full-admin.component';
+import { FullProviderComponent } from './layouts/full-provider/full-provider.component';
+
 import { BlankComponent } from './layouts/blank/blank.component';
 
 //Vistas de las paginas con carga normal
@@ -15,16 +17,28 @@ import { FaqComponent } from './views/faq/faq.component';
 
 
 export const Approutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
   {
     path: '',
-    component: FullComponent,
+    component: FullAdminComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'dashboard-admin',
         //Se carga de esta manera porque dentro del modulo del dashboard vienen componentes que 
         //se comparten y pueden usar en las vistas dentro del modulo
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./views/dashboard/admin/dashboard-admin.module').then(m => m.DashboardAdminModule)
+      },
+    ]
+  },
+  {
+    path: '',
+    component: FullProviderComponent,
+    children: [
+      {
+        path: 'dashboard-provider',
+        //Se carga de esta manera porque dentro del modulo del dashboard vienen componentes que 
+        //se comparten y pueden usar en las vistas dentro del modulo
+        loadChildren: () => import('./views/dashboard/provider/dashboard-provider.module').then(m => m.DashboardProviderModule)
       },
     ]
   },

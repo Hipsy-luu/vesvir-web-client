@@ -15,14 +15,10 @@
         <div class="" style="height: calc(100vh - 410px);margin: 40px 3px;">
           <div class="row">
             <div class="col-12 full-centered">
-              <img
-                class="image-product"
-                src="assets/images/product/chair3.png"
-                alt="user"
-              />
+              <img class="image-product" src="assets/images/product/chair3.png" alt="user" />
             </div>
           </div>
-          
+
           <!-- REFERENCE -->
           <div class="row pd-10-t-b">
             <div class="col-4 full-right">
@@ -57,18 +53,22 @@
             </div>
             <div class="col-8 full-centered">
               <div class="row full-centered margin-hori-10-5">
-                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
+                <label class="row no-margin genre-label margin-hori-10-5"
+                  style="background-color: blueviolet;margin-bottom: 5px;">
                   Niña
                 </label>
-                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #2b3de2;margin-bottom: 5px;">
+                <label class="row no-margin genre-label margin-hori-10-5"
+                  style="background-color: #2b3de2;margin-bottom: 5px;">
                   Niño
                 </label>
               </div>
               <div class="row full-centered margin-hori-10-5">
-                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #e22bc3;margin-bottom: 5px;">
+                <label class="row no-margin genre-label margin-hori-10-5"
+                  style="background-color: #e22bc3;margin-bottom: 5px;">
                   Mujer
                 </label>
-                <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
+                <label class="row no-margin genre-label margin-hori-10-5"
+                  style="background-color: #160e81;margin-bottom: 5px;">
                   Hombre
                 </label>
               </div>
@@ -89,7 +89,8 @@
               <label>Estado</label>
             </div>
             <div class="col-8 full-centered">
-              <label class="row no-margin genre-label margin-hori-10-5" style="background-color: #469b58;margin-bottom: 5px;">
+              <label class="row no-margin genre-label margin-hori-10-5"
+                style="background-color: #469b58;margin-bottom: 5px;">
                 Activado
               </label>
             </div>
@@ -111,35 +112,39 @@
   <div class="col-10">
     <div class="card">
       <!-- TITLE -->
-      <div
-        class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center"
-      >
-        <div class="text-white m-b-0 m-l-15 font-18">Stickers</div>
-        <div class="text-white m-b-0 m-l-15 font-20 no-margin">
-          <label class="label-images-count">{{ images.length }}</label>
+      <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
+        <div class="col-6">
+          <div class="text-white m-b-0 m-l-15 font-18">
+            Añada un nuevo sticker al producto
+          </div>
+          <!-- <div class="text-white m-b-0 m-l-15 font-20 no-margin">
+            <label class="label-images-count">{{ images.length }}</label>
+          </div> -->
         </div>
+        <div class="col-6">
+
+        </div>
+
       </div>
 
       <!-- ADD IMAGE -->
-      <div class="card-body border-top">
+      <!-- <div class="card-body border-top">
         <form class="no-margin">
           <div class="form-group no-margin">
             <div class="row">
               <div class="col-4">
-                <div
-                  class="row full-centered full-right"
-                  style="height: 49px; margin-right: 10px;"
-                >
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
                   <div class="input-field m-t-0 m-b-0">
-                    <label>Añadir un nuevo sticker para este producto</label>
+                    <label class="control-label form-label">
+                      Añadir un nuevo sticker para este producto
+                    </label>
                   </div>
                 </div>
-                <div
-                  class="row full-centered full-right"
-                  style="height: 49px; margin-right: 10px;"
-                >
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
                   <div class="input-field m-t-0 m-b-0">
-                    <label>Titulo</label>
+                    <label class="control-label form-label">
+                      <span style="color: red;">*</span> Titulo
+                    </label>
                   </div>
                 </div>
               </div>
@@ -150,44 +155,25 @@
                       <span class="input-group-text">Subir</span>
                     </div>
                     <div class="custom-file">
-                      <input
-                        type="file"
-                        class="custom-file-input"
-                        id="inputGroupFile01"
-                      />
-                      <label class="custom-file-label" for="inputGroupFile01"
-                        >Añadir archivo PNG</label
-                      >
+                      <input type="file" class="custom-file-input" id="inputGroupFile01" />
+                      <label class="custom-file-label" for="inputGroupFile01">Añadir archivo PNG</label>
                     </div>
                   </div>
                 </div>
                 <div class="row full-centered">
-                  <input
-                    type="text"
-                    class="form-control"
-                    maxlength="50"
-                    id="maxval"
-                    aria-describedby="maxval"
-                    placeholder="Nombre del Sticker"
-                  />
+                  <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
+                    placeholder="Nombre del Sticker" />
                 </div>
               </div>
               <div class="col-3">
                 <div class="row full-centered">
                   <div class="col-12">
-                    <span
-                      class="card full-centered"
-                      style="
+                    <span class="card full-centered" style="
                         background-image: url('assets/images/product/fondo-stiker.jpg');
                         width: fit-content;
                         background-size: cover;
-                      "
-                    >
-                      <img
-                        class="image-product"
-                        src="assets/images/product/chair2.png"
-                        alt="user"
-                      />
+                      ">
+                      <img class="image-product" src="assets/images/product/chair2.png" alt="user" />
                     </span>
                   </div>
                 </div>
@@ -195,10 +181,84 @@
             </div>
             <div class="row">
               <div class="col-12 full-centered">
-                <button
-                  type="button"
-                  class="btn btn-info waves-effect waves-light"
-                >
+                <button type="button" class="btn btn-info waves-effect waves-light">
+                  <i class="fas fa-upload"></i> Subir
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div> -->
+      <!-- ADD IMAGE -->
+      <div class="card-body border-top">
+        <form class="no-margin">
+          <div class="form-group no-margin">
+            <div class="row">
+              <div class="col-4">
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
+                  <div class="input-field m-t-0 m-b-0">
+                    <label class="control-label col-form-label form-label">Añadir un nuevo sticker para este producto</label>
+                  </div>
+                </div>
+                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
+                  <div class="input-field m-t-0 m-b-0">
+                    <label class="control-label col-form-label form-label">
+                      <span style="color: red;">*</span>Nombre
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="row">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Subir</span>
+                    </div>
+                    <div class="custom-file">
+                      <input (change)="updateSource($event)" type="file" accept="image/png" class="custom-file-input"
+                        id="inputGroupFile01" />
+                      <label class="custom-file-label" for="inputGroupFile01">Añadir
+                        archivo JPG</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row full-centered">
+                  <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
+                    placeholder="Nombre del sticker" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="row full-centered full-width full-height">
+                  <div class="col-12 full-width full-height">
+                    <span *ngIf="source.length == 0" class="card full-centered full-height">
+                      <img class=" full-width full-height" style="object-fit: cover;"
+                        src="assets/images/product/no-image.jpg" alt="Sin Imagen" />
+                    </span>
+
+                    <span *ngIf="source.length > 0">
+                      <div class="card">
+                        <span class="card full-centered" style="
+                            background-image: url('assets/images/product/fondo-stiker.jpg');
+                            width: fit-content;
+                          ">
+                          <img *ngIf="source.length > 0" class=" full-width full-height" style="object-fit: cover;"
+                            [src]="source">
+                        </span>
+                      </div>
+                      <div class="full-width full-centered pd-10">
+                        <button (click)="cancelImage()" class="btn mr-0 btn-outline-secondary" type="button">
+                          <i class="fas fa-trash-alt"></i>
+                          Borrar imagen
+                        </button>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 full-centered">
+                <button (click)="uploadImage()" type="button" class="btn mr-0 btn-outline-primary">
                   <i class="fas fa-upload"></i> Subir
                 </button>
               </div>
@@ -209,54 +269,43 @@
       <hr class="m-t-0" />
       <form>
         <div class="form-group form-inline pd-10-l">
-          <input
-            [ngModelOptions]="{ standalone: true }"
-            [(ngModel)]="searchValue"
-            (ngModelChange)="filterByName($event)"
-            placeholder="Buscar por Titulo"
-            class="form-control ml-2"
-            type="text"
-          />
+          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+            (ngModelChange)="filterByName($event)" placeholder="Buscar por Titulo" class="form-control ml-2"
+            type="text" />
           <i class="pd-10-l fas fa-search"></i>
         </div>
       </form>
       <!-- EDIT IMAGES -->
       <div class="card-body p-t-0 p-r-0">
-        <div
-          class="chat-box p-r-15"
-          style="height: calc(100vh - 600px); position: relative;"
-          [perfectScrollbar]="config"
-        >
+        <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
+          <div class="text-white m-b-0 m-l-15 font-18">Stickers</div>
+          <div class="text-white m-b-0 m-l-15 font-20 no-margin">
+            <label class="label-images-count">{{ images.length }}</label>
+          </div>
+        </div>
+        <div class="chat-box p-r-15">
           <!-- ITEMS -->
-
-          <div class="table-responsive">
+          <div style="height: calc(100vh - 600px); position: relative;" [perfectScrollbar]="config">
             <table class="table table-hover">
-              <thead>
-                <tr class="row">
-                  <th scope="col" class="col-2 full-centered">Imagen</th>
-                  <th scope="col" class="col-4 full-left">Titulo</th>
-                  <th scope="col" class="col-3 full-centered">Posición</th>
-                  <th scope="col" class="col-3 full-centered">Acciones</th>
-                </tr>
+              <thead style="position: relative;">
+                <div style="position: sticky;top: 0;background: white;z-index: 2;">
+                  <tr class="row">
+                    <th scope="col" class="col-2 full-centered">Imagen</th>
+                    <th scope="col" class="col-4 full-left">Nombre</th>
+                    <th scope="col" class="col-3 full-centered">Posición</th>
+                    <th scope="col" class="col-3 full-centered">Acciones</th>
+                  </tr>
+                </div>
               </thead>
-              <tbody
-                class="dragndrop"
-                [dragula]="'images-list'"
-                [(dragulaModel)]="imagesFiltered"
-              >
+
+              <tbody class="dragndrop" [dragula]="'images-list'" [(dragulaModel)]="imagesFiltered">
+
                 <!-- <div >
-                  <div *ngFor='let text of many2' [innerHtml]='text'></div>
-               </div> -->
-                <tr
-                  class="row"
-                  *ngFor="let image of imagesFiltered; index as i"
-                >
+                          <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                      </div> -->
+                <tr class="row" *ngFor="let image of imagesFiltered; index as i">
                   <th scope="col" class="col-2 full-centered">
-                    <img
-                      [src]="image.image"
-                      class="mr-2"
-                      style="width: 40px;"
-                    />
+                    <img [src]="image.image" class="mr-2" style="width: 40px;" />
                   </th>
                   <th scope="col" class="col-4 full-left">{{ image.name }}</th>
                   <th scope="col" class="col-3 full-centered">
@@ -268,11 +317,7 @@
                     </span>
                   </th>
                   <th scope="col" class="col-3 full-centered">
-                    <button
-                      (click)="deleteImage(image.id)"
-                      class="btn mr-0 btn-outline-secondary"
-                      type="button"
-                    >
+                    <button (click)="deleteImage(image.id)" class="btn mr-0 btn-outline-secondary" type="button">
                       <i class="fas fa-trash-alt"></i>
                       Borrar esta imagen
                     </button>
@@ -281,6 +326,7 @@
               </tbody>
             </table>
           </div>
+
         </div>
       </div>
       <hr class="m-t-0" />
@@ -297,14 +343,14 @@
             </button>
           </div>
           <div class="col-6 full-right">
-            <button class="btn mr-0 btn-outline-secondary button-options" type="button">
+            <!-- <button class="btn mr-0 btn-outline-secondary button-options" type="button">
               <div class="row full-centered">
                 <i class="fas fa-save"></i>
               </div>
               <div class="row full-centered font-normal">
                 Guardar
               </div>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>

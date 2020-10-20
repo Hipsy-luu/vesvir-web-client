@@ -37,8 +37,20 @@ body, p{
   margin: 0px;
 }
 
+.no-margin-i {
+  margin: 0px !important;
+}
+
+.full-height{
+  height: 100%;
+}
+
 .full-width{
   width: 100%;
+}
+
+.full-width-i{
+  width: 100% !important;
 }
 
 .margin-hori-10-5{
@@ -61,6 +73,10 @@ body, p{
   margin-right: 10px;
 }
 
+.ma-l-10p{
+  margin-left: 10% !important;
+}
+
 .ma-l-40{
   margin-left: 40px;
 }
@@ -78,7 +94,7 @@ body, p{
 }
 
 .no-padding{
-  padding: 0px;
+  padding: 0px !important;;
 }
 
 .pd-10{
@@ -135,7 +151,8 @@ body, p{
 .per-card{
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 15px 5px;
-=======
+}
+
 .text-al-center{
   text-align: center;
 }
@@ -313,6 +330,13 @@ body, p{
 .p-10-0{
   padding: 10px 0;
 }
+
+.form-label{
+  padding: 0px 10px;
+  background-color: #e7f9ff;
+}
+
+/*  */
 /*Media Queries*/
 @media screen and (max-width: 1200px){
   .main-landing .background .left-background{
@@ -412,3 +436,5 @@ body, p{
     font-size: 25px;
   }
 }
+
+

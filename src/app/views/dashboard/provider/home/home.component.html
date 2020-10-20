@@ -1,0 +1,141 @@
+<div class="card-group">
+    <!-- Card -->
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="m-r-10">
+                    <span class="btn btn-circle btn-lg btn-info">
+                        <i class="ti-wallet text-white"></i>
+                    </span>
+                </div>
+                <div>
+
+                    <h4>
+                        Ventas Realizadas
+                    </h4>
+                </div>
+                <div class="ml-auto">
+                    <h2 class="m-b-0 font-light">12</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <!-- Card -->
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="m-r-10">
+                    <span class="btn btn-circle btn-lg bg-success">
+                        <i class="ti-shopping-cart text-white"></i>
+                    </span>
+                </div>
+                <div>
+
+                    <h4>
+                        Productos Vendidos
+                    </h4>
+                </div>
+                <div class="ml-auto">
+                    <h2 class="m-b-0 font-light">43</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <!-- Card -->
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="m-r-10">
+                    <span class="btn btn-circle btn-lg bg-warning">
+                        <i class="mdi mdi-currency-usd text-white"></i>
+                    </span>
+                </div>
+                <div>
+                    <h4>
+                        Total Ventas
+                    </h4>
+                </div>
+                <div class="ml-auto">
+                    <h2 class="m-b-0 font-light">$ 0.00</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <!-- Column -->
+</div>
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-md-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h4 class="card-title">Venta de productos</h4>
+                        <h5 class="card-subtitle">Resumen del último mes</h5>
+                    </div>
+                    <div class="ml-auto">
+                        <ul class="list-inline font-12 dl m-r-10">
+                            <li class="list-inline-item">
+                                <i class="fas fa-dot-circle text-info"></i> Ventas
+                            </li>
+                            <!-- <li class="list-inline-item">
+                                <i class="fas fa-dot-circle text-danger"></i> Iphone</li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div id="product-sales" style="height:305px"></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Column -->
+    <div class="col-md-12 col-lg-4">
+
+        <div class="card">
+            <div class="ma-10-30">
+                <h4 class="card-title">Top 10</h4>
+                <h5 class="card-subtitle">Productos mas vendidos</h5>
+            </div>
+            <div class="table-responsive" >
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="row">
+                      <th scope="col" class="col-8 full-left">Nombre</th>
+                      <th scope="col" class="col-2 full-centered">Cantidad</th>
+                      <th scope="col" class="col-1 full-centered">Precio</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <div >
+                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                     </div> -->
+                     <div style="height:calc(100vh - 600px); position: relative;" [perfectScrollbar]="{}">
+                        <tr class="row" *ngFor="let product of topTenProducts">
+                            <th scope="col" class="col-8 full-left">
+                              <img
+                                [src]="product.image"
+                                class="mr-2"
+                                style="width: 40px;"
+                              /> 
+                              
+                              <label maxlength=10 >{{ product.name }}</label>
+                            </th>
+                            <th scope="col" class="col-2 full-centered">
+                              {{ product.quantity }}
+                            </th>
+                            <th scope="col" class="col-1 full-centered">
+                              {{ product.price }}
+                            </th>
+                          </tr>
+                     </div>
+                    
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+</div>
