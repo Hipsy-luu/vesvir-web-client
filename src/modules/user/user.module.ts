@@ -1,3 +1,5 @@
+import { MailCenterModule } from './../mail-center/mail-center.module';
+import { directionProviders } from './../../models/repositoriesModels/directions.providers';
 import { Module } from '@nestjs/common';
 //Se importa el modulo de la base de datos para hacer disponible la instancia en el servicio
 import { DatabaseModule } from '../../database/database.module';
@@ -14,13 +16,15 @@ import { userProviders } from '../../models/repositoriesModels/user.providers';
 @Module({
   imports: [
     DatabaseModule,
-    PassportModule.register({ defaultStrategy: 'jwt', session: false })
+    PassportModule.register({ defaultStrategy: 'jwt', session: false }),
+    MailCenterModule
   ],
   exports: [UserService],
   controllers: [UserController],
   providers: [
     UserService, 
     ...userProviders,
+    ...directionProviders
   ],
 })
 

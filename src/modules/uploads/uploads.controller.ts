@@ -5,11 +5,11 @@ import * as multer from 'multer';
 import * as fs from 'fs';
 import { ServerMessages } from '../../utils/serverMessages.util';
 import { AuthGuard } from '@nestjs/passport';
+import { UploadsService } from './uploads.service';
 
-var usersPath = './storage/users/';
-var bandsPath = './storage/bands/';
-var setsPath = './storage/sets/';
-var songsPath = './storage/songs/';
+var brandsPath = './storage/brands/';
+var productsPath = './storage/products/';
+var productsStickersPath = './storage/product-stickers/';
 
 const jpgFileFilter = (req, file, callback) => {
     let ext = path.extname(file.originalname);
@@ -22,65 +22,52 @@ const jpgFileFilter = (req, file, callback) => {
 }
 
 //Reasigna los valores para guardar la imagen (carpeta y si no existe la crea)
-var storageUsers = multer.diskStorage({
+var storageBrand = multer.diskStorage({
     destination: function (req, file, cb) {
         //console.log({stringActual : dirCompany , stringdirectorio : dir});
         if (!fs.existsSync('./storage/') ){
             fs.mkdirSync('./storage/');
         }
-        if (!fs.existsSync(usersPath) ){
-            fs.mkdirSync(usersPath);
+        if (!fs.existsSync(brandsPath) ){
+            fs.mkdirSync(brandsPath);
         }
-        cb(null, usersPath)
+        cb(null, brandsPath)
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname );
-        
-    }
-});
-
-var storageBands = multer.diskStorage({
-    destination: function (req, file, cb) {
-        //console.log({stringActual : dirCompany , stringdirectorio : dir});
-        if (!fs.existsSync('./storage/') ){
-            fs.mkdirSync('./storage/');
-        }
-        if (!fs.existsSync(bandsPath) ){
-            fs.mkdirSync(bandsPath);
-        }
-        cb(null, bandsPath)
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname );
-        
-    }
-});
-
-var storageSets = multer.diskStorage({
-    destination: function (req, file, cb) {
-        //console.log({stringActual : dirCompany , stringdirectorio : dir});
-        if (!fs.existsSync('./storage/') ){
-            fs.mkdirSync('./storage/');
-        }
-        if (!fs.existsSync(setsPath) ){
-            fs.mkdirSync(setsPath);
-        }
-        cb(null, setsPath)
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname );
-        
     }
 });
 
 //Reasigna los valores para guardar la imagen de las canciones segun el nombre del archivo(carpeta y si no existe la crea)
-var storageSongs = multer.diskStorage({
+var storageProduct = multer.diskStorage({
     destination: function (req, file, cb) {
-        var dirSong = file.originalname.toString().slice(0,file.originalname.toString().indexOf("-"));
-        var dir = songsPath+dirSong+'/';
+        var dirProduct = file.originalname.toString().slice(0,file.originalname.toString().indexOf("-"));
+        var dir = productsPath+dirProduct+'/';
         //console.log({stringActual : dirSong , stringdirectorio : dir});
-        if (!fs.existsSync(songsPath)){
-            fs.mkdirSync(songsPath);
+        if (!fs.existsSync(productsPath)){
+            fs.mkdirSync(productsPath);
+        }
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+        cb(null, dir)
+    },
+    filename: function (req, file, cb) {
+        //Desde el nombre ya deberia de venir como se guardara la imagen (piano,guitar o bass)
+        let name : String = file.originalname.toString().slice(
+            file.originalname.toString().indexOf("-")+1,file.originalname.toString().lengt );
+        //console.log("nombre del archivo de la cancion " + name);
+        cb( null, name);
+    }
+});
+
+var storageProductStickers = multer.diskStorage({
+    destination: function (req, file, cb) {
+        var dirProduct = file.originalname.toString().slice(0,file.originalname.toString().indexOf("-"));
+        var dir = productsStickersPath+dirProduct+'/';
+        //console.log({stringActual : dirSong , stringdirectorio : dir});
+        if (!fs.existsSync(productsStickersPath)){
+            fs.mkdirSync(productsStickersPath);
         }
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
@@ -98,167 +85,118 @@ var storageSongs = multer.diskStorage({
 
 @Controller('uploads')
 export class UploadsController {
-    constructor(){}
-    //////////////////////////////////////USUARIOS/////////////////////////////////////////////////
-    //Crea y guarda la imagen del usuario y su directorio
-    @Post('user-image/')
+    constructor(private uploadsService : UploadsService){}
+    //////////////////////////////////////MARCA/////////////////////////////////////////////////
+    //Crea y guarda la imagen de la marca y su directorio
+    @Post('brand-image/')
     @UseGuards(AuthGuard())
     @UseInterceptors(FilesInterceptor('files[]', 1, {
         fileFilter: jpgFileFilter,
-        storage: storageUsers
+        storage: storageBrand
     }))
-    async userImageFileUpload(@UploadedFiles() images): Promise<any> {
-        return new ServerMessages(false,"Imagen del usuario " + images[0].originalname + " subida.",{});
+    async brandImageFileUpload(@UploadedFiles() images): Promise<any> {
+        return await this.uploadsService.setBrandHaveImage(images[0].originalname);
     }
 
-    //URL que proporciona las imagenes de los usuarios 
-    @Get('user-image/:idUser')
-    @UseGuards(AuthGuard())
-    async serveUserImage(@Param('idUser') idUser : String, @Res() res): Promise<any> {
+    //URL que proporciona las imagenes de las marcas 
+    @Get('brand-image/:idBrand')
+    /* @UseGuards(AuthGuard()) */
+    async serveBrandImage(@Param('idBrand') idBrand : String, @Res() res): Promise<any> {
         try {
-            res.sendFile( idUser+'.jpg' , { root: 'storage/users/'}, 
+            res.sendFile( idBrand+'.jpg' , { root: 'storage/brands/'}, 
             (err) => {
                 if (err) {
-                    return new ServerMessages(true,"Imagen del usuaruo"+idUser+" no encontrada.",err);
+                    return new ServerMessages(true,"Imagen de la marca "+ idBrand+" no encontrada.",err);
                 } else {
-                    return new ServerMessages(false,"Imagen del usuario " +idUser + " enviada.",{});
+                    return new ServerMessages(false,"Imagen de la marca " + idBrand + " enviada.",{});
                 }
             }
             );
         } catch (error) {
-            return new ServerMessages(true,"Imagen del usuaruo"+idUser+" no encontrada.",error);
+            return new ServerMessages(true,"Imagen de la marca "+ idBrand +" no encontrada.",error);
         }
         
     }
-    //Elimina la imagen de un usuario
-    @Get('user-delete-image/:idUser')
+    //Elimina una imagen de una marca segun el id de la imagen
+    @Get('brand-delete-image/:idBrand')
     @UseGuards(AuthGuard())
-    async deleteUserImage(@Param('idUser') idUser : String): Promise<any> {
-        return await this.deleteFile('storage/users/'+idUser+'.jpg');
+    async deleteBrandImage(@Param('idBrand') idBrand : string): Promise<any> {
+        return await this.uploadsService.deleteImageBrand(idBrand );
     }
 
-    //////////////////////////////////////BANDAS/////////////////////////////////////////////////
-    //Crea y guarda la imagen de la BANDAS y su directorio
-    @Post('band-image/')
+    //////////////////////////////////////PRODUCTOS IMAGENES/////////////////////////////////////////////////
+    //Crea y guarda la imagen del producto y su directorio
+    @Post('product-image/')
     @UseGuards(AuthGuard())
     @UseInterceptors(FilesInterceptor('files[]', 1, {
         fileFilter: jpgFileFilter,
-        storage: storageBands
+        storage: storageProduct
     }))
-    async bandImageFileUpload(@UploadedFiles() images): Promise<any> {
-        return new ServerMessages(false,"Imagen de la banda " + images[0].originalname + " subida.",{});
+    async productImageFileUpload(@UploadedFiles() images): Promise<any> {
+        return new ServerMessages(false , "Se subió correctamente la imagen del producto ",{});
     }
 
-    //URL que proporciona las imagenes de las BANDAS 
-    @Get('band-image/:idBand')
-    @UseGuards(AuthGuard())
-    async serveBandImage(@Param('idBand') idBand : String, @Res() res): Promise<any> {
+    //URL que proporciona las imágenes de los usuarios 
+    @Get('product-image/:idProduct/:idProductImage')
+    /* @UseGuards(AuthGuard()) */
+    async serveProductImage(@Param('idProduct') idProduct : String,@Param('idProductImage') idProductImage : String, @Res() res): Promise<any> {
         try {
-            res.sendFile( idBand+'.jpg' , { root: 'storage/bands/'}, 
+            res.sendFile( idProductImage+'.jpg' , { root: 'storage/products/'+idProduct+'/'}, 
             (err) => {
                 if (err) {
-                    return new ServerMessages(true,"Imagen de la banda "+idBand+" no encontrada.",err);
+                    return new ServerMessages(true,"Imagen del producto "+ idProductImage+" no encontrada.",err);
                 } else {
-                    return new ServerMessages(false,"Imagen de la banda " +idBand + " enviada.",{});
+                    return new ServerMessages(false,"Imagen del producto " + idProductImage + " enviada.",{});
                 }
             }
             );
         } catch (error) {
-            return new ServerMessages(true,"Imagen de la banda "+idBand+" no encontrada.",error);
-        }
-    }
-    //Elimina la imagen de una BANDAS
-    @Get('band-delete-image/:idBand')
-    @UseGuards(AuthGuard())
-    async deleteBandImage(@Param('idBand') idBand : String): Promise<any> {
-        return await this.deleteFile('storage/songs/'+idBand+'.jpg');
-    }
-
-    //////////////////////////////////////Sets/////////////////////////////////////////////////
-    //Crea y guarda la imagen de un SET y su directorio
-    @Post('set-image/')
-    @UseGuards(AuthGuard())
-    @UseInterceptors(FilesInterceptor('files[]', 1, {
-        fileFilter: jpgFileFilter,
-        storage: storageSets
-    }))
-    async setImageFileUpload(@UploadedFiles() images): Promise<any> {
-        return new ServerMessages(false,"Imagen del set " + images[0].originalname + " subida.",{});
-    }
-
-    //URL que proporciona las imagenes un SET
-    @Get('set-image/:idSet')
-    //@UseGuards(AuthGuard())
-    async serveSetImage(@Param('idSet') idSet : String, @Res() res): Promise<any> {
-        try {
-            res.sendFile( idSet+'.jpg' , { root: 'storage/sets/'}, 
-            (err) => {
-                if (err) {
-                    return new ServerMessages(true,"Imagen del set"+idSet+" no encontrada.",err);
-                } else {
-                    return new ServerMessages(false,"Imagen del set " +idSet + " enviada.",{});
-                }
-            }
-            );
-        } catch (error) {
-            return new ServerMessages(true,"Imagen del set"+idSet+" no encontrada.",error);
-        }
-    }
-    //Elimina la imagen un SET
-    @Get('set-delete-image/:idSet')
-    @UseGuards(AuthGuard())
-    async deleteSetImage(@Param('idSet') idSet : String): Promise<any> {
-        return await this.deleteFile('storage/sets/'+idSet+'.jpg');
-    }
-    //////////////////////////////////////CANCIONES/////////////////////////////////////////////////
-    //Crea y guarda la imagen de la cancion y su directorio
-    @Post('song-image/')
-    @UseGuards(AuthGuard())
-    @UseInterceptors(FilesInterceptor('files[]', 1, {
-        fileFilter: jpgFileFilter,
-        storage: storageSongs
-    }))
-    async songImageFileUpload(@UploadedFiles() images): Promise<any> {
-        return new ServerMessages(false,"Imagen " + images[0].originalname + " subida.",{});
-    }
-
-    //URL que proporciona las imagenes de los usuarios 
-    @Get('song-image/:idSong/:nameFile')
-    @UseGuards(AuthGuard())
-    async serveSongImage(@Param('idSong') idSong : String,@Param('nameFile') nameFile : String, @Res() res): Promise<any> {
-        try {
-            res.sendFile( nameFile+'.jpg' , { root: 'storage/songs/'+idSong+'/'}, 
-                (err) => {
-                    if (err) {
-                        return new ServerMessages(true,"Imagen del usuaruo"+idSong+" no encontrada.",err);
-                    } else {
-                        return new ServerMessages(false,"Imagen del usuario " +idSong + " enviada.",{});
-                    }
-                }
-            );
-        } catch (error) {
-            return new ServerMessages(true,"Imagen de la cancion "+idSong+" no encontrada.",error);
+            return new ServerMessages(true,"Imagen del producto "+ idProductImage +" no encontrada.",error);
         }
         
     }
-    //Elimina alguna de las imagenes de la cancion segun su nombre de archivo
-    @Get('song-delete-image/:idSong/:nameFile')
+    //Elimina uns imagen de un producto por id
+    @Get('product-delete-image/:idProductImage')
     @UseGuards(AuthGuard())
-    async deleteSongImage(@Param('idSong') idSong : String,@Param('nameFile') nameFile : String): Promise<any> {
-        return await this.deleteFile('storage/songs/'+idSong+'/'+nameFile+'.jpg');
-    } 
+    async deleteProductImage(@Param('idProductImage') idProductImage : string): Promise<any> {
+        return await this.uploadsService.deleteProductImage(idProductImage );
+    }
 
-    //Esta funcion ayuda a varios controladores a borrar los archivos solo debe recibir el path relativo con 
-    //su nombre
-    deleteFile(namePath : string) : Promise<any>{
-        return new Promise((resolve,reject)=>{
-            fs.unlink(namePath , (error) => {
-                if (error) {
-                    resolve( new ServerMessages(true,"Imagen no existe.",{}) );
-                }else{
-                    resolve( new ServerMessages(false,"Imagen eliminada.",{}));
-                };
-            });
-        })
+    //////////////////////////////////////PRODUCTOS STICKERS/////////////////////////////////////////////////
+    //Crea y guarda la imagen del producto y su directorio
+    @Post('product-sticker/')
+    @UseGuards(AuthGuard())
+    @UseInterceptors(FilesInterceptor('files[]', 1, {
+        fileFilter: jpgFileFilter,
+        storage: storageProductStickers
+    }))
+    async productStickerFileUpload(@UploadedFiles() sticker): Promise<any> {
+        return new ServerMessages(false , "Se subió correctamente el sticker del producto ",{});
+    }
+
+    //URL que proporciona las imágenes de los stickers 
+    @Get('product-sticker/:idProduct/:idProductSticker')
+    /* @UseGuards(AuthGuard()) */
+    async serveProductSticker(@Param('idProduct') idProduct : String,@Param('idProductSticker') idProductSticker : String, @Res() res): Promise<any> {
+        try {
+            res.sendFile( idProductSticker+'.jpg' , { root: 'storage/product-stickers/'+idProduct+'/'}, 
+            (err) => {
+                if (err) {
+                    return new ServerMessages(true,"Sticker del producto "+ idProductSticker+" no encontrada.",err);
+                } else {
+                    return new ServerMessages(false,"Sticker del producto " + idProductSticker + " enviada.",{});
+                }
+            }
+            );
+        } catch (error) {
+            return new ServerMessages(true,"Sticker del producto "+ idProduct +" no encontrada.",error);
+        }
+        
+    }
+    //Elimina un sticker de un producto por id
+    @Get('product-delete-sticker/:idProductSticker')
+    @UseGuards(AuthGuard())
+    async deleteProductSticker(@Param('idProductSticker') idProductSticker : string): Promise<any> {
+        return await this.uploadsService.deleteProductSticker(idProductSticker );
     }
 }

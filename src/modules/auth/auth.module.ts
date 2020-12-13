@@ -1,3 +1,4 @@
+import { directionProviders } from './../../models/repositoriesModels/directions.providers';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
@@ -6,6 +7,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { userProviders } from '../../models/repositoriesModels/user.providers';
+import { cardProviders } from '../../models/repositoriesModels/cards.providers';
 
 @Module({
   imports: [
@@ -18,7 +20,15 @@ import { userProviders } from '../../models/repositoriesModels/user.providers';
     }),
     UserModule,
   ],
-  controllers: [AuthController],
-  providers: [AuthService,JwtStrategy, ...userProviders],
+  controllers: [
+    AuthController
+  ],
+  providers: [
+    AuthService,
+    JwtStrategy, 
+    ...userProviders,
+    ...directionProviders,
+    ...cardProviders
+  ],
 })
 export class AuthModule {}

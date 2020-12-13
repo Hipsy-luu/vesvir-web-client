@@ -1,3 +1,4 @@
+import { Card } from './../models/cards.entity';
 import { Sequelize } from 'sequelize-typescript';
 
 /**
@@ -7,6 +8,13 @@ import { Sequelize } from 'sequelize-typescript';
  */
 //import { SEQUELIZE } from '../utils/constants';
 import { User } from '../models/users.entity';
+import { Direction } from '../models/directions.entity';
+import { Category } from '../models/categories.entity';
+import { Brand } from '../models/brands.entity';
+import { Product } from '../models/products.entity';
+import { Quantity } from '../models/quantitys.entity';
+import { ProductImage } from '../models/productImages.entity';
+import { ProductStickers } from '../models/productStickers.entity';
 
 export const databaseProviders = [
   {
@@ -33,6 +41,14 @@ export const databaseProviders = [
        */
       sequelize.addModels([
         User,
+        Direction,
+        Category,
+        Brand,
+        Product,
+        Quantity,
+        ProductImage,
+        ProductStickers,
+        Card
       ]);
 
       await sequelize.sync();

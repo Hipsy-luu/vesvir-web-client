@@ -3,7 +3,7 @@ import { CreateUserDto } from '../modules/user/dto/createUser.dto';
 
 export const validators = 
     {
-      validateUser: (newUser : CreateUserDto) => {
+      /* validateUser: (newUser : CreateUserDto) => {
         var errors = [];
 
         if(newUser.password){
@@ -15,6 +15,6 @@ export const validators =
         }else{
             return false;
         }
-      }
+      } */
     }
   ;
