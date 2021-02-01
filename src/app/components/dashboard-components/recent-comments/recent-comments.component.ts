@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { UtilitiesService } from './../../../services/utilities/utilities.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
@@ -9,7 +10,23 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 export class RecentCommentsComponent implements OnInit {
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor() { }
+  @Input()
+  reviewsDataFixed : {
+    idReview: number,
+    idUser: number,
+    imageUser: string,
+    nameUser: string,
+    idProduct: number,
+    nameProduct: string,
+    date: number,
+    review: string,
+    qualification: number,
+    status: string //"approved" "new" "disapproved"
+  }[] = [];
+  
+
+
+  constructor(public utilitiesService : UtilitiesService) { }
 
   ngOnInit(): void {
   }

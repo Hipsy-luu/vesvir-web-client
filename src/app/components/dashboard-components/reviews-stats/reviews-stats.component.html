@@ -5,12 +5,22 @@
                 <i class="mdi mdi-emoticon-happy display-5 text-muted"></i>
                 <div class="m-l-10">
                     <h5 class="m-b-0">Reseñas Positivas (5-4)</h5>
-                    <span class="text-muted">25547 Reseñas</span>
+                    <span class="text-muted">{{positiveReviews}} Reseñas</span>
                 </div>
             </div>
-            <div class="progress">
+            <!-- <div class="progress">
                 <div class="progress-bar bg-success" role="progressbar" style="width: 47%" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            </div> -->
+            <div class="progress">
+                <div
+                  class="progress-bar bg-inverse"
+                  role="progressbar"
+                  [style]="'width: '+((positiveReviews / totalProd)*100).toFixed(2)+'%; height: 6px'"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
         </li>
         
         <li class="m-t-40 m-b-40">
@@ -18,12 +28,26 @@
                 <i class="mdi mdi-emoticon-neutral display-5 text-muted"></i>
                 <div class="m-l-10">
                     <h5 class="m-b-0">Reseñas Neutrales (3-2)</h5>
-                    <span class="text-muted">547 Reseñas</span>
+                    <span class="text-muted">{{neutralReviews}} Reseñas</span>
                 </div>
             </div>
+            <!-- <div class="progress">
+                <div 
+                class="progress-bar bg-info" 
+                role="progressbar" 
+                style="width: 20%" 
+                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            </div> -->
             <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+                <div
+                  class="progress-bar bg-cyan"
+                  role="progressbar"
+                  [style]="'width: '+((neutralReviews / totalProd)*100).toFixed(2)+'%; height: 6px'"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
         </li>
 
         <li class="m-t-40">
@@ -31,12 +55,22 @@
                 <i class="mdi mdi-emoticon-sad display-5 text-muted"></i>
                 <div class="m-l-10">
                     <h5 class="m-b-0">Reseñas Negativas (1)</h5>
-                    <span class="text-muted">5547 Reseñas</span>
+                    <span class="text-muted">{{negativeReviews}} Reseñas</span>
                 </div>
             </div>
-            <div class="progress">
+            <!-- <div class="progress">
                 <div class="progress-bar bg-orange" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            </div> -->
+            <div class="progress">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  [style]="'width: '+((negativeReviews / totalProd)*100).toFixed(2)+'%; height: 6px'"
+                  aria-valuenow="25"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
         </li>
     </ul>
 </div>

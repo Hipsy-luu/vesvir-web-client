@@ -14,6 +14,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ToastrModule } from 'ngx-toastr';
 
+/* import { NgxMaskModule, IConfig } from 'ngx-mask'; 
+const maskConfig: Partial<IConfig> = {
+    validation: false,
+  }; */
 //Layouts
 import { FullAdminComponent } from './layouts/full-admin/full-admin.component';
 import { FullProviderComponent } from './layouts/full-provider/full-provider.component';
@@ -91,6 +95,7 @@ const config: SocketIoConfig = { url: deployConf.apiUrl, options: {}};
         PerfectScrollbarModule,
         Ng2SearchPipeModule,
         NgMultiSelectDropDownModule.forRoot(),
+        /* NgxMaskModule.forRoot(maskConfig), */
         SocketIoModule.forRoot(config)
     ],
     providers: [

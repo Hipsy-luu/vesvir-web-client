@@ -1,3 +1,4 @@
+import { BrandsComponent } from './brands/brands.component';
 import { CategorysComponent } from './categorys/categorys.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ReviewsComponent } from './reviews/reviews.component';
@@ -45,7 +46,7 @@ export const DashboardAdminRoutes: Routes = [
             }
           },
           {
-            path: 'categorys',
+            path: 'categories',
             component: CategorysComponent,
             data: {
               title: 'Categorías',
@@ -55,15 +56,36 @@ export const DashboardAdminRoutes: Routes = [
               ]
             }
           },
-          
+          {
+            path: 'brands',
+            component: BrandsComponent,
+            data: {
+              title: 'Marcas',
+              urls: [
+                { title: 'Inicio', url: '/dashboard-admin/home' },
+                { title: 'Marcas' }
+              ]
+            }
+          },
         ]
         
+      },
+      {
+        path: 'product/:idProduct',
+        component: ProductComponent,
+        data: {
+          title: 'Editando Producto',
+          urls: [
+            { title: 'Inicio', url: '/dashboard-admin/home' },
+            { title: 'Producto' }
+          ]
+        }
       },
       {
         path: 'categorys',
         children: [
           {
-            path: 'mens/:idcategory',
+            path: ':genre/:idCategory',
             component: ProductsComponent,
             data: {
               title: 'Hombres',
@@ -74,7 +96,7 @@ export const DashboardAdminRoutes: Routes = [
             }
           },
           {
-            path: 'womens/:idcategory',
+            path: 'womens/:idCategory',
             component: ProductsComponent,
             data: {
               title: 'Mujeres',
@@ -85,7 +107,7 @@ export const DashboardAdminRoutes: Routes = [
             }
           },
           {
-            path: 'boys/:idcategory',
+            path: 'boys/:idCategory',
             component: ProductsComponent,
             data: {
               title: 'Niños',
@@ -96,24 +118,13 @@ export const DashboardAdminRoutes: Routes = [
             }
           },
           {
-            path: 'girls/:idcategory',
+            path: 'girls/:idCategory',
             component: ProductsComponent,
             data: {
               title: 'Niñas',
               urls: [
                 { title: 'Inicio', url: '/dashboard-admin/home' },
                 { title: 'Niñas' }
-              ]
-            }
-          },
-          {
-            path: 'product/:id',
-            component: ProductComponent,
-            data: {
-              title: 'Editando Producto',
-              urls: [
-                { title: 'Inicio', url: '/dashboard-admin/home' },
-                { title: 'Producto' }
               ]
             }
           },
@@ -134,7 +145,7 @@ export const DashboardAdminRoutes: Routes = [
             }
           },
           {
-            path: 'customer/:id',
+            path: 'customer/:idCustomer',
             component: CustomerComponent,
             data: {
               title: 'Edición de Cliente',
@@ -158,7 +169,7 @@ export const DashboardAdminRoutes: Routes = [
         }
       },
       {
-        path: 'order/:id',
+        path: 'order/:idOrder',
         component: OrderComponent,
         data: {
           title: '',
@@ -180,7 +191,7 @@ export const DashboardAdminRoutes: Routes = [
         }
       },
       {
-        path: 'provider/:id',
+        path: 'provider/:idProvider',
         component: ProviderComponent,
         data: {
           title: 'Proveedor',

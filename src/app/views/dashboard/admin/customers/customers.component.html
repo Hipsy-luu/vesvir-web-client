@@ -13,8 +13,8 @@
           <input
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="searchValue"
-            (ngModelChange)="filterByCustomerName($event)"
-            placeholder="Buscar por nombre del cliente"
+            (ngModelChange)="filterByCustomerEmail($event)"
+            placeholder="Buscar por correo del cliente"
             class="form-control ml-2"
             type="text"
           />
@@ -71,7 +71,7 @@
               <div class="chat-box p-r-15" style="position: relative;">
                 <!-- ITEMS -->
     
-                <div class="table-responsive">
+                <div class="">
                   <table class="table table-hover">
                     <thead>
                       <tr class="row">
@@ -106,9 +106,11 @@
                           {{customer.idUser}}
                         </th>
                         <th scope="col" class="col-1 full-left">
+                          <span *ngIf="customer.name.length == 0">Sin indicar</span>
                           {{customer.name}}
                         </th>
                         <th scope="col" class="col-2 full-left">
+                          <span *ngIf="customer.surnames.length == 0">Sin indicar</span>
                           {{customer.surnames}}
                         </th>
                         <th scope="col" class="col-2 full-left">
@@ -127,6 +129,9 @@
                           <label *ngIf="customer.genre == 0" class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
                               Hombre
                           </label>
+                          <label *ngIf="customer.genre == -1" class="row no-margin genre-label margin-hori-10-5" style="background-color: #c48484;margin-bottom: 5px;">
+                            Sin Indicar
+                          </label>
                         </th>
                         <th scope="col" class="col full-centered">
                           <label *ngIf="customer.actualPreference == 3" class="row no-margin genre-label margin-hori-10-5" style="background-color: blueviolet;margin-bottom: 5px;">
@@ -141,6 +146,9 @@
                           <label *ngIf="customer.actualPreference == 0" class="row no-margin genre-label margin-hori-10-5" style="background-color: #160e81;margin-bottom: 5px;">
                               Hombre
                           </label>
+                          <label *ngIf="customer.actualPreference == -1" class="row no-margin genre-label margin-hori-10-5" style="background-color: #c48484;margin-bottom: 5px;">
+                            Sin Indicar
+                          </label>
                         </th>
                         <th scope="col" class="col full-centered">
                           {{utilitiesService.formatDate1(customer.createDate)}}
@@ -154,7 +162,7 @@
                         <th scope="col" class="col full-centered">
                           <button
                             (click)="openCustomer(customer.idUser)"
-                            class="btn mr-0 btn-outline-secondary"
+                            class="btn mr-0 btn-outline-primary-inverted"
                             type="button"
                           >
                             <i class="fas fa-edit"></i>

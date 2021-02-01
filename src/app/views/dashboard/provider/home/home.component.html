@@ -15,7 +15,7 @@
                     </h4>
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">12</h2>
+                    <h2 class="m-b-0 font-light">{{totalSells}}</h2>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     </h4>
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">43</h2>
+                    <h2 class="m-b-0 font-light">{{totalProductsSell}}</h2>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                     </h4>
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">$ 0.00</h2>
+                    <h2 class="m-b-0 font-light">$ {{totalAmountSells.toFixed(2)}}</h2>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
                 <div class="d-flex align-items-center">
                     <div>
                         <h4 class="card-title">Venta de productos</h4>
-                        <h5 class="card-subtitle">Resumen del último mes</h5>
+                        <h5 class="card-subtitle">Resumen del último año</h5>
                     </div>
                     <div class="ml-auto">
                         <ul class="list-inline font-12 dl m-r-10">
@@ -100,42 +100,40 @@
                 <h4 class="card-title">Top 10</h4>
                 <h5 class="card-subtitle">Productos mas vendidos</h5>
             </div>
-            <div class="table-responsive" >
+            <div class="table-responsive">
                 <table class="table table-hover">
-                  <thead>
-                    <tr class="row">
-                      <th scope="col" class="col-8 full-left">Nombre</th>
-                      <th scope="col" class="col-2 full-centered">Cantidad</th>
-                      <th scope="col" class="col-1 full-centered">Precio</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <!-- <div >
+                    <thead>
+                        <tr class="row">
+                            <th scope="col" class="col-7 full-left">Nombre</th>
+                            <th scope="col" class="col-3 full-centered">Recurrencia Ventas</th>
+                            <th scope="col" class="col-1 full-centered">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <div >
                         <div *ngFor='let text of many2' [innerHtml]='text'></div>
                      </div> -->
-                     <div style="height:calc(100vh - 600px); position: relative;" [perfectScrollbar]="{}">
-                        <tr class="row" *ngFor="let product of topTenProducts">
-                            <th scope="col" class="col-8 full-left">
-                              <img
-                                [src]="product.image"
-                                class="mr-2"
-                                style="width: 40px;"
-                              /> 
-                              
-                              <label maxlength=10 >{{ product.name }}</label>
-                            </th>
-                            <th scope="col" class="col-2 full-centered">
-                              {{ product.quantity }}
-                            </th>
-                            <th scope="col" class="col-1 full-centered">
-                              {{ product.price }}
-                            </th>
-                          </tr>
-                     </div>
-                    
-                  </tbody>
+                        <div style="height:calc(100vh - 600px); position: relative;" [perfectScrollbar]="{}">
+                            <tr class="row" *ngFor="let product of top10Products">
+                                <th scope="col" class="col-7 full-left">
+                                    <img *ngIf="product.product.images.length != 0" src="{{dataSessionService.baseURL}}uploads/product-image/{{product.product.images[0].idProduct}}/{{product.product.images[0].idProductImage}}"
+                                        class="mr-2" style="width: 40px;" />
+                                    <img *ngIf="product.product.images.length == 0" src="/assets/images/no-image.png" class="mr-2" style="width: 40px;">
+
+                                    <label maxlength=10>{{ product.product.name }}</label>
+                                </th>
+                                <th scope="col" class="col-3 full-centered">
+                                    {{ product.count }}
+                                </th>
+                                <th scope="col" class="col-1 full-centered">
+                                    {{ product.product.price }}
+                                </th>
+                            </tr>
+                        </div>
+
+                    </tbody>
                 </table>
-              </div>
+            </div>
         </div>
     </div>
 </div>

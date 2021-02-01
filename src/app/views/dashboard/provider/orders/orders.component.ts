@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilitiesService } from '../../../../services/utilities/utilities.service';
 import { DataSessionService } from '../../../../services/dataSession/data-session.service';
-import { dataOrders } from './orders';
+import { ApiDataService } from '../../../../services/apiData/api-data.service';
+import { LoggedResponse } from '../../../../classes/loggedResponse.class';
+import { ServerMessage } from '../../../../classes/serverMessage.class';
 
 @Component({
   selector: 'app-orders',
@@ -9,25 +11,77 @@ import { dataOrders } from './orders';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  dataOrders = [];
+  dataOrders : {
+    idOrder : number,
+    nameClient: string,
+    destinationCity : string,
+    total : number,
+    paymentMethod: string,
+    lastStatus : string,
+    date : Date,
+    noProducts : number,
+    status : string
+  }[] = [];
   dataOrdersFiltered = [];
 
   searchValue: String = "";
-  statusSelected : number = -1;
-  payMethodSelected : number = -1;
+  statusSelected : string = "";
+  payMethodSelected : string = "";
   page = 1;
   pageSize = 10;
 
-  constructor(public utilitiesService : UtilitiesService,private dataSessionService : DataSessionService) { 
-    this.dataOrders = [...dataOrders];
+  constructor(public utilitiesService : UtilitiesService,private dataSessionService : DataSessionService, private apiDataService : ApiDataService) { 
+    this.dataOrders = [];
     this.dataOrdersFiltered = Array.from(this.dataOrders);
   }
 
   ngOnInit(): void {
-    for (let index = 0; index < this.dataOrders.length; index++) {
-      this.dataOrders[index].paymentMethod = this.genPay();
-      this.dataOrders[index].status = this.genStatus();
-    }
+    this.dataSessionService.checkLogin((logedResponse: LoggedResponse) => {
+      //console.log(logedResponse);
+      if (this.dataSessionService.user.userType == 0 ) {
+        //Cosas para hacer si es admin
+        console.log("es admin");
+        this.dataSessionService.navigateByUrl("/dashboard-admin/home");
+      } else if (this.dataSessionService.user.userType == 1 ) {
+        console.log("es provedor");
+        //this.dataSessionService.navigateByUrl("/dashboard-provider/home");
+
+        this.apiDataService.getProviderOrdersListData().then((response : ServerMessage)=>{
+          //console.log("éxito")
+          //console.log(response);
+         /*  for (let index = 0; index < response.data.length; index++) {
+            response.data[index].createDate = new Date(response.data[index].createDate);
+            response.data[index].lastLogin = new Date(response.data[index].lastLogin);
+          } */
+          if(response.error == true){
+            this.utilitiesService.showErrorToast(response.message,"Error");
+          }else if(response.error == false){
+            
+            for (let index = 0; index < response.data.length; index++) {
+              response.data[index].date = new Date(response.data[index].date);
+            }
+
+            this.dataOrders = [...response.data];
+            this.dataOrdersFiltered = Array.from(this.dataOrders);
+          }
+          
+        }).catch((error)=>{
+          console.log("error");
+          console.log(error);
+          this.utilitiesService.showErrorToast("A ocurrido un error","Error");
+          
+        });
+      }else if (this.dataSessionService.user.userType == 2) {
+        this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.");
+        this.dataSessionService.logOut();
+      }else{
+        this.utilitiesService.showErrorToast( "Usuario desconocido.","Error!");
+        this.dataSessionService.logOut();
+      }
+    }, (noLoginResponse: LoggedResponse) => {
+      //console.log(noLoginResponse);
+      this.dataSessionService.logOut();
+    });
   }
 
   filterByProviderName(event) {
@@ -43,11 +97,11 @@ export class OrdersComponent implements OnInit {
     }
   }
 
-  changePayMethodSelected(opc : number){
+  changePayMethodSelected(opc : string){
     this.payMethodSelected = opc;
-    this.statusSelected = -1;
+    this.statusSelected = "";
     this.dataOrdersFiltered = Array.from(this.dataOrders);
-      if (this.payMethodSelected == -1) {
+      if (this.payMethodSelected.length == 0) {
         this.dataOrdersFiltered = Array.from(this.dataOrders);
       }else{
         this.dataOrdersFiltered = this.dataOrders.filter((dataProduct) => {
@@ -56,11 +110,11 @@ export class OrdersComponent implements OnInit {
       }
   }
 
-  changeStateSelected(opc : number){
+  changeStateSelected(opc : string){
     this.statusSelected = opc;
-      if (this.statusSelected == -1) {
+      if (this.statusSelected.length == 0) {
         this.dataOrdersFiltered = Array.from(this.dataOrders);
-      } else if( this.payMethodSelected == -1 ){
+      } else if( this.payMethodSelected.length == 0 ){
         this.dataOrdersFiltered = this.dataOrders.filter((dataProduct) => {
           return dataProduct.status == this.statusSelected ;
         });
@@ -71,7 +125,12 @@ export class OrdersComponent implements OnInit {
       }
   }
 
-  openOrder(idOrder){
+  openOrder( codeShipping : string ){
+    let index = codeShipping.indexOf("O");
+
+    let idOrder = codeShipping.substring( ( index + 1 ) , codeShipping.length )
+
+
     this.dataSessionService.navigateByUrl("/dashboard-provider/order/"+idOrder);
   }
 

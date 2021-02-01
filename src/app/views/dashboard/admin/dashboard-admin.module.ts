@@ -14,6 +14,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DragulaModule } from 'ng2-dragula';
 import { DashboardAdminRoutes } from './dashboard-admin.routing';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 //Views - Administrator Dashboard
 import { HomeComponent } from './home/home.component';
@@ -32,6 +33,7 @@ import { ProviderComponent } from './provider/provider.component';
 
 import { ReviewsComponent } from './reviews/reviews.component';
 import { CategorysComponent } from './categorys/categorys.component';
+import { BrandsComponent } from './brands/brands.component'; 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 //Components
@@ -40,6 +42,11 @@ import {SalesIncomeComponent} from '../../../components/dashboard-components/sal
 import {TopSellingProductsComponent} from '../../../components/dashboard-components/top-selling-products/top-selling-products.component';
 import { RecentCommentsComponent } from '../../../components/dashboard-components/recent-comments/recent-comments.component';
 import { ReviewsStatsComponent } from '../../../components/dashboard-components/reviews-stats/reviews-stats.component';
+
+
+const maskConfig: Partial<IConfig> = {
+    validation: false,
+  };
 
 @NgModule({
     imports: [
@@ -56,6 +63,7 @@ import { ReviewsStatsComponent } from '../../../components/dashboard-components/
         }),
         NgxChartsModule,
         NgxDatatableModule,
+        NgxMaskModule.forRoot(maskConfig),
         DragulaModule.forRoot(),
     ],
     declarations: [
@@ -79,6 +87,7 @@ import { ReviewsStatsComponent } from '../../../components/dashboard-components/
         CustomerComponent,
         ProviderComponent,
         OrderComponent,
+        BrandsComponent,
         
     ]
 })

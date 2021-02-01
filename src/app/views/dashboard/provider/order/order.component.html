@@ -13,7 +13,7 @@
                             <div class="ma-l-40">
                                 <h4>Fecha</h4>
                                 <h4 class="card-subtitle date-font-col">
-                                    {{ utilitiesService.formatDate1( orderDetail.dateOrder ) }}
+                                    {{ utilitiesService.formatDate1( orderDetail.createDate ) }}
                                 </h4>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="ma-l-40">
                                 <h4>Total</h4>
-                                <h4 class="card-subtitle total-font-col">$ {{ orderDetail.total.toFixed(2) }}</h4>
+                                <h4 class="card-subtitle total-font-col">$ {{ orderDetail.amount.toFixed(2) }}</h4>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="ma-l-40">
                                 <h4>Productos</h4>
-                                <h4 class="card-subtitle product-font-col">{{orderDetail.productList.length}}</h4>
+                                <h4 class="card-subtitle product-font-col">{{totalProducts}}</h4>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,84 @@
 
 <div class="card-body">
     <div class="row">
-        <div class="card col-sm-12 col-md-7">
+
+        
+        <div class="card col-sm-12 col-md-12">
+            <h4 class="card-title row">
+                <div class="col-9 full-left">
+                    <i class="fas fa-user ma-r-10"></i>
+                    Cliente - <h6 class="no-margin full-centered margin-hori-10-5">
+                        {{orderDetail.customer.name}} {{orderDetail.customer.surnames}}</h6>
+                </div>
+                <div class="col-3 full-right">
+                    <span class="no-margin genre-label margin-hori-10-5"
+                        style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
+                        N<sup>o</sup> {{orderDetail.customer.idUser}}
+                    </span>
+                </div>
+            </h4>
+            <hr class="m-t-0" />
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card " style="padding: 15px 18px;font-size: small;">
+                            <h5 class="">Correo electrónico</h5>
+                            <span>
+                                <i class="fas fa-envelope ma-r-10"></i>
+                                <a href="mailto:{{orderDetail.customer.email}}"
+                                    class="">{{orderDetail.customer.email}}</a>
+                            </span>
+
+                            <h5 class="">Cuenta registrada</h5>
+                            <span>
+                                <i class="fas fa-calendar  ma-r-10"></i>
+                                {{ utilitiesService.formatDate1(orderDetail.customer.createDate) }}
+                            </span>
+
+                            <h5 class="">Pedidos validos realizados</h5>
+                            <span>
+                                <span class="no-margin genre-label margin-hori-10-5"
+                                    style=" background-color: #2BA8E3 !important;  margin-bottom: 5px; border-color: #3f0058; ">
+                                    {{noTotalOrders}}
+                                </span>
+                            </span>
+
+                            <h5 class="">Total gastado desde su registro</h5>
+                            <span>
+                                <span class="no-margin genre-label margin-hori-10-5"
+                                    style=" background-color: #22c6ab;  margin-bottom: 5px; border-color: #3f0058; ">
+                                    $ {{totalPayment.toFixed(2)}}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="row">
+                            <h4 class="">
+                                <i class="fas fa-sticky-note ma-r-10"></i>
+                                Nota del Administrador
+                            </h4>
+                        </div>
+                        <div class="row ">
+                            <textarea disabled [(ngModel)]="orderDetail.privateNote" rows="8" cols="50" class=""></textarea>
+                            <div class="col-12 full-right">
+                                <!-- <button (click)="updatePrivateNote()"
+                                    class="btn mr-0 btn-outline-primary button-options ma-15-0"
+                                    style="margin-top: 14px;" type="button">
+                                    <div class="row full-centered font-normal">
+                                        <i class="fas fa-save ma-r-10"></i>
+                                        Guardar
+                                    </div>
+                                </button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col-sm-12 col-md-12">
             <h4 class="card-title row">
                 <div class="col-6 full-left">
                     <i class="fas fa-file-alt ma-r-10"></i>
@@ -81,12 +158,13 @@
                     </span>
                 </div>
                 <div class="col-6 full-centered full-right">
-                    <button class="btn mr-0 btn-outline-primary button-options ma-15-0 ma-r-10" type="button">
+                    <!-- TO DO : implementar la creación del archivo pdf de la orden -->
+                    <!-- <button class="btn mr-0 btn-outline-primary button-options ma-15-0 ma-r-10" type="button">
                         <div class="row full-centered font-normal">
                             <i class="fas fa-print ma-r-10"></i>
                             Imprimir pedido
                         </div>
-                    </button>
+                    </button> -->
                 </div>
             </h4>
             <hr class="m-t-0" />
@@ -97,57 +175,49 @@
                         Historial del pedido</span>
                     <span class="no-margin genre-label margin-hori-10-5 no-margin full-centered"
                         style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
-                        {{orderDetail.orderHistory.length}}
+                        {{orderDetail.statusHistorys.length}}
                     </span>
                 </h5>
                 <div class="card-body p-t-0 p-r-0 no-padding">
                     <div class="chat-box p-r-15">
                         <!-- ITEMS -->
-                        <div class="col-12">
+                        <div class="col-12" style="height: calc(100vh - 600px); position: relative;"
+                            [perfectScrollbar]="config">
                             <table class="table table-hover">
                                 <thead>
                                     <tr class="row">
                                         <th scope="col" class="col-1 full-centered">N<sup>o</sup></th>
-                                        <th scope="col" class="col full-left">Estado</th>
-                                        <th scope="col" class="col full-left">Usuario</th>
-                                        <th scope="col" class="col-1 full-centered">
+                                        <th scope="col" class="col-6 full-left">Estado</th>
+                                        <th scope="col" class="col-2 full-left">Usuario</th>
+                                        <th scope="col" class="col-2 full-centered">
                                             <!-- <i class="far fa-calendar ma-r-10"></i> -->Fecha</th>
-                                        <th scope="col" class="col-3 full-centered">Acciones</th>
+                                        <th scope="col" class="col-1 full-centered" style="font-size: 0.7rem;">Acciones
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- <div >
                                         <div *ngFor='let text of many2' [innerHtml]='text'></div>
                                     </div> -->
-                                    <tr class="row" *ngFor='let orderHis of orderDetail.orderHistory;let i = index'>
+                                    <tr class="row" *ngFor='let orderHis of orderDetail.statusHistorys;let i = index'>
                                         <th scope="col" class="col-1 full-centered">
-                                            {{i}}
+                                            {{orderDetail.statusHistorys.length - i}}
                                         </th>
-                                        <th scope="col" class="col full-left">
-                                            <span *ngIf="orderHis.status == 0">Cancelada</span>
-                                            <span *ngIf="orderHis.status == 1">En espera de pago Conecta</span>
-                                            <span *ngIf="orderHis.status == 2">En espera de pago por transferencia
-                                                electronica</span>
-                                            <span *ngIf="orderHis.status == 3">Error de pago</span>
-                                            <span *ngIf="orderHis.status == 4">Reembolsado</span>
-                                            <span *ngIf="orderHis.status == 5">Pedido entregado</span>
-                                            <span *ngIf="orderHis.status == 6">En transito</span>
-                                            <span *ngIf="orderHis.status == 7">Preparando Pedido</span>
-                                            <span *ngIf="orderHis.status == 8">Pago Realizado</span>
-                                            <!-- <i class="fas fa-search-plus ma-r-10"></i> Enviado -->
+                                        <th scope="col" class="col-6 full-left">
+                                            <span>{{orderHis.label}}</span>
                                         </th>
-                                        <th scope="col" class="col full-left">
-                                            {{orderHis.userUpdate}}
+                                        <th scope="col" class="col-2 full-left">
+                                            {{orderHis.registerUserData}}
+                                        </th>
+                                        <th scope="col" class="col-2 full-centered" >
+                                            {{ utilitiesService.formatDate1( orderHis.createdAt )}}
                                         </th>
                                         <th scope="col" class="col-1 full-centered">
-                                            {{ utilitiesService.formatDate1( orderHis.date )}}
-                                        </th>
-                                        <th scope="col" class="col-3 full-centered">
-                                            <button (click)="resentEmail(orderHis.status)"
+                                            <!-- <button (click)="resentEmail(orderHis.status)"
                                                 class="btn mr-0 btn-outline-secondary" type="button">
                                                 <i class="fas fa-share ma-r-10"></i>
                                                 Reenviar Email
-                                            </button>
+                                            </button> -->
                                         </th>
                                     </tr>
                                 </tbody>
@@ -155,61 +225,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 no-margin">
-                    <div class="row no-margin">
-                        <div class="col-8">
-                            <div ngbDropdown class="d-inline-block  full-width">
-                                <button class="btn btn-outline-secondary mr-2 full-width" id="dropdownBasic1"
-                                    ngbDropdownAnchor ngbDropdownToggle>
-                                    <span *ngIf="newStatusSelected == -1">Elige el un nuevo estado</span>
-                                    <span *ngIf="newStatusSelected == 0">Cancelada</span>
-                                    <span *ngIf="newStatusSelected == 1">En espera de pago Conecta</span>
-                                    <span *ngIf="newStatusSelected == 2">En espera de pago por transferencia
-                                        electronica</span>
-                                    <span *ngIf="newStatusSelected == 3">Error de pago</span>
-                                    <span *ngIf="newStatusSelected == 4">Reembolsado</span>
-                                    <span *ngIf="newStatusSelected == 5">Pedido entregado</span>
-                                    <span *ngIf="newStatusSelected == 6">En transito</span>
-                                    <span *ngIf="newStatusSelected == 7">Preparando Pedido</span>
-                                    <span *ngIf="newStatusSelected == 8">Pago Realizado</span>
-                                </button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
-                                    <button disabled ngbDropdownItem (click)="newStatusSelected = -1">Elige el nuevo
-                                        estado</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 0">Cancelada</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 1">En espera de pago
-                                        Conecta</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 2">En espera de pago por
-                                        transferencia electronica</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 3">Error de pago</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 4">Reembolsado</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 5">Pedido entregado</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 6">En transito</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 7">Preparando Pedido</button>
-                                    <button ngbDropdownItem (click)="newStatusSelected = 8">Pago Realizado</button>
-                                    <!-- <button ngbDropdownItem (click)="pageSize = 9">fdnfdfdf</button>
-                                    <button ngbDropdownItem (click)="pageSize = 10">fdnfdfdf</button> -->
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="row " style="margin-bottom: 15px;">
                         <div class="col-4">
-                            <button (click)="addNewStatus(newStatusSelected)"
-                                class="btn mr-0 btn-outline-primary full-width" type="button">
-                                ACTUALIZAR ESTADO
+
+                        </div>
+                        <div class="col-8 ">
+                            <button (click)="openAddNewStatus()" class="btn mr-0 btn-outline-primary full-width"
+                                style="margin-top: 22px" type="button">
+                                <i class="fas fa-plus-square ma-r-10"></i>AÑADIR NUEVO ESTADO
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <hr class="m-t-0" />
-            <div class="card">
+            <div class="card" *ngIf="orderDetail.shippingPackages.length != 0">
                 <h5 class="card-title row">
                     <span class="ma-10-30">
-                        <i class="fas fa-box-open ma-r-10"></i>
-                        Envíos</span>
+                        <i class="fas fa-shopping-cart ma-r-10"></i>
+                        Productos</span>
                     <span class="no-margin genre-label margin-hori-10-5 no-margin full-centered"
                         style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
-                        {{orderDetail.shippingPackagesData.length}}
+                        {{orderDetail.shippingPackages[0].packageProducts.length}}
                     </span>
                 </h5>
                 <div class="card-body p-t-0 p-r-0 no-padding">
@@ -219,48 +257,52 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr class="row">
-                                        <th scope="col" class="col-2 full-left">Fecha</th>
-                                        <th scope="col" class="col full-left">
-                                            <i class="fas fa-building"></i>Proveedor
+                                        <th scope="col" class="col-2 full-centered">Id</th>
+                                        <th scope="col" class="col-4 full-centered">
+                                            <i class="fas fa-file-pdf ma-r-10"></i>GUIÁ
                                         </th>
-                                        <th scope="col" class="col full-centered">Peso</th>
-                                        <th scope="col" class="col full-centered">Costo Envió</th>
-                                        <th scope="col" class="col full-centered">N<sup>o</sup>Seguimiento</th>
-                                        <th scope="col" class="col full-centered"></th>
+                                        <th scope="col" class="col-2 full-centered">Costo</th>
+                                        <th scope="col" class="col-2 full-right fs-0-7">N<sup>o</sup>Seguimiento</th>
+                                        <th scope="col" class="col-2 full-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- <div >
                                         <div *ngFor='let text of many2' [innerHtml]='text'></div>
                                     </div> -->
-                                    <tr *ngFor='let shippingPackage of orderDetail.shippingPackagesData;let i = index'
+                                    <tr *ngFor='let shippingPackage of orderDetail.shippingPackages;let i = index'
                                         class="row">
-                                        <th scope="col" class="col-2 full-left">
-                                            {{ utilitiesService.formatDate1( shippingPackage.date ) }}
+                                        <th scope="col" class="col-2 full-centered ">
+                                           <!--  {{ utilitiesService.formatDate1( shippingPackage.createDate ) }} -->
+                                           {{shippingPackage.idShippingPackage}}-{{shippingPackage.idMiEnvioShipments}}
                                         </th>
                                         <!-- <th scope="col" class="col full-left">
                                             Fedex
                                         </th> -->
-                                        <th scope="col" class="col full-left">
-                                            <a [routerLink]="'/dashboard/admin/provider/'+shippingPackage.providerData.idProvider"
-                                                target="_blank">
-                                                {{shippingPackage.providerData.nameProvider}}
+                                        <th scope="col" class="col-4 full-centered fs-0-7">
+                                            <a *ngIf="shippingPackage.trackingNumber.length > 5" [href]="shippingPackage.trackingLabelUrl"
+                                                target="_blank" class="btn mr-0 btn-outline-secondary">
+                                                <!-- {{shippingPackage.trackingLabelUrl}} -->
+                                                <i class="fas fa-file-pdf ma-r-10"></i>VER
+                                            </a>
+                                            <a *ngIf="shippingPackage.trackingNumber.length == 0" class="btn mr-0 btn-outline-secondary">
+                                                <!-- {{shippingPackage.trackingLabelUrl}} -->
+                                                <i class="fas fa-genderless"></i>En espera
                                             </a>
                                         </th>
-                                        <th scope="col" class="col full-centered">
-                                            {{shippingPackage.packageWeight.toFixed(2)}} Kg
-                                        </th>
-                                        <th scope="col" class="col full-centered">
+                                        <th scope="col" class="col-2 full-centered ">
                                             $ {{shippingPackage.costDelivery.toFixed(2)}}
                                         </th>
-                                        <th scope="col" class="col full-centered">
-                                            {{shippingPackage.guideCode}}
+                                        <th scope="col" class="col-2 full-right">
+                                            <a [href]="shippingPackage.trackingUrl" target="_blank">
+                                                {{shippingPackage.trackingNumber}}
+                                            </a>
                                         </th>
-                                        <th scope="col" class="col full-centered">
+                                        <th scope="col" class="col-2 full-right">
                                             <button class="btn mr-0 btn-outline-secondary"
                                                 (click)="openModalShippingDetails(shippingPackage)" type="button">
-                                                <i class="fas fa-share ma-r-10"></i>
-                                                Ver
+                                                <!-- <i class="fas fa-share ma-r-10"></i> -->
+                                                Detalles
                                             </button>
                                         </th>
                                     </tr>
@@ -269,23 +311,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <hr class="m-t-0" />
-            <div class="card">
-                <h5 class="card-title row">
-                    <span class="ma-10-30">
-                        <i class="fas fa-shopping-cart ma-r-10"></i>
-                        Productos</span>
-                    <span class="no-margin genre-label margin-hori-10-5 no-margin full-centered"
-                        style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
-                        {{orderDetail.productList.length}}
-                    </span>
-                </h5>
                 <div class="card-body p-t-0 p-r-0 no-padding">
                     <div class="chat-box p-r-15">
-                        <!-- ITEMS -->
-                        <div class="col-12">
+                        <!-- <div class="col-12" style="height: calc(100vh - 500px); position: relative;"
+                            [perfectScrollbar]="config"> -->
+                        <div class="col-12" >
                             <table class="table table-hover">
                                 <thead>
                                     <tr class="row">
@@ -298,44 +328,46 @@
                                         <th scope="col" class="col-2 full-centered">Total</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <!-- <div >
-                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
-                                     </div> -->
-                                    <tr class="row" *ngFor="
-                                        let product of orderDetail.productList">
-                                        <th scope="col" class="col-1 full-centered">{{product.idProduct}}</th>
+                                <tbody *ngIf="orderDetail.shippingPackages[0].packageProducts.length != 0">
+                                    <tr class="row" *ngFor="let product of orderDetail.shippingPackages[0].packageProducts">
+                                        <th scope="col" class="col-1 full-centered">{{product.idSoldProduct}}
+                                        </th>
                                         <th scope="col" class="col-1 full-centered">
-                                            <img [src]="product.image" class="mr-2" style="width: 40px;" />
+                                            <img *ngIf="product.product.images.length != 0"
+                                                [src]="apiDataService.baseURL +
+                                            'uploads/product-image/' + product.product.images[0].idProduct + '/' + product.product.images[0].idProductImage"
+                                                class="mr-2" style="width: 40px;" />
+                                            <img *ngIf="product.product.images.length == 0"
+                                                src="/assets/images/no-image.png" class="mr-2" style="width: 40px;" />
                                         </th>
                                         <th scope="col" class="col full-left">
                                             {{product.name}}
                                         </th>
-                                        <th scope="col" class="col full-centered">
-                                            {{product.price}}
+                                        <th scope="col" class="col full-centered ">
+                                            {{product.price.toFixed(2)}}
                                         </th>
                                         <th scope="col" class="col-1 full-centered">
                                             {{product.quantity}}
                                         </th>
                                         <th scope="col" class="col full-centered">
-                                            <label *ngIf="product.status == 'agotado'"
+                                            <label *ngIf="product.product.deleted == true"
                                                 class="row no-margin genre-label margin-hori-10-5"
                                                 style="background-color: #b12d1c; margin-bottom: 5px;">
-                                                Agotado
+                                                Borrado
                                             </label>
-                                            <label *ngIf="product.status == 'activado'"
+                                            <label *ngIf="product.product.activated == true"
                                                 class="row no-margin genre-label margin-hori-10-5"
                                                 style="background-color: #29852e; margin-bottom: 5px;">
                                                 Activado
                                             </label>
-                                            <label *ngIf="product.status == 'pausado'"
+                                            <label *ngIf="product.product.activated == false"
                                                 class="row no-margin genre-label margin-hori-10-5"
                                                 style="background-color: #1c44b1; margin-bottom: 5px;">
                                                 Pausado
                                             </label>
                                         </th>
                                         <th scope="col" class="col-2 full-centered">
-                                            $ 1500.00
+                                            $ {{(product.quantity * product.price).toFixed(2)}}
                                         </th>
                                     </tr>
                                 </tbody>
@@ -344,443 +376,123 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card col-sm-12 col-md-5">
-            <h4 class="card-title row">
-                <div class="col full-left">
-                    <i class="fas fa-user ma-r-10"></i>
-                    Cliente - <h6 class="no-margin full-centered margin-hori-10-5">
-                        {{orderDetail.customerInformation.name}}</h6>
-                </div>
-                <div class="col-2 full-right">
+
+            <!-- <hr class="m-t-0" /> -->
+            <div class="card">
+                <h5 class="card-title row">
+                    <span class="ma-10-30">
+                        <i class="fas fa-hand-holding-usd ma-r-10"></i>
+                        Pagos</span>
                     <span class="no-margin genre-label margin-hori-10-5"
                         style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
-                        N<sup>o</sup> {{orderDetail.customerInformation.idUser}}
+                        {{orderDetail.payments.length}}
                     </span>
-                </div>
-            </h4>
-            <hr class="m-t-0" />
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card " style="padding: 15px 18px;font-size: small;">
-                            <h5 class="">Correo electrónico</h5>
-                            <span>
-                                <i class="fas fa-envelope ma-r-10"></i>
-                                <a href="mailto:{{orderDetail.customerInformation.email}}"
-                                    class="">{{orderDetail.customerInformation.email}}</a>
-                            </span>
-
-                            <h5 class="">Cuenta registrada</h5>
-                            <span>
-                                <i class="fas fa-calendar  ma-r-10"></i>
-                                {{ utilitiesService.formatDate1(orderDetail.customerInformation.dateRegister) }}
-                            </span>
-
-                            <h5 class="">Pedidos validos realizados</h5>
-                            <span>
-                                <span class="no-margin genre-label margin-hori-10-5"
-                                    style=" background-color: #2BA8E3 !important;  margin-bottom: 5px; border-color: #3f0058; ">
-                                    {{orderDetail.customerInformation.noOrders}}
-                                </span>
-                            </span>
-
-                            <h5 class="">Total gastado desde su registro</h5>
-                            <span>
-                                <span class="no-margin genre-label margin-hori-10-5"
-                                    style=" background-color: #22c6ab;  margin-bottom: 5px; border-color: #3f0058; ">
-                                    $ {{orderDetail.customerInformation.totalSpent.toFixed(2)}}
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="row">
-                            <h4 class="">
-                                <i class="fas fa-sticky-note ma-r-10"></i>
-                                Nota Privada
-                            </h4>
-                        </div>
-                        <div class="row ">
-                            <textarea [(ngModel)]="orderDetail.privateNote" rows="8" cols="50" class=""></textarea>
-                            <div class="col-12 full-right">
-                                <button (click)="updatePrivateNote()"
-                                    class="btn mr-0 btn-outline-primary button-options ma-15-0" type="button">
-                                    <div class="row full-centered font-normal">
-                                        <i class="fas fa-save ma-r-10"></i>
-                                        Guardar
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row card">
-                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-                        <li [ngbNavItem]="1">
-                            <a ngbNavLink>
-                                <i class="fas fa-truck-moving ma-r-10"></i>
-                                Dirección de envió
-                            </a>
-                            <ng-template ngbNavContent>
-                                <div class=" p-r-15" style="position: relative;">
-                                    <!-- ITEMS -->
-                                    <!-- <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="control-label col-form-label">Seleccione la dirección de envió</label>
-                                                <div ngbDropdown class="">
-                                                    <button
-                                                      class="form-control"
-                                                      id="dropdownUserType"
-                                                      ngbDropdownToggle
-                                                    >
-                                                        <span>1 - Avenida 26 Pte, Delicias</span>
-                                                    </button>
-                                                    <div ngbDropdownMenu aria-labelledby="dropdownUserType" class="full-width">
-                                                        <button ngbDropdownItem >1 - Avenida 26 Pte, Delicias</button>
-                                                        <button ngbDropdownItem >2 - Calle villa de lira, Chihuahua</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div> -->
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <!-- <label for="idnamem" class="control-label col-form-label">*
-                                                    Nombre</label> -->
-                                                <label class="control-label form-label">
-                                                    <!-- <span style="color: red;">*</span> --> Nombre
-                                                </label>
-                                                <!-- <input type="text" class="form-control" id="idnamem"
-                                                    placeholder="Nombre de la persona que recibe"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.name}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="idsurm" class="control-label form-label">*
-                                                    Apellidos</label>
-                                                <!-- <input type="text" class="form-control" id="idsurm"
-                                                    placeholder="Escriba sus apellidos"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.surnames}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="iddirm" class="control-label form-label">* Calle</label>
-                                                <!-- <textarea type="text" class="form-control" id="iddirm"
-                                                    placeholder="Escriba la calle aquí"></textarea> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.street}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idtelm" class="control-label form-label">*
-                                                    Teléfono</label>
-                                                <!-- <input type="text" class="form-control" id="idtelm"
-                                                    placeholder="Escriba su teléfono"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.phone}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idintm" class="control-label form-label">* No
-                                                    Interior</label>
-                                                <!-- <input type="text" class="form-control" id="idintm"
-                                                    placeholder="Numero interior"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.number}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idnoem" class="control-label form-label"> No
-                                                    Exterior</label>
-                                                <!-- <input type="text" class="form-control" id="idnoem"
-                                                    placeholder="Numero exterior"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.extNumber}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="idestm" class="control-label form-label">*
-                                                    Estado</label>
-                                                <!-- <input type="text" class="form-control" id="idestm"
-                                                    placeholder="Nombre del estado"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.state}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="idcium" class="control-label form-label">*
-                                                    Ciudad</label>
-                                                <!-- <input type="text" class="form-control" id="idcium"
-                                                    placeholder="Nombre de la ciudad"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.city}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="idcolm" class="control-label form-label">*
-                                                    Colonia</label>
-                                                <!-- <input type="text" class="form-control" id="idcolm"
-                                                    placeholder="Nombre de la colonia"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.colony}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label for="idcodm" class="control-label form-label">* Código
-                                                    postal</label>
-                                                <!-- <input type="text" class="form-control" id="idcodm"
-                                                    placeholder="Código postal"> -->
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.shippingAddress.postalCode}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="row ">
-                                        <div class="col-12 full-right">
-                                            <button class="btn mr-0 btn-outline-primary button-options ma-15-0"
-                                                type="button">
-                                                <div class="row full-centered font-normal">
-                                                    <i class="fas fa-save ma-r-10"></i>
-                                                    Guardar
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            </ng-template>
-                        </li>
-                        <li [ngbNavItem]="2">
-                            <a ngbNavLink>
-                                <i class="far fa-file-alt  ma-r-10"></i>
-                                Datos Facturación
-                            </a>
-                            <ng-template ngbNavContent>
-                                <div class=" p-r-15" style="position: relative;">
-                                    <!-- ITEMS -->
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idraz" class="control-label form-label">Razón
-                                                    social</label>
-                                                <label type="text" class="form-control" id="idraz">
-                                                    {{orderDetail.billingInformation.businessName}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idrfc" class="control-label form-label">RFC</label>
-                                                <label type="text" class="form-control" id="idrfc">
-                                                    {{orderDetail.billingInformation.rfc}}</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="idtel3"
-                                                    class="control-label col-form-label">Teléfono</label>
-                                                <label type="text" class="form-control" id="idtel3">
-                                                    {{orderDetail.billingInformation.phone}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-4">
-                                            <div class="form-group">
-                                                <label for="inemal2" class="control-label form-label">Correo
-                                                    Electrónico</label>
-                                                <label type="text" class="form-control" id="inemal2">
-                                                    {{orderDetail.billingInformation.email}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="inedo2" class="control-label form-label">Estado</label>
-                                                <label type="text" class="form-control" id="inedo2">
-                                                    {{orderDetail.billingInformation.state}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="form-group">
-                                                <label for="incity2" class="control-label form-label">Ciudad</label>
-                                                <label type="text" class="form-control" id="incity2">
-                                                    {{orderDetail.billingInformation.city}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-2">
-                                            <div class="form-group">
-                                                <label for="incod2" class="control-label form-label">Código
-                                                    postal</label>
-                                                <label type="text" class="form-control" id="incod2">
-                                                    {{orderDetail.billingInformation.postalCode}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-2">
-                                            <div class="form-group">
-                                                <label for="incol2" class="control-label form-label">Colonia</label>
-                                                <label type="text" class="form-control" id="incol2">
-                                                    {{orderDetail.billingInformation.colony}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-2">
-                                            <div class="form-group">
-                                                <label for="innumber"
-                                                    class="control-label form-label">Numero</label>
-                                                <label type="text" class="form-control" id="innumber">
-                                                    {{orderDetail.billingInformation.number}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <label for="instreet" class="control-label form-label">Calle</label>
-                                                <label type="text" class="form-control" id="instreet">
-                                                    {{orderDetail.billingInformation.street}}
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </li>
-                    </ul>
-
-                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-                </div>
-                <!-- <hr class="m-t-0" /> -->
-                <div class="card">
-                    <h5 class="card-title row">
-                        <span class="ma-10-30">
-                            <i class="fas fa-hand-holding-usd ma-r-10"></i>
-                            Pagos</span>
-                        <span class="no-margin genre-label margin-hori-10-5"
-                            style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
-                            {{orderDetail.paymentList.length}}
-                        </span>
-                    </h5>
-                    <div class="card-body p-t-0 p-r-0 no-padding">
-                        <div class="chat-box p-r-15">
-                            <!-- ITEMS -->
-                            <div class="col-12">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr class="row">
-                                            <th scope="col" class="col-2 full-left">Fecha</th>
-                                            <th scope="col" class="col full-left">Método de pago</th>
-                                            <th scope="col" class="col full-centered">ID de Transacción</th>
-                                            <th scope="col" class="col full-centered">Importe</th>
-                                            <th scope="col" class="col full-centered">Req Factura</th>
-                                            <th scope="col" class="col-2 full-centered">Estado Factura</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- <div >
-                                        <div *ngFor='let text of many2' [innerHtml]='text'></div>
-                                    </div> -->
-                                        <tr class="row" *ngFor='let paymentDetail of orderDetail.paymentList'>
-                                            <th scope="col" class="col-2 full-left">
-                                                {{ utilitiesService.formatDate1(paymentDetail.date) }}
-                                            </th>
-                                            <th scope="col" class="col full-left">
-                                                <label *ngIf="paymentDetail.paymentMethod == 0"
-                                                    class="row no-margin genre-label margin-hori-10-5"
-                                                    style=" background-color: #1d3099;  margin-bottom: 5px;">
-                                                    Tarjeta
-                                                </label>
-                                                <label *ngIf="paymentDetail.paymentMethod == 1"
-                                                    class="row no-margin genre-label margin-hori-10-5"
-                                                    style=" background-color: #2392a1;  margin-bottom: 5px;">
-                                                    Transferencia
-                                                </label>
-                                                <label *ngIf="paymentDetail.paymentMethod == 2"
-                                                    class="row no-margin genre-label margin-hori-10-5"
-                                                    style=" background-color: #23a12e;  margin-bottom: 5px;">
-                                                    Puntos de pago
-                                                </label>
-                                            </th>
-                                            <th scope="col" class="col full-centered">
-                                                {{paymentDetail.transaction}}
-                                            </th>
-                                            <th scope="col" class="col full-centered">
-                                                $ {{paymentDetail.payment.toFixed(2)}}
-                                            </th>
-                                            <th scope="col" class="col full-centered">
-                                                <label *ngIf="paymentDetail.requiresInvoice == true"
-                                                    class="row no-margin genre-label margin-hori-10-5"
-                                                    style=" background-color: #1d9932;  margin-bottom: 5px;">
-                                                    SI
-                                                </label>
-                                                <label *ngIf="paymentDetail.requiresInvoice == false"
-                                                    class="row no-margin genre-label margin-hori-10-5"
-                                                    style=" background-color: #2392a1;  margin-bottom: 5px;">
-                                                    NO
-                                                </label>
-                                            </th>
-                                            <th scope="col" class="col-2 full-centered">
-                                                <span *ngIf="paymentDetail.requiresInvoice == true">
-                                                    <label *ngIf="paymentDetail.invoiceReady == true"
-                                                        class="btn mr-0 btn-outline-secondary" type="button">
-                                                        <i class="fas fa-check-circle ma-r-10"></i>
-                                                        OK
+                </h5>
+                <div class="card-body p-t-0 p-r-0 no-padding">
+                    <div class="chat-box p-r-15">
+                        <!-- ITEMS -->
+                        <div class="col-12">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="row">
+                                        <th scope="col" class="col-2 full-left">Fecha</th>
+                                        <th scope="col" class="col-2 full-left">Método de pago</th>
+                                        <th scope="col" class="col-2 full-centered">Plataforma</th>
+                                        <th scope="col" class="col-2 full-centered">Importe</th>
+                                        <th scope="col" class="col-2 full-centered">Req Factura</th>
+                                        <th scope="col" class="col-2 full-centered">Estado Factura</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- <div >
+                                    <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                                </div> -->
+                                    <tr class="row" *ngFor='let paymentDetail of orderDetail.payments'>
+                                        <th class="col-12" *ngIf="paymentDetail.status == 'paid-card'">
+                                            <span class="row" >
+                                                <th scope="col" class="col-2 full-left fs-0-7">
+                                                    {{ utilitiesService.formatDate1(paymentDetail.createDate) }}
+                                                </th>
+                                                <th scope="col" class="col-2 full-left">
+                                                    <label *ngIf="paymentDetail.status == 'paid-card'"
+                                                        class="row no-margin genre-label margin-hori-10-5 fs-0-7"
+                                                        style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                        Tarjeta
                                                     </label>
-                                                    <button (click)="createInvoice()"
-                                                        *ngIf="paymentDetail.invoiceReady == false"
-                                                        class="btn mr-0 btn-outline-secondary" type="button">
-                                                        <i class="fas fa-check-circle ma-r-10"></i>
-                                                        Crear
-                                                    </button>
-                                                </span>
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                                    <label *ngIf="paymentDetail.status == 'paid-wallet'"
+                                                        class="row no-margin genre-label margin-hori-10-5 fs-0-7"
+                                                        style=" background-color: #1d3099;  margin-bottom: 5px;">
+                                                        Pago de envío - Wallet
+                                                    </label>
+                                                    <label *ngIf="paymentDetail.status == 'Transferencia'"
+                                                        class="row no-margin genre-label margin-hori-10-5 fs-0-7"
+                                                        style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                        Transferencia
+                                                    </label>
+                                                    <label *ngIf="paymentDetail.status == 'Puntos de pago'"
+                                                        class="row no-margin genre-label margin-hori-10-5 fs-0-7"
+                                                        style=" background-color: #23a12e;  margin-bottom: 5px;">
+                                                        Puntos de pago
+                                                    </label>
+                                                </th>
+                                                <th scope="col" class="col-2 full-centered fs-0-7">
+        
+                                                    <span *ngIf="paymentDetail.status == 'paid-card'">Conekta</span>
+                                                    <span *ngIf="paymentDetail.status == 'paid-wallet'">MiEnvio</span>
+                                                </th>
+                                                <th scope="col" class="col-2 full-centered fs-0-7">
+                                                    $ {{shippingPackageProductTotal.toFixed(2)}}
+                                                </th>
+                                                <th scope="col" class="col full-centered">
+                                                    <label
+                                                        *ngIf="paymentDetail.status == 'paid-card' && orderDetail.needInvoice == true"
+                                                        class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #1d9932;  margin-bottom: 5px;">
+                                                        SI
+                                                    </label>
+                                                    <label
+                                                        *ngIf="(paymentDetail.status == 'paid-card' && orderDetail.needInvoice == false) || paymentDetail.status == 'paid-wallet'"
+                                                        class="row no-margin genre-label margin-hori-10-5"
+                                                        style=" background-color: #2392a1;  margin-bottom: 5px;">
+                                                        NO
+                                                    </label>
+                                                </th>
+                                                <th scope="col" class="col-2 full-centered">
+                                                    <!-- <span
+                                                        *ngIf="paymentDetail.status == 'paid-card' && orderDetail.needInvoice == true">
+                                                        <label *ngIf="orderDetail.invoiced == true"
+                                                            class="btn mr-0 btn-outline-secondary" type="button">
+                                                            <i class="fas fa-check-circle ma-r-10"></i>
+                                                            OK
+                                                        </label>
+                                                        <button (click)="createInvoice()" *ngIf="orderDetail.invoiced == false"
+                                                            class="btn mr-0 btn-outline-secondary" type="button">
+                                                            <i class="fas fa-check-circle ma-r-10"></i>
+                                                            Crear
+                                                        </button>
+                                                    </span> -->
+                                                </th>
+                                            </span>
+                                        </th>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- <hr class="m-t-0" /> -->
+
+        </div>
+
+        <div class="card col-sm-12 col-md-7">
+
+        </div>
+        
+        <div class="card col-sm-12 col-md-5">
+            <div class="card-body">
                 <div class="row">
                     <div class="col-12  per-card">
                         <div class="row">
@@ -788,7 +500,7 @@
                                 <h5>Productos</h5>
                             </div>
                             <div class="col-5 full-right">
-                                <h5>$ 732.00</h5>
+                                <h5>$ {{ shippingPackageProductTotal.toFixed(2) }}</h5>
                             </div>
                         </div>
                         <hr class="m-t-0" />
@@ -797,7 +509,7 @@
                                 <h5>Envió</h5>
                             </div>
                             <div class="col-5 full-right">
-                                <h5>$ 732.00</h5>
+                                <h5>$ {{shippingPackagesTotal.toFixed(2)}}</h5>
                             </div>
                         </div>
                         <hr class="m-t-0" />
@@ -806,7 +518,7 @@
                                 <h5>Total</h5>
                             </div>
                             <div class="col-5 full-right">
-                                <h5>$ <strong>732.00</strong></h5>
+                                <h5>$ <strong>{{(shippingPackageProductTotal + shippingPackageProductTotal ).toFixed(2)}}</strong></h5>
                             </div>
                         </div>
                     </div>
@@ -814,13 +526,33 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-6 full-left">
+            <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options" type="button">
+                <div class="row full-centered">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </div>
+                <div class="row full-centered font-normal">
+                    Regresar
+                </div>
+            </button>
+        </div>
+        <div class="col-6 full-right">
+            <!-- <button class="btn mr-0 btn-outline-primary button-options" type="button">
+                <div class="row full-centered">
+                    <i class="fas fa-save"></i>
+                </div>
+                <div class="row full-centered font-normal">
+                    Guardar
+                </div>
+            </button> -->
+        </div>
+    </div>
 </div>
 
-
-<!-- Modal Direction -->
-<ng-template #modalShippingDetails let-modal>
+<ng-template #modalNewState let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Información del Envió </h4>
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Status de la Orden</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -829,51 +561,451 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="idnamem" class="control-label col-form-label">Fecha</label>
+                    <label for="idnamem" class="control-label col-form-label">Fecha : </label>
                     <label type="text" class="form-control"
-                        id="idraz">{{ utilitiesService.formatDate1( selectedShippingDetails.date )}}</label>
+                        id="idraz">{{ utilitiesService.formatDate1(newStatusSelected.createdAt) }}</label>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="idsurm" class="control-label col-form-label">Transportista</label>
-                    <label type="text" class="form-control" id="idraz">{{selectedShippingDetails.carrier}}</label>
+                    <label for="idsurm" class="control-label col-form-label">Por :</label>
+                    <label type="text" class="form-control" id="idraz">{{newStatusSelected.registerUserData}}</label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="idnamem" class="control-label col-form-label">Peso</label>
-                    <label type="text" class="form-control"
-                        id="idraz">{{selectedShippingDetails.packageWeight.toFixed(2)}} Kg</label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                    <label for="idnamem" class="control-label col-form-label">Costo de envió</label>
-                    <label type="text" class="form-control" id="idraz">$
-                        {{selectedShippingDetails.costDelivery.toFixed(2)}}</label>
+                    <label class="control-label form-label">
+                        <span style="color: red;">*</span> Descripción técnica
+                    </label>
+                    <input [(ngModel)]="newStatusSelected.label" type="text" required class="form-control" id="id-dest"
+                        placeholder="Descripción detallada del estado actual">
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-12">
                 <div class="form-group">
-                    <label for="idsurm" class="control-label col-form-label">Proveedor</label>
-                    <a [routerLink]="'/dashboard/admin/provider/'+selectedShippingDetails.providerData.idProvider"
-                        target="_blank" type="text" class="form-control" id="idraz">
-                        {{selectedShippingDetails.providerData.nameProvider}}
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="form-group">
-                    <label for="idsurm" class="control-label col-form-label">Numero de seguimiento</label>
-                    <label type="text" class="form-control" id="idraz">{{selectedShippingDetails.guideCode}}</label>
+                    <label class="control-label form-label">
+                        <span style="color: red;">*</span> Descripción para el Cliente
+                    </label>
+                    <input [(ngModel)]="newStatusSelected.descriptionForUser" type="text" required class="form-control"
+                        id="id-desu" placeholder="Descripción corta del estado actual">
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Save click');" class="btn btn-danger button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-window-close ma-0-10"></i> Cancelar
+            </div>
+        </button>
+        <button (click)="saveNewStatus()" [disabled]="newStatusSelected.label.length < 5 ||
+            newStatusSelected.descriptionForUser.length < 5" class="btn btn-success button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-save ma-0-10"></i>Añadir
+            </div>
+        </button>
+
+        <!--  <button (click)="modal.close('Save click');" class="btn mr-0 btn mr-0 btn-primary button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <span class="ma-0-10">
+                    Aceptar
+                </span>
+            </div>
+        </button> -->
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+</ng-template>
+
+
+<!-- Modal Direction -->
+<ng-template #modalShippingDetails let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Información del Envió
+            {{selectedShippingPackage.idShippingPackage}} -
+            {{ utilitiesService.formatDate1( selectedShippingPackage.createDate )}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="activeModal" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>
+                    <!-- <i class="far fa-file-alt  ma-r-10"></i>
+                    Información del Envio -->
+                    <h5 class="card-title row">
+                        <span class="ma-10-30">
+                            <i class="fas fa-truck-moving ma-r-10"></i>
+                            Dirección de envió
+                        </span>
+                    </h5>
+                </a>
+                <ng-template ngbNavContent>
+                    <div class=" p-r-15" style="position: relative;">
+                        <!-- ITEMS -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label col-form-label">Seleccione la dirección de envió</label>
+                                    <div ngbDropdown class="">
+                                        <button
+                                          class="form-control"
+                                          id="dropdownUserType"
+                                          ngbDropdownToggle
+                                        >
+                                            <span>1 - Avenida 26 Pte, Delicias</span>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownUserType" class="full-width">
+                                            <button ngbDropdownItem >1 - Avenida 26 Pte, Delicias</button>
+                                            <button ngbDropdownItem >2 - Calle villa de lira, Chihuahua</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span>Nombre
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idnamem"
+                                        placeholder="Nombre de la persona que recibe"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.name}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span>Apellidos
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idsurm"
+                                        placeholder="Escriba sus apellidos"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.surnames}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span>Calle
+                                    </label>
+                                    <!-- <textarea type="text" class="form-control" id="iddirm"
+                                        placeholder="Escriba la calle aquí"></textarea> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.street}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span>Teléfono
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idtelm"
+                                        placeholder="Escriba su teléfono"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.phone}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> No Interior
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idintm"
+                                        placeholder="Numero interior"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.number}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> No Exterior
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idnoem"
+                                        placeholder="Numero exterior"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.extNumber}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Estado
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idestm"
+                                        placeholder="Nombre del estado"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.state}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Ciudad
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idcium"
+                                        placeholder="Nombre de la ciudad"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.city}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Colonia
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idcolm"
+                                        placeholder="Nombre de la colonia"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.colony}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Código Postal
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="idcodm"
+                                        placeholder="Código postal"> -->
+                                    <label type="text" class="form-control" id="idtel3">
+                                        {{orderDetail.shippingAddress.postalCode}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row ">
+                            <div class="col-12 full-right">
+                                <button class="btn mr-0 btn-outline-primary button-options ma-15-0"
+                                    type="button">
+                                    <div class="row full-centered font-normal">
+                                        <i class="fas fa-save ma-r-10"></i>
+                                        Guardar
+                                    </div>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>
+                    <!-- <i class="far fa-file-alt  ma-r-10"></i>
+                    Información del Envio -->
+                    <h5 class="card-title row">
+                        <span class="ma-10-30">
+                            <i class="far fa-file-alt  ma-r-10"></i>
+                            Información del Envio
+                        </span>
+                    </h5>
+                </a>
+                <ng-template ngbNavContent>
+                    <div class=" p-r-15" style="position: relative;">
+                        <!-- ITEMS -->
+                        <!--  <hr class="m-t-0" /> -->
+                        <div class="card">
+                            <h5 class="card-title row">
+                                <span class="ma-10-30">
+                                    <i class="fas fa-box-open"></i>
+                                    Paquete</span>
+                            </h5>
+                            <div class="card-body p-t-0 p-r-0 no-padding">
+                                <div class="chat-box p-r-15">
+                                    <!-- ITEMS -->
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idnamem"
+                                                        class="control-label col-form-label">Ancho</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{ selectedShippingPackage.width }} cm</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Alto </label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.height}} cm</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm"
+                                                        class="control-label col-form-label">Profundidad</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.length}} cm</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm"
+                                                        class="control-label col-form-label">Peso</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.weight}} Kg</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                        <div class="card">
+                            <h5 class="card-title row">
+                                <span class="ma-10-30">
+                                    <i class="fas fa-people-carry"></i>
+                                    Transportista</span>
+                            </h5>
+                            <div class="card-body p-t-0 p-r-0 no-padding">
+                                <div class="chat-box p-r-15">
+                                    <!-- ITEMS -->
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idnamem"
+                                                        class="control-label col-form-label">Transportista</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{ selectedShippingPackage.carrier }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Tiempo de
+                                                        entrega</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.durationTerms}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Costo de
+                                                        envio</label>
+                                                    <label type="text" class="form-control" id="idraz">$
+                                                        {{selectedShippingPackage.costDelivery.toFixed(2)}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idnamem" class="control-label col-form-label">Código de
+                                                        rastreo</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idratn">{{ selectedShippingPackage.trackingNumber }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Url de
+                                                        rastreo</label>
+                                                    <a type="text" class="form-control"
+                                                        [href]="selectedShippingPackage.trackingUrl" target="_blank"
+                                                        id="idrtu">{{selectedShippingPackage.trackingUrl}}</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Etiqueta de
+                                                        la Guiá</label>
+                                                    <a type="text" class="form-control"
+                                                        [href]="selectedShippingPackage.trackingLabelUrl"
+                                                        target="_blank"
+                                                        id="idtul">{{selectedShippingPackage.trackingLabelUrl}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="m-t-0" />
+                        <div class="card">
+                            <h5 class="card-title row">
+                                <span class="ma-10-30">
+                                    <i class="fas fa-database"></i>
+                                    MI Envio API</span>
+                            </h5>
+                            <div class="card-body p-t-0 p-r-0 no-padding">
+                                <div class="chat-box p-r-15">
+                                    <!-- ITEMS -->
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idnamem" class="control-label col-form-label">Id
+                                                        Compra</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{ selectedShippingPackage.idMiEnvioPurchase }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Id
+                                                        dirección
+                                                        proveedor</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.idMiEnvioDirectionProvider}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Id Pago
+                                                        Envio</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.idMiEnvioPurchasePaymentId}}</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label for="idsurm" class="control-label col-form-label">Id de
+                                                        envio</label>
+                                                    <label type="text" class="form-control"
+                                                        id="idraz">{{selectedShippingPackage.idMiEnvioShipments}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
     </div>
     <div class="modal-footer">
         <button (click)="modal.close('Save click');" class="btn mr-0 btn mr-0 btn-primary button-reset " type="button">

@@ -17,29 +17,29 @@
                 <!-- Filtrar por estado -->
                 <div ngbDropdown class="d-inline-block">
                     <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
-                        <span *ngIf="payMethodSelected == -1">Todos los pagos</span>
-                        <span *ngIf="payMethodSelected == 0">Tarjeta</span>
-                        <span *ngIf="payMethodSelected == 1">Transferencia electronica</span>
-                        <span *ngIf="payMethodSelected == 2">Puntos de pago</span>
+                        <span *ngIf="payMethodSelected.length == 0">Todos los pagos</span>
+                        <span *ngIf="payMethodSelected == 'Tarjeta'">Tarjeta</span>
+                        <span *ngIf="payMethodSelected == 'Transferencia electronica'">Transferencia electronica</span>
+                        <span *ngIf="payMethodSelected == 'Puntos de pago'">Puntos de pago</span>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button (click)="changePayMethodSelected(-1)" ngbDropdownItem>
+                        <button (click)="changePayMethodSelected('')" ngbDropdownItem>
                             Todos los pagos
                         </button>
-                        <button (click)="changePayMethodSelected(0)" ngbDropdownItem>
+                        <button (click)="changePayMethodSelected('Tarjeta')" ngbDropdownItem>
                             Tarjeta
                         </button>
-                        <button (click)="changePayMethodSelected(1)" ngbDropdownItem>
+                        <button (click)="changePayMethodSelected('Transferencia electronica')" ngbDropdownItem>
                             Transferencia electronica
                         </button>
-                        <button (click)="changePayMethodSelected(2)" ngbDropdownItem>
+                        <button (click)="changePayMethodSelected('Puntos de pago')" ngbDropdownItem>
                             Puntos de pago
                         </button>
                     </div>
                 </div>
 
                 <!-- Filtrar por estado -->
-                <div ngbDropdown class="d-inline-block">
+                <!-- <div ngbDropdown class="d-inline-block">
                     <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
                         <span *ngIf="statusSelected == -1">Todos los estados</span>
                         <span *ngIf="statusSelected == 0">Cancelada</span>
@@ -84,7 +84,7 @@
                             Pago Realizado
                         </button>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Modificar cantidad de desplegados -->
                 <div ngbDropdown class="d-inline-block">
@@ -147,17 +147,17 @@
                                                 $ {{order.total}}
                                             </th>
                                             <th scope="col" class="col-1 full-centered">
-                                                <label *ngIf="order.paymentMethod == 0"
+                                                <label *ngIf="order.paymentMethod == 'Tarjeta'"
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #1d3099;  margin-bottom: 5px;">
                                                     Tarjeta
                                                 </label>
-                                                <label *ngIf="order.paymentMethod == 1"
+                                                <label *ngIf="order.paymentMethod == 'Transferencia electronica'"
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #2392a1;  margin-bottom: 5px;">
                                                     Transferencia electronica
                                                 </label>
-                                                <label *ngIf="order.paymentMethod == 2"
+                                                <label *ngIf="order.paymentMethod == 'Puntos de pago'"
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #23a12e;  margin-bottom: 5px;">
                                                     Puntos de pago
@@ -165,7 +165,11 @@
                                             </th>
 
                                             <th scope="col" class="col-2 full-centered">
-                                                <label *ngIf="order.lastStatus == 0"
+                                                <label class="row no-margin genre-label margin-hori-10-5"
+                                                    style=" background-color: #d3d3d3;  margin-bottom: 5px; font-size: 0.6rem;">
+                                                    {{order.lastStatus}}
+                                                </label>
+                                                <!-- <label *ngIf="order.lastStatus == 0"
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #a15523;  margin-bottom: 5px;">
                                                     Cancelada
@@ -174,7 +178,7 @@
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #236fa1;  margin-bottom: 5px;">
                                                     En espera de pago Conecta
-                                                    <!-- TO DO: Aquí pueden ir algunos otros -->
+                                                    
                                                 </label>
                                                 <label *ngIf="order.lastStatus == 2"
                                                     class="row no-margin genre-label margin-hori-10-5"
@@ -191,7 +195,7 @@
                                                     style=" background-color: #a1238c;  margin-bottom: 5px;">
                                                     Reembolsado
                                                 </label>
-                                                <!-- Estados de la app y posibles del proveedor-->
+                                                
                                                 <label *ngIf="order.lastStatus == 5"
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #0f249b;  margin-bottom: 5px;">
@@ -211,7 +215,7 @@
                                                     class="row no-margin genre-label margin-hori-10-5"
                                                     style=" background-color: #164d1a;  margin-bottom: 5px;">
                                                     Pago Realizado
-                                                </label>
+                                                </label> -->
                                             </th>
                                             <th scope="col" class="col-1 full-centered">
                                                 {{utilitiesService.formatDate1(order.date)}}

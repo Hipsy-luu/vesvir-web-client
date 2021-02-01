@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilitiesService } from '../../../../services/utilities/utilities.service';
-import { dataProviders } from './providers';
 import { DataSessionService } from '../../../../services/dataSession/data-session.service';
+import { ApiDataService } from '../../../../services/apiData/api-data.service';
+import { LoggedResponse } from '../../../../classes/loggedResponse.class';
+import { ServerMessage } from '../../../../classes/serverMessage.class';
 
 @Component({
   selector: 'app-providers',
@@ -18,12 +20,48 @@ export class ProvidersComponent implements OnInit {
   page = 1;
   pageSize = 10;
 
-  constructor(public utilitiesService : UtilitiesService,private dataSessionService : DataSessionService) { 
-    this.dataProviders = [...dataProviders];
-    this.dataProvidersFiltered = Array.from(this.dataProviders);
-  }
+
+  constructor(public dataSessionService: DataSessionService, public utilitiesService: UtilitiesService,
+    private apiDataService : ApiDataService) { 
+      this.dataProviders = [];
+      this.dataProvidersFiltered = Array.from(this.dataProviders);
+    }
 
   ngOnInit(): void {
+    this.dataSessionService.checkLogin((logedResponse: LoggedResponse) => {
+      //console.log(logedResponse);
+      if (this.dataSessionService.user.userType == 0 ) {
+        //Cosas para hacer si es admin
+        console.log("es admin");
+        this.apiDataService.getProvidersListData().then((response : ServerMessage)=>{
+          //console.log(response);
+          for (let index = 0; index < response.data.length; index++) {
+            response.data[index].createDate = new Date(response.data[index].createDate);
+            response.data[index].lastLogin = new Date(response.data[index].lastLogin);
+          }
+          this.dataProviders = [...response.data];
+          this.dataProvidersFiltered = Array.from(this.dataProviders);
+        }).catch((error)=>{
+          console.log("error");
+          console.log(error);
+          this.utilitiesService.showErrorToast("A ocurrido un error","Error");
+          
+        });
+
+      } else if (this.dataSessionService.user.userType == 1 ) {
+        console.log("es provedor");
+        this.dataSessionService.navigateByUrl("/dashboard-provider/home");
+      }else if (this.dataSessionService.user.userType == 2) {
+        this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.");
+        this.dataSessionService.logOut();
+      }else{
+        this.utilitiesService.showErrorToast( "Usuario desconocido.","Error!");
+        this.dataSessionService.logOut();
+      }
+    }, (noLoginResponse: LoggedResponse) => {
+      //console.log(noLoginResponse);
+      this.dataSessionService.logOut();
+    });
   }
 
   filterByProviderName(event) {

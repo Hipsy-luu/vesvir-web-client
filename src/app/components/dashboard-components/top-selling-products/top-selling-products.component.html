@@ -8,11 +8,11 @@
             </div>
             <div class="ml-auto">
                 <div class="dl">
-                    <select class="custom-select">
-                        <option value="0" selected>Mensual</option>
+                    <select disabled class="custom-select">
+                        <!-- <option value="0" selected>Mensual</option>
                         <option value="1">Diario</option>
-                        <option value="2">Semanal</option>
-                        <option value="3">Anual</option>
+                        <option value="2">Semanal</option> -->
+                        <option value="3" selected>Anual</option>
                     </select>
                 </div>
             </div>
@@ -32,88 +32,36 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let product of top10SoldProducts">
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="m-r-10">
-                                <a class="btn btn-circle btn-info text-white">EA</a>
+                                <div class="user-pic">
+                                    <img *ngIf="product.product.images.length == 0" style="height: 30px;" src="/assets/images/no-image.png"
+                                        class="rounded-circle img-fluid">
+                                    <img *ngIf="product.product.images.length != 0" style="height: 30px;" [src]="apiDataService.baseURL +
+                                    'uploads/product-image/' + product.product.images[0].idProduct + '/' + product.product.images[0].idProductImage"
+                                        class="rounded-circle img-fluid">
+                                </div>
                             </div>
                             <div class="">
-                                <h4 class="m-b-0 font-16">Elite Admin</h4>
+                                <h4 class="m-b-0 font-16">{{product.name}}</h4>
                             </div>
                         </div>
                     </td>
-                    <td>Single Use</td>
-                    <td>Mujer</td>
+                    <td>{{product.product.provider.businessName}}</td>
                     <td>
-                        <label class="label label-danger">Angular</label>
+                        <span *ngIf="product.product.gender == 0"  class="label label-info">Niño</span>
+                        <span *ngIf="product.product.gender == 1"  class="label label-purple">Niña</span>
+                        <span *ngIf="product.product.gender == 2"  class="label label-info">Mujer</span>
+                        <span *ngIf="product.product.gender == 3"  class="label label-purple">Hombre</span>
                     </td>
-                    <td>356</td>
                     <td>
-                        <h5 class="m-b-0">$2850.06</h5>
+                        <label class="text-capitalize">{{product.product.category.name}}</label>
                     </td>
-                </tr>
-                <tr>
+                    <td>{{product.totalSales}}</td>
                     <td>
-                        <div class="d-flex align-items-center">
-                            <div class="m-r-10">
-                                <a class="btn btn-circle btn-orange text-white">MA</a>
-                            </div>
-                            <div class="">
-                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Single Use</td>
-                    <td>Hombre</td>
-                    <td>
-                        <label class="label label-info">Vue Js</label>
-                    </td>
-                    <td>356</td>
-                    <td>
-                        <h5 class="m-b-0">$2850.06</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="m-r-10">
-                                <a class="btn btn-circle btn-success text-white">MP</a>
-                            </div>
-                            <div class="">
-                                <h4 class="m-b-0 font-16">Material Pro Admin</h4>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Single Use</td>
-                    <td>Mujer</td>
-                    <td>
-                        <label class="label label-success">Bootstrap</label>
-                    </td>
-                    <td>356</td>
-                    <td>
-                        <h5 class="m-b-0">$2850.06</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="m-r-10">
-                                <a class="btn btn-circle btn-purple text-white">AA</a>
-                            </div>
-                            <div class="">
-                                <h4 class="m-b-0 font-16">Ample Admin</h4>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Single Use</td>
-                    <td>Mujer</td>
-                    <td>
-                        <label class="label label-purple">React</label>
-                    </td>
-                    <td>356</td>
-                    <td>
-                        <h5 class="m-b-0">$2850.06</h5>
+                        <h5 class="m-b-0">${{ product.product.price * product.totalSales }}</h5>
                     </td>
                 </tr>
             </tbody>

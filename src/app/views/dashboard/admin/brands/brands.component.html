@@ -1,0 +1,280 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <!-- TITLE -->
+            <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
+                <div class="row full-width">
+                    <div class="col-6 full-centered full-left">
+                        <div class="text-white m-b-0 m-l-15 font-18">
+                            <i class="fas fa-trademark"></i>
+                            Marcas
+                            <span class="no-margin genre-label margin-hori-10-5"
+                                style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                                {{brandsList.length}}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 full-right">
+                        <button type="button" class="btn mr-0 btn-outline-primary-inverted" aria-label="Eliminar"
+                            (click)="openModalAddBrand()">
+                            <!-- <span aria-hidden="true">&times;</span> -->
+                            <!-- <i class="fas fa-trash"></i> -->
+                            <i class="fas fa-plus-square ma-0-10"></i>
+                            Nueva Marca
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr class="m-t-0" />
+            <form>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group pd-10-l">
+                            <label class="control-label form-label ma-b-10-i">
+                                <!-- <span style="color: red;">*</span> --> Buscar por nombre
+                            </label>
+                            <div class="form-inline">
+                                <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+                                    (ngModelChange)="filterByName($event)" placeholder="Ingrese nombre a buscar"
+                                    class="form-control text-capitalize" type="text" />
+                                <i class="pd-10-l fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- EDIT IMAGES -->
+            <div class="card-body p-t-0 p-r-0">
+                <div class="chat-box p-r-15" style="height: calc(100vh - 300px); position: relative;"
+                    [perfectScrollbar]="config">
+                    <!-- ITEMS -->
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="row">
+                                    <th scope="col" class="col-1 full-centered">Id</th>
+                                    <th scope="col" class="col-3 full-left">Nombre</th>
+                                    <th scope="col" class="col-2 full-left">
+                                        
+                                        
+                                    </th>
+                                    <th scope="col" class="col-1 full-centered">No Productos</th>
+                                    <th scope="col" class="col-2 full-centered">Estatus</th>
+                                    <th scope="col" class="col-3 full-centered"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <div >
+                      <div *ngFor='let text of many2' [innerHtml]='text'></div>
+                   </div> -->
+                                <tr class="row" *ngFor="let brand of brandsFiltered; index as i">
+                                    <th scope="col" class="col-1 full-centered">
+                                        <span *ngIf="brand.idBrand != -1" >{{brand.idBrand}}</span>
+                                    </th>
+                                    <th scope="col" class="col-3 full-left text-capitalize">{{ brand.name }}</th>
+                                    <th scope="col" class="col-2 full-left">
+                                        <img *ngIf="brand.haveImage == true" class="profile-img fake-btn-img-size" [src]="brand.imageBlob">
+                                        <img *ngIf="brand.haveImage == false" class="profile-img fake-btn-img-size" src="/assets/images/no-image.png">
+                                    </th>
+                                    <th scope="col" class="col-1 full-centered">{{brand.noProducts}}</th>
+                                    <th scope="col" class="col-2 full-centered">
+                                        <label *ngIf="brand.active == true"
+                                            class="row no-margin genre-label margin-hori-10-5"
+                                            style="background-color: rgb(44, 185, 31);margin-bottom: 5px;">
+                                            Activo
+                                        </label>
+                                        <label *ngIf="brand.active == false"
+                                            class="row no-margin genre-label margin-hori-10-5"
+                                            style="background-color: #e22b2b;margin-bottom: 5px;">
+                                            Desactivado
+                                        </label>
+                                    </th>
+                                    <th scope="col" class="col-3 full-centered">
+                                        <div *ngIf="brand.idBrand != -1" class="row">
+                                            <div class="col-6">
+                                                <button (click)="openModalEditBrand(brand)"
+                                                    class="btn mr-0 btn-outline-primary" type="button">
+                                                    <i class="fas fa-edit"></i>
+                                                    Editar
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button (click)="openModalConfirmDeleteBrand(brand)"
+                                                    class="btn mr-0 btn-outline-secondary" type="button">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                    Eliminar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Add Brand -->
+<ng-template #modalAddBrand let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="selectedBrand.idBrand == -1" class="modal-title" id="modal-basic-title">Añadir nueva marca</h4>
+        <h4 *ngIf="selectedBrand.idBrand != -1" class="modal-title" id="modal-basic-title">Editando marca</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> -->
+        <button *ngIf="selectedBrand.idBrand != -1" type="button" class="close" aria-label="Close"
+            (click)="openModalConfirmDeleteBrand(selectedBrand)">
+            <!-- <span aria-hidden="true">&times;</span> -->
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- ADD IMAGE -->
+        <div class="card-body border-top">
+            <div class="no-margin">
+                <div class="form-group no-margin">
+                    <div class="row full-centered">
+                        <div class="img-box p-t-10 ">
+                            <div *ngIf="selectedBrand.haveImage == false" class="input-group mb-3"
+                                style="justify-content: center;">
+                                <!-- file input, accepts images only. Detect when file has been picked/changed with Angular's native (change) event listener -->
+
+                                <label *ngIf="source.length == 0">
+                                    <input (change)="updateSource($event)" type="file" id="img" name="img"
+                                        accept="image/jpeg" class="input-box">
+                                    <label for="img" class="fake-btn-img">
+                                        <img class="fake-btn-img-size" src="/assets/images/no-image.png">
+                                        <div class="overlay">
+                                            <p class="white-20">subir foto</p>
+                                        </div>
+                                    </label>
+                                </label>
+
+
+                                <!-- img placeholder when a file has been picked. shows only when 'source' is not empty -->
+                                <label *ngIf="source.length > 0">
+                                    <div class="">
+                                        <img class="fake-btn-img-size" *ngIf="source.length > 0" [src]="source">
+                                    </div>
+                                    <div class="p-t-20 just-center full-centered">
+                                        <button (click)="cancelImage()" class="btn mr-0 btn-outline-primary-inverted">
+                                            Eliminar</button>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div *ngIf="selectedBrand.haveImage == true" class=" mb-3">
+                                <div class="">
+                                    <img class="profile-img" [src]="selectedBrand.imageBlob">
+                                </div>
+                                <div class="p-t-20 just-center full-centered">
+                                    <button (click)="cancelImage()" class="btn mr-0 btn-outline-primary-inverted">
+                                        Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
+                                <div class="input-field m-t-0 m-b-0">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Nombre de la categoría
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="input-group mb-3">
+                                    <input [(ngModel)]="selectedBrand.name" type="text"
+                                        class="form-control text-capitalize" maxlength="50" id="maxval"
+                                        aria-describedby="maxval" placeholder="Nombre de la categoría" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 full-centered full-right">
+                            <div class="input-field m-t-0 m-b-0">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Estatus
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div ngbDropdown class="d-inline-block full-width">
+                                <button class="outline-btn btn btn-outline-secondary full-width" id="dropdownBasic2"
+                                    ngbDropdownToggle>
+                                    <span *ngIf="selectedBrand.active == true">Activo</span>
+                                    <span *ngIf="selectedBrand.active == false">Desactivado</span>
+                                </button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="full-width">
+                                    <button (click)="selectedBrand.active = true" ngbDropdownItem>Activado</button>
+                                    <button (click)="selectedBrand.active = false"
+                                        ngbDropdownItem>Desactivado</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-window-close ma-0-10"></i> Cancelar
+            </div>
+        </button>
+        <button class="btn mr-0 btn-success button-reset " type="button">
+            <div *ngIf="selectedBrand.idBrand == -1" (click)="addBrand()" class="row full-centered font-normal">
+                <i class="fas fa-save ma-0-10"></i>
+                Añadir
+            </div>
+            <!-- <div *ngIf="selectedBrand.idBrand != -1" class="row full-centered font-normal"> -->
+            <div *ngIf="selectedBrand.idBrand != -1" (click)="editBrand()" class="row full-centered font-normal">
+                <i class="fas fa-save ma-0-10"></i>
+                Guardar
+            </div>
+        </button>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+</ng-template>
+
+<!-- Modal Confirm Delete Category -->
+<ng-template #modalConfirmDeleteCategory let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmar Eliminación</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <label class="control-label form-label">
+                <span style="color: red;">Se borrara la categoría y ademas los productos asociados a ella.</span>
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+            <div class="row full-centered font-normal">
+                <i class="fas fa-window-close ma-0-10"></i> Cancelar
+            </div>
+        </button>
+        <button (click)="deleteBrand()" class="btn mr-0 btn-success button-reset " type="button">
+        <!-- <button class="btn mr-0 btn-success button-reset " type="button"> -->
+            <div class="row full-centered font-normal">
+                <i class="fas fa-trash ma-0-10"></i> Eliminar
+            </div>
+        </button>
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+    </div>
+</ng-template>

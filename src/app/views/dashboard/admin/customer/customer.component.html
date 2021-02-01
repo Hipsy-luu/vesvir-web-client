@@ -4,12 +4,12 @@
         <div class="row full-width">
             <div class="col-6 full-centered full-left">
                 <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
-                    Cliente
+                    Información de la cuenta <!-- del Cliente --> {{customer.idUser}}
                 </div>
             </div>
             <div class="col-6 full-right">
-                <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar"
-                    (click)="openModalConfirmDeleteDirection()">
+                <button type="button" class=" btn mr-0 btn-outline-primary-inverted" aria-label="Eliminar"
+                    (click)="openModalConfirmDeleteUser()">
                     <!-- <span aria-hidden="true">&times;</span> -->
                     <i class="fas fa-trash"></i>
                     Eliminar Cliente
@@ -36,7 +36,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Nombre
                                         </label>
-                                        <input [(ngModel)]="customer.name" type="text" class="form-control" id="idnom"
+                                        <input [(ngModel)]="customer.name" type="text" class="form-control" id="idnom" required
                                             placeholder="Escriba su nombre aqui">
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Apellidos
                                         </label>
-                                        <input [(ngModel)]="customer.surnames" type="text" class="form-control"
+                                        <input [(ngModel)]="customer.surnames" type="text" class="form-control" required
                                             id="insur" placeholder="Escriba sus apellidos aquí">
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                             <span style="color: red;">*</span> Correo
                                             Electrónico
                                         </label>
-                                        <input [(ngModel)]="customer.email" type="text" class="form-control" id="inele"
+                                        <input [(ngModel)]="customer.email" type="text" class="form-control" id="inele" required
                                             placeholder="Escriba un email valido aquí">
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                         <!--  <input [(ngModel)]="customer.birthDay"  type="date" class="form-control" >
                                         <input [(ngModel)]="customeBirthDay" (change)="setBirthDay()" type="date" id="infech" class="form-control"> -->
                                         <div class="input-group">
-                                            <input [(ngModel)]="modelCustomerBirthDay" id="dateOfBirth"
+                                            <input [(ngModel)]="modelCustomerBirthDay" id="dateOfBirth" required
                                                 class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
                                                 #dp="ngbDatepicker">
                                             <div class="input-group-append">
@@ -83,9 +83,11 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="inputcom" class="control-label col-form-label">* Teléfono</label>
-                                        <input [(ngModel)]="customer.phone" type="text" class="form-control"
-                                            id="inputcom" placeholder="Company Here">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Teléfono
+                                        </label>
+                                        <input [(ngModel)]="customer.phone" matInput mask="000-000-0000" type="text" class="form-control"  required
+                                            id="inputcom" placeholder="Teléfono de contacto"  >
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -95,16 +97,18 @@
                                         </label>
                                         <div ngbDropdown class="">
                                             <button class="form-control" id="dropdownGenre" ngbDropdownToggle>
-                                                <span *ngIf="customer.genre == 3">Niña</span>
-                                                <span *ngIf="customer.genre == 2">Niño</span>
-                                                <span *ngIf="customer.genre == 1">Mujer</span>
-                                                <span *ngIf="customer.genre == 0">Hombre</span>
+                                                <span *ngIf="customer.gender == 3">Niña</span>
+                                                <span *ngIf="customer.gender == 2">Niño</span>
+                                                <span *ngIf="customer.gender == 1">Mujer</span>
+                                                <span *ngIf="customer.gender == 0">Hombre</span>
+                                                <span *ngIf="customer.gender == -1">Sin selección</span>
                                             </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownGenre">
-                                                <button ngbDropdownItem (click)="customer.genre = 3">Niña</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 2">Niño</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 1">Mujer</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 0">Hombre</button>
+                                                <button ngbDropdownItem (click)="customer.gender = 3">Niña</button>
+                                                <button ngbDropdownItem (click)="customer.gender = 2">Niño</button>
+                                                <button ngbDropdownItem (click)="customer.gender = 1">Mujer</button>
+                                                <button ngbDropdownItem (click)="customer.gender = 0">Hombre</button>
+                                                <button ngbDropdownItem (click)="customer.gender = -1" disabled>Sin selección</button>
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +126,7 @@
                                             </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownUserType">
                                                 <button ngbDropdownItem (click)="customer.userType = 2">Cliente</button>
-                                                <button ngbDropdownItem
-                                                    (click)="customer.userType = 1">Proveedor</button>
+                                                <button ngbDropdownItem (click)="customer.userType = 1">Proveedor</button>
                                                 <!-- <button ngbDropdownItem (click)="customer.userType = 0">Administrador</button> -->
                                             </div>
                                         </div>
@@ -132,9 +135,9 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <label class="control-label form-label">
-                                            <span style="color: red;">*</span> Restablecer la Contraseña
+                                            <!-- <span style="color: red;">*</span> --> Restablecer la Contraseña
                                         </label>
-                                        <button class="btn mr-0 btn-danger button-reset " type="button">
+                                        <button (click)="openModalResetPassword()" class="btn mr-0 btn-danger button-reset " type="button">
                                             <div class="row full-centered font-normal">
                                                 <i class="fas fa-key ma-0-10"></i> RESTABLECER
                                             </div>
@@ -143,6 +146,32 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="m-t-0" />
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 full-left">
+                        <!-- <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
+                            type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-window-close "></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Cancelar
+                            </div>
+                        </button> -->
+                    </div>
+                    <div class="col-6 full-right">
+                        <button [disabled]="customer.directions.length == 0 && customer.userType == 1" (click)="saveCustomerInformation()" class="btn mr-0 btn-outline-primary button-options" type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Guardar
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -173,7 +202,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Razón social
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.businessName" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.businessName" type="text" required
                                             class="form-control" id="idraz"
                                             placeholder="Nombre de la empresa/ Razón social">
                                     </div>
@@ -183,7 +212,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> RFC
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.rfc" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.rfc" type="text" required
                                             class="form-control" id="idrfc" placeholder="RFC">
                                     </div>
                                 </div>
@@ -192,7 +221,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Teléfono
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.phone" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.phoneBilling"  matInput mask="000-000-0000" type="text" required
                                             class="form-control" id="idtel3" placeholder="Numero de teléfono">
                                     </div>
                                 </div>
@@ -204,7 +233,7 @@
                                             <span style="color: red;">*</span> Correo
                                             Electrónico
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.email" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.emailBilling" type="text"
                                             class="form-control" id="inemal2"
                                             placeholder="Escriba el correo electrónico de la empresa">
                                     </div>
@@ -214,7 +243,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Estado
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.state" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.state" type="text" required
                                             class="form-control" id="inedo2" placeholder="Escriba el estado">
                                     </div>
                                 </div>
@@ -223,7 +252,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Ciudad
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.city" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.city" type="text" required
                                             class="form-control" id="incity2" placeholder="Escriba la ciudad aquí">
                                     </div>
                                 </div>
@@ -234,7 +263,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Código postal
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.postalCode" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.postalCode" type="text" required
                                             class="form-control" id="incod2"
                                             placeholder="Escriba el código postal aquí">
                                     </div>
@@ -244,7 +273,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Colonia
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.colony" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.colony" type="text" required
                                             class="form-control" id="incol2" placeholder="Escriba la colonia aqui">
                                     </div>
                                 </div>
@@ -253,7 +282,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Numero
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.number" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.number" type="text" required
                                             class="form-control" id="innumber" placeholder="Escriba el numero aquí">
                                     </div>
                                 </div>
@@ -262,7 +291,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Calle
                                         </label>
-                                        <input [(ngModel)]="customer.billingInformation.street" type="text"
+                                        <input [(ngModel)]="customer.billingInformation.street" type="text" required
                                             class="form-control" id="instreet" placeholder="Escriba la dirección aquí">
                                     </div>
                                 </div>
@@ -271,15 +300,57 @@
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 full-left">
+                        <!-- <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
+                            type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-window-close "></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Cancelar
+                            </div>
+                        </button> -->
+                    </div>
+                    <div class="col-6 full-right">
+                        <button (click)="saveCustomerBilling()" class="btn mr-0 btn-outline-primary button-options" type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Guardar
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
-                <div class="text-white m-b-0 m-l-15 font-18">
-                    <i class="fas fa-home"></i>
-                    Direcciones
-                    <span class="no-margin genre-label margin-hori-10-5"
-                        style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
-                        2</span>
+                <div class="row full-width">
+                    <div class="col-6 full-centered full-left">
+                        <div class="text-white m-b-0 m-l-15 font-18">
+                            <i class="fas fa-home"></i>
+                            Direcciones de envió
+                            <span class="no-margin genre-label margin-hori-10-5"
+                                style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                                {{customer.directions.length}}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 full-right">
+                        <button type="button" class=" btn mr-0  btn-outline-primary-inverted" aria-label="Eliminar"
+                            (click)="openModalAddDirection()">
+                            <!-- <span aria-hidden="true">&times;</span> -->
+                            <i class="fas fa-plus-square ma-0-10"></i>
+                            Añadir Dirección
+                        </button>
+                    </div>
                 </div>
+                <!-- <div class="text-white m-b-0 m-l-15 font-18">
+                    <i class="fas fa-user"></i>
+                    Cliente
+                </div> -->
+        
             </div>
             <div class="">
                 <!-- <hr class="m-t-0" /> -->
@@ -317,7 +388,9 @@
                                                 <th scope="col" class="col-2 full-left">
                                                     {{direction.street}}</th>
                                                 <th scope="col" class="col-1 full-left">
-                                                    {{direction.default}}</th>
+                                                    <i *ngIf="direction.default == false" class="fas fa-times-circle font-xx-large"></i>
+                                                    <i *ngIf="direction.default == true" class="fas fa-check-circle font-xx-large"></i>
+                                                </th>
                                                 <th scope="col" class="col-2 full-left">
                                                     {{direction.postalCode}}</th>
                                                 <th scope="col" class="col-1 full-left">
@@ -349,22 +422,22 @@
                         <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
                             type="button">
                             <div class="row full-centered">
-                                <i class="fas fa-window-close "></i>
+                                <i class="fas fa-arrow-circle-left"></i>
                             </div>
                             <div class="row full-centered font-normal">
-                                Cancelar
+                                Regresar
                             </div>
                         </button>
                     </div>
                     <div class="col-6 full-right">
-                        <button class="btn mr-0 btn-outline-secondary button-options" type="button">
+                        <!-- <button class="btn mr-0 btn-outline-primary button-options" type="button">
                             <div class="row full-centered">
                                 <i class="fas fa-save"></i>
                             </div>
                             <div class="row full-centered font-normal">
                                 Guardar
                             </div>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -373,11 +446,12 @@
         <!-- Modal Direction -->
         <ng-template #modalDirection let-modal>
             <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Actualizando Dirección</h4>
+                <h4 *ngIf="selectedDirection.idDirection != -1" class="modal-title" id="modal-basic-title">Actualizando Dirección</h4>
+                <h4 *ngIf="selectedDirection.idDirection == -1" class="modal-title" id="modal-basic-title">Añadiendo Dirección</h4>
                 <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button> -->
-                <button type="button" class="close" aria-label="Close" (click)="openModalConfirmDeleteDirection()">
+                <button *ngIf="selectedDirection.idDirection != -1" type="button" class="close" aria-label="Close" (click)="openModalConfirmDeleteDirection()">
                     <!-- <span aria-hidden="true">&times;</span> -->
                     <i class="fas fa-trash"></i>
                 </button>
@@ -389,7 +463,7 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Nombre
                             </label>
-                            <input [(ngModel)]="selectedDirection.name" type="text" class="form-control" id="idnamem"
+                            <input [(ngModel)]="selectedDirection.name" type="text" class="form-control" id="idnamem" required
                                 placeholder="Nombre de la persona que recibe">
                         </div>
                     </div>
@@ -398,7 +472,7 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Apellidos
                             </label>
-                            <input [(ngModel)]="selectedDirection.surnames" type="text" class="form-control" id="idsurm"
+                            <input [(ngModel)]="selectedDirection.surnames" type="text" class="form-control" id="idsurm" required
                                 placeholder="Escriba sus apellidos">
                         </div>
                     </div>
@@ -409,7 +483,7 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Calle
                             </label>
-                            <textarea [(ngModel)]="selectedDirection.street" type="text" class="form-control"
+                            <textarea [(ngModel)]="selectedDirection.street" type="text" class="form-control" required
                                 id="iddirm" placeholder="Escriba la calle aquí"></textarea>
                         </div>
                     </div>
@@ -420,7 +494,7 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Teléfono
                             </label>
-                            <input [(ngModel)]="selectedDirection.phone" type="text" class="form-control" id="idtelm"
+                            <input [(ngModel)]="selectedDirection.phone" matInput mask="000-000-0000" type="text" class="form-control" id="idtelm" required
                                 placeholder="Escriba su teléfono">
                         </div>
                     </div>
@@ -429,14 +503,14 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> No Interior
                             </label>
-                            <input [(ngModel)]="selectedDirection.number" type="text" class="form-control" id="idintm"
+                            <input [(ngModel)]="selectedDirection.number" type="text" class="form-control" id="idintm" required
                                 placeholder="Numero interior">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4">
                         <div class="form-group">
                             <label class="control-label form-label">
-                                <span style="color: red;">*</span> No Exterior
+                                <!-- <span style="color: red;">*</span> --> No Exterior
                             </label>
                             <input [(ngModel)]="selectedDirection.extNumber" type="text" class="form-control"
                                 id="idnoem" placeholder="Numero exterior">
@@ -450,8 +524,8 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Estado
                             </label>
-                            <input [(ngModel)]="selectedDirection.state" type="text" class="form-control" id="idestm"
-                                placeholder="Company Here">
+                            <input [(ngModel)]="selectedDirection.state" type="text" class="form-control" id="idestm" required
+                                placeholder="Estado">
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -459,8 +533,8 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Ciudad
                             </label>
-                            <input [(ngModel)]="selectedDirection.city" type="text" class="form-control" id="idcium"
-                                placeholder="Company Here">
+                            <input [(ngModel)]="selectedDirection.city" type="text" class="form-control" id="idcium" required
+                                placeholder="Ciudad">
                         </div>
                     </div>
                 </div>
@@ -471,7 +545,7 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Colonia
                             </label>
-                            <input [(ngModel)]="selectedDirection.colony" type="text" class="form-control" id="idcolm"
+                            <input [(ngModel)]="selectedDirection.colony" type="text" class="form-control" id="idcolm" required
                                 placeholder="Company Here">
                         </div>
                     </div>
@@ -480,13 +554,13 @@
                             <label class="control-label form-label">
                                 <span style="color: red;">*</span> Código postal
                             </label>
-                            <input [(ngModel)]="selectedDirection.postalCode" type="text" class="form-control"
+                            <input [(ngModel)]="selectedDirection.postalCode" type="text" class="form-control" required
                                 id="idcodm" placeholder="Company Here">
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
+                <div *ngIf="selectedDirection.idDirection != -1 && customer.directions.length > 1" class="row">
                     <div class="col-12">
                         <div class="form-group">
                             <label class="control-label form-label">
@@ -517,10 +591,16 @@
                         <i class="fas fa-window-close ma-0-10"></i> Cancelar
                     </div>
                 </button>
-                <button (click)="modal.close('Save click');setDefaultDirection()"
+                <button *ngIf="selectedDirection.idDirection != -1" (click)="saveDirections(0);"
                     class="btn mr-0 btn-success button-reset " type="button">
                     <div class="row full-centered font-normal">
                         <i class="fas fa-save  ma-0-10"></i> Guardar
+                    </div>
+                </button>
+                <button *ngIf="selectedDirection.idDirection == -1" (click)="addDirection()"
+                    class="btn mr-0 btn-success button-reset " type="button">
+                    <div class="row full-centered font-normal">
+                        <i class="fas fa-save  ma-0-10"></i> Añadir
                     </div>
                 </button>
                 <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
@@ -553,12 +633,19 @@
 
 
         <!-- Modal Confirm Delete Client -->
-        <ng-template #modalConfirmDirectionDelete let-modal>
+        <ng-template #modalConfirmUserDelete let-modal>
             <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">Confirmar Eliminación del cliente</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label class="control-label form-label">
+                        <span style="color: red;">Se borraran todos los datos del cliente.</span> 
+                    </label>
+                </div>
             </div>
             <div class="modal-footer">
                 <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
@@ -566,9 +653,39 @@
                         <i class="fas fa-window-close ma-0-10"></i> Cancelar
                     </div>
                 </button>
-                <button class="btn mr-0 btn-success button-reset " type="button">
+                <button (click)="deleteCustomer()" class="btn mr-0 btn-success button-reset " type="button">
                     <div class="row full-centered font-normal">
                         <i class="fas fa-trash ma-0-10"></i> Eliminar
+                    </div>
+                </button>
+                <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+            </div>
+        </ng-template>
+
+        <!-- Modal Confirm Reset Password Client -->
+        <ng-template #modalResetPasswordUser let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">¿Cambiar Contraseña?</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label class="control-label form-label">
+                        <span style="color: red;">La contraseña se cambiara a una auto generada, se enviara un email al cliente con la nueva contraseña.</span> 
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+                    <div class="row full-centered font-normal">
+                        <i class="fas fa-window-close ma-0-10"></i> Cancelar
+                    </div>
+                </button>
+                <button (click)="changePassword()" class="btn mr-0 btn-success button-reset " type="button">
+                    <div class="row full-centered font-normal">
+                        <i class="fas fa-exclamation-triangle ma-0-10"></i>Aceptar
                     </div>
                 </button>
                 <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
