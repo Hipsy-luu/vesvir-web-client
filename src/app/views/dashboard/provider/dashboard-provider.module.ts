@@ -26,7 +26,10 @@ import { OrderComponent } from './order/order.component';
 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { NewProductComponent } from './new-product/new-product.component';
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+const maskConfig: Partial<IConfig> = {
+    validation: false,
+  };
 @NgModule({
     imports: [
         FormsModule,
@@ -43,6 +46,7 @@ import { NewProductComponent } from './new-product/new-product.component';
         NgxChartsModule,
         NgxDatatableModule,
         DragulaModule.forRoot(),
+        NgxMaskModule.forRoot(maskConfig),
     ],
     declarations: [
         //Views - Administrator Dashboard

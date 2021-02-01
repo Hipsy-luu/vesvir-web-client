@@ -1,116 +1,6 @@
-
 <div class="card">
-
     <!-- TITLE -->
-    <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center" >
-        <div class="row full-width">
-            <div class="col-6 full-centered full-left">
-                <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
-                    Datos de facturación de la empresa
-                </div>
-            </div>
-            <div class="col-6 full-right">
-                <!-- <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteProvider()">
-                    <i class="fas fa-trash"></i>
-                    Eliminar Proveedor
-                </button> -->
-            </div>
-        </div>
-        <!-- <div class="text-white m-b-0 m-l-15 font-18">
-            <i class="fas fa-user"></i>
-            Cliente
-        </div> -->
-        
-    </div>
-    <div class="">
-        <div class="card-body row">
-            <div class="col-12">
-                <div class=" p-t-0 p-r-0">
-                    <div class=" p-r-15" style="position: relative;">
-                        <!-- ITEMS -->
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="idraz" class="control-label col-form-label">* Nombre de la empresa/Razón social</label>
-                                    <input [(ngModel)]="customer.billingInformation.businessName" type="text" class="form-control" 
-                                        id="idraz" placeholder="Nombre de la empresa/ Razón social">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label for="idrfc" class="control-label col-form-label">* RFC</label>
-                                    <input [(ngModel)]="customer.billingInformation.rfc" type="text" class="form-control" 
-                                        id="idrfc" placeholder="RFC">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label for="idtel3" class="control-label col-form-label">* Teléfono</label>
-                                    <input [(ngModel)]="customer.billingInformation.phone" type="text" class="form-control" 
-                                        id="idtel3" placeholder="Numero de teléfono">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-4">
-                                <div class="form-group">
-                                    <label for="inemal2" class="control-label col-form-label">* Correo Electrónico</label>
-                                    <input [(ngModel)]="customer.billingInformation.email" type="text" class="form-control" 
-                                        id="inemal2" placeholder="Escriba el correo electrónico de la empresa">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label for="inedo2" class="control-label col-form-label">* Estado</label>
-                                    <input [(ngModel)]="customer.billingInformation.state" type="text" class="form-control" 
-                                        id="inedo2" placeholder="Escriba el estado">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label for="incity2" class="control-label col-form-label">* Ciudad</label>
-                                    <input [(ngModel)]="customer.billingInformation.city" type="text" class="form-control" 
-                                        id="incity2" placeholder="Escriba la ciudad aquí">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-2">
-                                <div class="form-group">
-                                    <label for="incod2" class="control-label col-form-label">* Código postal</label>
-                                    <input [(ngModel)]="customer.billingInformation.postalCode" type="text" class="form-control" 
-                                        id="incod2" placeholder="Escriba el código postal aquí">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-2">
-                                <div class="form-group">
-                                    <label for="incol2" class="control-label col-form-label">* Colonia</label>
-                                    <input [(ngModel)]="customer.billingInformation.colony" type="text" class="form-control" 
-                                        id="incol2" placeholder="Escriba la colonia aqui">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-2">
-                                <div class="form-group">
-                                    <label for="innumber" class="control-label col-form-label">* Numero</label>
-                                    <input [(ngModel)]="customer.billingInformation.number" type="text" class="form-control" 
-                                        id="innumber" placeholder="Escriba el numero aquí">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="instreet" class="control-label col-form-label">* Calle</label>
-                                    <input [(ngModel)]="customer.billingInformation.street" type="text" class="form-control" 
-                                        id="instreet" placeholder="Escriba la dirección aquí">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
-
-    <!-- TITLE -->
-    <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center" >
+    <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
         <div class="row full-width">
             <div class="col-6 full-centered full-left">
                 <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
@@ -119,17 +9,17 @@
             </div>
             <div class="col-6 full-right">
                 <!-- <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteDirection()">
-                    
-                    <i class="fas fa-trash"></i>
-                    Eliminar Proveedor
-                </button> -->
+                
+                <i class="fas fa-trash"></i>
+                Eliminar Proveedor
+            </button> -->
             </div>
         </div>
         <!-- <div class="text-white m-b-0 m-l-15 font-18">
-            <i class="fas fa-user"></i>
-            Cliente
-        </div> -->
-        
+        <i class="fas fa-user"></i>
+        Cliente
+    </div> -->
+
     </div>
     <div class="">
         <div class="card-body row">
@@ -142,33 +32,45 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="idnom" class="control-label col-form-label">* Nombre</label>
-                                        <input [(ngModel)]="customer.name" type="text" class="form-control" id="idnom" placeholder="Escriba su nombre aqui">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Nombre
+                                        </label>
+                                        <input [(ngModel)]="userData.name" type="text" required class="form-control text-capitalize" id="idnom"
+                                            placeholder="Escriba su nombre aqui">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="insur" class="control-label col-form-label">* Apellidos</label>
-                                        <input [(ngModel)]="customer.surnames" type="text" class="form-control" id="insur" placeholder="Escriba sus apellidos aquí">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Apellidos
+                                        </label>
+                                        <input [(ngModel)]="userData.surnames" required type="text" class="form-control text-capitalize"
+                                            id="insur" placeholder="Escriba sus apellidos aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="inele" class="control-label col-form-label">* Correo Electrónico</label>
-                                        <input [(ngModel)]="customer.email" type="text" class="form-control" id="inele" placeholder="Escriba un email valido aquí">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Correo Electrónico
+                                        </label>
+                                        <input [(ngModel)]="userData.email" type="text" required class="form-control" id="inele"
+                                            placeholder="Escriba un email valido aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="infech" class="control-label col-form-label">Fecha de nacimiento</label>
-                                       <!--  <input [(ngModel)]="customer.birthDay"  type="date" class="form-control" >
-                                        <input [(ngModel)]="customeBirthDay" (change)="setBirthDay()" type="date" id="infech" class="form-control"> -->
+                                        <label class="control-label form-label">
+                                            <!-- <span style="color: red;">*</span> --> Fecha de nacimiento
+                                        </label>
+                                        <!--  <input [(ngModel)]="userData.birthDay"  type="date" class="form-control" >
+                                    <input [(ngModel)]="customeBirthDay" (change)="setBirthDay()" type="date" id="infech" class="form-control"> -->
                                         <div class="input-group">
-                                            <input 
-                                                [(ngModel)]="modelCustomerBirthDay"
-                                                id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+                                            <input [(ngModel)]="modelCustomerBirthDay" id="dateOfBirth"
+                                                class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                                                #dp="ngbDatepicker" required>
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" (click)="dp.toggle();" type="button"><i class="fa fa-calendar"></i></button>
+                                                <button class="btn btn-outline-secondary" (click)="dp.toggle();"
+                                                    type="button"><i class="fa fa-calendar"></i></button>
                                             </div>
                                         </div>
                                         <!-- <pre>Model: {{ modelCustomerBirthDay | json }}</pre> -->
@@ -178,29 +80,41 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label for="inputcom" class="control-label col-form-label">* Teléfono</label>
-                                        <input [(ngModel)]="customer.phone"  type="text" class="form-control" id="inputcom" placeholder="Company Here">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Teléfono
+                                        </label>
+                                        <input 
+                                            [(ngModel)]="userData.phone"  
+                                            matInput
+                                            [clearIfNotMatch]="true" 
+                                            [showMaskTyped]="true" 
+                                            mask="000-000-0000"
+                                            type="tel"
+                                            class="form-control"
+                                            required
+                                            id="inputcom" placeholder="Ingrese el teléfono de contacto">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
                                     <div class="form-group">
-                                        <label class="control-label col-form-label">Genero</label>
+                                        <label class="control-label form-label">
+                                            <!-- <span style="color: red;">*</span> --> Genero
+                                        </label>
                                         <div ngbDropdown class="">
-                                            <button
-                                              class="form-control"
-                                              id="dropdownGenre"
-                                              ngbDropdownToggle
-                                            >
-                                                <span *ngIf="customer.genre == 3">Niña</span>
-                                                <span *ngIf="customer.genre == 2">Niño</span>
-                                                <span *ngIf="customer.genre == 1">Mujer</span>
-                                                <span *ngIf="customer.genre == 0">Hombre</span>
+                                            <button class="form-control" id="dropdownGenre" ngbDropdownToggle>
+                                                <span *ngIf="userData.gender == 3">Niña</span>
+                                                <span *ngIf="userData.gender == 2">Niño</span>
+                                                <span *ngIf="userData.gender == 1">Mujer</span>
+                                                <span *ngIf="userData.gender == 0">Hombre</span>
+                                                <span *ngIf="userData.gender == -1">Seleccione un genero</span>
                                             </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownGenre">
-                                                <button ngbDropdownItem (click)="customer.genre = 3">Niña</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 2">Niño</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 1">Mujer</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 0">Hombre</button>
+                                                <button disabled ngbDropdownItem
+                                                    (click)="userData.gender = -1">Seleccione un genero</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 3">Niña</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 2">Niño</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 1">Mujer</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 0 ">Hombre</button>
                                             </div>
                                         </div>
                                     </div>
@@ -208,120 +122,307 @@
                                 <div class="col-sm-4 col-md-2">
                                     <div class="form-group">
                                         <label class="control-label col-form-label">Nueva Contraseña</label>
-                                        <input  type="text" class="form-control" id="inpass" placeholder="Escriba la nueva contraseña">
+                                        <input [(ngModel)]="newPassword" type="password" class="form-control" id="inpass"
+                                            placeholder="Escriba la nueva contraseña">
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-md-2">
                                     <div class="form-group">
                                         <label class="control-label col-form-label">Confirmar Contraseña</label>
-                                        <input   type="text" class="form-control" id="inconfpass" placeholder="Confirmar contraseña">
+                                        <input [(ngModel)]="confirmPassword" type="password" class="form-control" id="inconfpass"
+                                            placeholder="Confirmar contraseña">
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-md-2" style="padding: 20px 10px;">
                                     <!-- <div class="form-group"> -->
-                                        
-                                        <button class="btn mr-0 btn-danger button-reset " type="button" style="height: 100%;">
-                                            <div class="row full-centered font-normal">
-                                                <i class="fas fa-key ma-0-10"></i> CAMBIAR
-                                            </div>
-                                        </button>
+                                    <button (click)="changePassword()" class="btn mr-0 btn-danger button-reset " type="button"
+                                        style="height: 100%;">
+                                        <div class="row full-centered font-normal">
+                                            <i class="fas fa-key ma-0-10"></i> CAMBIAR
+                                        </div>
+                                    </button>
                                     <!-- </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
+
+
+        <!-- TITLE -->
+        <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
+            <div class="row full-width">
+                <div class="col-6 full-centered full-left">
+                    <div class="text-white m-b-0 m-l-15 font-18"><i class="fas fa-user"></i>
+                        Datos de facturación de la empresa
+                    </div>
+                </div>
+                <div class="col-6 full-right">
+                    <!-- <button type="button" class=" btn mr-0 button-delete-client" aria-label="Eliminar" (click)="openModalConfirmDeleteProvider()">
+                    <i class="fas fa-trash"></i>
+                    Eliminar Proveedor
+                </button> -->
+                </div>
+            </div>
+            <!-- <div class="text-white m-b-0 m-l-15 font-18">
+            <i class="fas fa-user"></i>
+            Cliente
+        </div> -->
+
+        </div>
+        <div class="">
+            <div class="card-body row">
+                <div class="col-12">
+                    <div class=" p-t-0 p-r-0">
+                        <div class=" p-r-15" style="position: relative;">
+                            <!-- ITEMS -->
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <!-- <div class="form-group">
+                                    <label class="control-label form-label">
+                                        <span style="color: red;">*</span> Teléfono
+                                    </label>
+                                    <input [(ngModel)]="customer.billingInformation.phoneBilling" type="text"
+                                        class="form-control" id="idtel3" placeholder="Numero de teléfono">
+                                </div> -->
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Nombre de la empresa/Razón social
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.businessName" type="text"
+                                            class="form-control text-uppercase" id="idraz" required
+                                            placeholder="Nombre de la empresa/ Razón social">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> RFC
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.rfc" type="text" required
+                                            class="form-control text-uppercase" id="idrfc" placeholder="RFC">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Teléfono
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.phoneBilling"
+                                            matInput
+                                            [clearIfNotMatch]="true" 
+                                            [showMaskTyped]="true" 
+                                            mask="000-000-0000"
+                                            type="tel"
+                                            required
+                                            class="form-control" id="idtel3" placeholder="Numero de teléfono">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Correo Electrónico
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.emailBilling" type="text"
+                                            class="form-control" id="inemal2"
+                                            required
+                                            placeholder="Escriba el correo electrónico de la empresa">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Estado
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.state" type="text" required
+                                            class="form-control text-capitalize" id="inedo2" placeholder="Escriba el estado ">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Ciudad
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.city" type="text" required
+                                            class="form-control text-capitalize" id="incity2" placeholder="Escriba la ciudad aquí">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Código postal
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.postalCode" type="text" required
+                                            class="form-control" id="incod2"
+                                            placeholder="Escriba el código postal aquí">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Colonia
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.colony" type="text" required
+                                            class="form-control text-capitalize" id="incol2" placeholder="Escriba la colonia aqui">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Numero
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.number" type="text" required
+                                            class="form-control" id="innumber" placeholder="Escriba el numero aquí">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label form-label">
+                                            <span style="color: red;">*</span> Calle
+                                        </label>
+                                        <input [(ngModel)]="userData.billingInformation.street" type="text" required
+                                            class="form-control" id="instreet" placeholder="Escriba la dirección aquí">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
-    <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center" >
-        <div class="text-white m-b-0 m-l-15 font-18">
-            <i class="fas fa-home"></i>
-            Dirección de la empresa
-            <!-- <span class="no-margin genre-label margin-hori-10-5"
+
+
+            <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
+                <div class="text-white m-b-0 m-l-15 font-18">
+                    <i class="fas fa-home"></i>
+                    Dirección de la empresa
+                    <!-- <span class="no-margin genre-label margin-hori-10-5"
                 style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; " >
             2</span> -->
-        </div>
-    </div>
-    <div class="">
-        <!-- <hr class="m-t-0" /> -->
-        <div class="card-body ">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idnamem" class="control-label col-form-label">* Nombre</label>
-                        <input [(ngModel)]="customer.directions[0].name" type="text" class="form-control" id="idnamem" placeholder="Nombre de la persona que recibe">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idsurm" class="control-label col-form-label">* Apellidos</label>
-                        <input [(ngModel)]="customer.directions[0].surnames" type="text" class="form-control" id="idsurm" placeholder="Escriba sus apellidos">
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="iddirm" class="control-label col-form-label">* Calle</label>
-                        <textarea [(ngModel)]="customer.directions[0].street" type="text" class="form-control" id="iddirm" placeholder="Escriba la calle aquí"></textarea>
+            <div class="" *ngIf="userData.directions.length == 1">
+                <!-- <hr class="m-t-0" /> -->
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Nombre
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].name" type="text" class="form-control text-capitalize" required
+                                    id="idnamem" placeholder="Nombre de la persona que recibe">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Apellidos
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].surnames" type="text" class="form-control text-capitalize" required
+                                    id="idsurm" placeholder="Escriba sus apellidos">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <div class="form-group">
-                        <label for="idtelm" class="control-label col-form-label">* Teléfono</label>
-                        <input [(ngModel)]="customer.directions[0].phone" type="text" class="form-control" id="idtelm" placeholder="Escriba su teléfono">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Calle
+                                </label>
+                                <textarea [(ngModel)]="userData.directions[0].street" type="text" class="form-control text-capitalize" required
+                                    id="iddirm" placeholder="Escriba la calle aquí"></textarea>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="form-group">
-                        <label for="idintm" class="control-label col-form-label">* No Interior</label>
-                        <input [(ngModel)]="customer.directions[0].number"  type="text" class="form-control" id="idintm" placeholder="Numero interior">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Teléfono
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].phone"
+                                    matInput
+                                    [clearIfNotMatch]="true" 
+                                    [showMaskTyped]="true" 
+                                    mask="000-000-0000"
+                                    type="tel"
+                                    class="form-control"
+                                    required
+                                    id="idtelm" placeholder="Escriba su teléfono">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> No Interior
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].number" type="text" class="form-control" required
+                                    id="idintm" placeholder="Numero interior">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <!-- <span style="color: red;">*</span>  -->No Exterior
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].extNumber" type="text" class="form-control"
+                                    id="idnoem" placeholder="Numero exterior">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="form-group">
-                        <label for="idnoem" class="control-label col-form-label"> No Exterior</label>
-                        <input [(ngModel)]="customer.directions[0].extNumber"  type="text" class="form-control" id="idnoem" placeholder="Numero exterior">
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Estado
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].state" type="text" class="form-control text-capitalize" required
+                                    id="idestm" placeholder="Company Here">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Ciudad
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].city" type="text" class="form-control text-capitalize" required
+                                    id="idcium" placeholder="Company Here">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idestm" class="control-label col-form-label">* Estado</label>
-                        <input [(ngModel)]="customer.directions[0].state" type="text" class="form-control" id="idestm" placeholder="Company Here">
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Colonia
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].colony" type="text" class="form-control text-capitalize" required
+                                    id="idcolm" placeholder="Company Here">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="control-label form-label">
+                                    <span style="color: red;">*</span> Código Postal
+                                </label>
+                                <input [(ngModel)]="userData.directions[0].postalCode" type="text" class="form-control" required
+                                    id="idcodm" placeholder="Company Here">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idcium" class="control-label col-form-label">* Ciudad</label>
-                        <input [(ngModel)]="customer.directions[0].city" type="text" class="form-control" id="idcium" placeholder="Company Here">
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idcolm" class="control-label col-form-label">* Colonia</label>
-                        <input [(ngModel)]="customer.directions[0].colony" type="text" class="form-control" id="idcolm" placeholder="Company Here">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        <label for="idcodm" class="control-label col-form-label">* Código postal</label>
-                        <input [(ngModel)]="customer.directions[0].postalCode" type="text" class="form-control" id="idcodm" placeholder="Company Here">
-                    </div>
-                </div>
-            </div>
-    
-            <!-- <div class="row">
+
+                    <!-- <div class="row">
                 <div class="col-12">
                     <div class="form-group">
                         <label class="control-label col-form-label">Default</label>
@@ -340,15 +441,15 @@
                     </div>
                 </div>
             </div> -->
-        </div>
-    </div>
+                </div>
+            </div>
 
 
-    <hr class="m-t-0" />
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6 full-left">
-                <!-- <button class="btn mr-0 btn-outline-secondary button-options" type="button">
+            <hr class="m-t-0" />
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 full-left">
+                        <!-- <button class="btn mr-0 btn-outline-secondary button-options" type="button">
                     <div class="row full-centered">
                         <i class="fas fa-window-close "></i>
                     </div>
@@ -356,17 +457,17 @@
                         Cancelar
                     </div>
                 </button> -->
-            </div>
-            <div class="col-6 full-right">
-                <button class="btn mr-0 btn-outline-secondary button-options" type="button">
-                    <div class="row full-centered">
-                        <i class="fas fa-save"></i>
                     </div>
-                    <div class="row full-centered font-normal">
-                        Guardar
+                    <div class="col-6 full-right">
+                        <button (click)="save()" class="btn mr-0 btn-outline-primary button-options" type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Guardar
+                            </div>
+                        </button>
                     </div>
-                </button>
+                </div>
             </div>
         </div>
-    </div>
-</div>

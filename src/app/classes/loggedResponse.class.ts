@@ -1,4 +1,4 @@
-export class LogedResponse{
+export class LoggedResponse{
     error : boolean;
     message : string;
 

@@ -55,7 +55,7 @@
               [ngModelOptions]="{ standalone: true }"
               [(ngModel)]="searchValue"
               (ngModelChange)="filterByName($event)"
-              placeholder="Buscar por Titulo"
+              placeholder="Buscar por nombre"
               class="form-control ml-2"
               type="text"
             />
@@ -106,14 +106,14 @@
                   <tr class="row">
                     <th scope="col" class="col-1 full-centered">ID</th>
                     <th scope="col" class="col-1 full-centered">Imagen</th>
-                    <th scope="col" class="col-4 full-left">Nombre</th>
+                    <th scope="col" class="col-2 full-left">Nombre</th>
                     <th scope="col" class="col full-centered">Stickers</th>
                     <th scope="col" class="col full-centered">Referencia</th>
                     <th scope="col" class="col full-centered">Categoría</th>
                     <th scope="col" class="col full-centered">Precio</th>
-                    <th scope="col" class="col full-centered">Cantidad</th>
+                    <th scope="col" class="col full-centered">Disponibles</th>
                     <th scope="col" class="col full-centered">Estado</th>
-                    <th scope="col" class="col full-centered">Acciones</th>
+                    <th scope="col" class="col-2 full-centered">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -131,16 +131,16 @@
                     "
                   >
                     <th scope="col" class="col-1 full-centered">
-                      {{ product.id }}
+                      {{ product.idProduct }}
                     </th>
                     <th scope="col" class="col-1 full-centered">
-                      <img
-                        [src]="product.image"
-                        class="mr-2"
-                        style="width: 40px;"
-                      />
+                      <!-- <img [src]="product.image" class="mr-2" style="width: 40px;" />
+                      <img [src]="product.image" class="mr-2" style="width: 40px;" /> -->
+
+                      <img *ngIf="product.image == ''" class="mr-2" style="width: 40px;" src="/assets/images/no-image.png">
+                      <img *ngIf="product.image != ''" class="mr-2" style="width: 40px;" [src]="dataSessionService.baseURL+product.image">
                     </th>
-                    <th scope="col" class="col-4 full-left">
+                    <th scope="col" class="col-2 full-left text-capitalize">
                       {{ product.name }}
                     </th>
                     <th scope="col" class="col full-centered">
@@ -149,38 +149,44 @@
                     <th scope="col" class="col full-centered">
                       {{ product.reference }}
                     </th>
-                    <th scope="col" class="col full-centered">
+                    <th scope="col" class="col full-centered text-capitalize">
                       {{ product.category }}
                     </th>
                     <th scope="col" class="col full-centered">
                       {{ product.price }}
                     </th>
                     <th scope="col" class="col full-centered">
-                      {{ product.price }}
+                      {{ product.quantity }}
                     </th>
                     <th scope="col" class="col full-centered">
-                      <label *ngIf="product.status == 'agotado'"
+                      <label *ngIf="product.status == 'agotado' && product.numArch != 0"
                         class="row no-margin genre-label margin-hori-10-5"
                         style="background-color: #b12d1c; margin-bottom: 5px;"
                       >
                         Agotado
                       </label>
-                      <label *ngIf="product.status == 'activado'"
+                      <label *ngIf="product.status == 'activado' && product.numArch != 0"
                         class="row no-margin genre-label margin-hori-10-5"
                         style="background-color: #29852e; margin-bottom: 5px;"
                       >
                         Activado
                       </label>
-                      <label *ngIf="product.status == 'pausado'"
+                      <label *ngIf="product.status == 'pausado' && product.numArch != 0"
                         class="row no-margin genre-label margin-hori-10-5"
                         style="background-color: #1c44b1; margin-bottom: 5px;"
                       >
                         Pausado
                       </label>
+                      <label *ngIf="product.numArch == 0"
+                        class="row no-margin genre-label size-8  margin-hori-10-5"
+                        style="background-color: #1c44b1; margin-bottom: 5px;font-size: 0.7rem;"
+                      >
+                        Sin stickers - Pausado
+                      </label>
                     </th>
-                    <th scope="col" class="col full-centered">
+                    <th scope="col" class="col-2 full-centered">
                       <button
-                        (click)="onSelect(product.id)"
+                        (click)="onSelect(product.idProduct)"
                         class="btn mr-0 btn-outline-secondary"
                         type="button"
                       >
@@ -188,6 +194,9 @@
                         Editar
                       </button>
                     </th>
+                  </tr>
+                  <tr *ngIf="dataProducts.length == 0" class="row">
+                    Sin productos
                   </tr>
                 </tbody>
               </table>

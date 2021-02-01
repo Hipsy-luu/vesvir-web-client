@@ -9,6 +9,7 @@ export class InfocardComponent implements AfterViewInit {
     @Input('onlineUsers') onlineUsers : number;
     @Input('usersToday') usersToday : number;
     @Input('totalSales') totalSales : number;
+    @Input('bagActive') bagActive : number;
 
     constructor() { }
 

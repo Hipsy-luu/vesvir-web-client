@@ -15,7 +15,10 @@
         <div class="" style="height: calc(100vh - 410px);margin: 40px 3px;">
           <div class="row">
             <div class="col-12 full-centered">
-              <img class="image-product" src="assets/images/product/chair3.png" alt="user" />
+              <img *ngIf="actualProduct.images.length == 0" class="image-product" src="assets/images/product/no-image.jpg"
+                alt="user" />
+              <img *ngIf="actualProduct.images.length != 0" class="image-product"
+                [src]="actualProduct.images[0].imageBlob" alt="user" />
             </div>
           </div>
 
@@ -25,7 +28,8 @@
               <label class="no-margin">Referencia</label>
             </div>
             <div class="col-8 full-centered">
-              ss
+              <span *ngIf="actualProduct.referenceCode.length == 0">Sin referencia</span>
+              <span *ngIf="actualProduct.referenceCode.length != 0">{{actualProduct.referenceCode}}</span>
             </div>
           </div>
           <!-- Name -->
@@ -33,8 +37,8 @@
             <div class="col-4 full-right">
               <label class="no-margin">Nombre</label>
             </div>
-            <div class="col-8 full-centered">
-              ss
+            <div class="col-8 full-centered text-capitalize">
+              <span>{{actualProduct.name}}</span>
             </div>
           </div>
           <!-- CATEGORY -->
@@ -42,8 +46,8 @@
             <div class="col-4 full-right">
               <label class="no-margin">Categoría</label>
             </div>
-            <div class="col-8 full-centered">
-              ss
+            <div class="col-8 full-centered text-capitalize">
+              {{actualProduct.category.name}}
             </div>
           </div>
           <!-- GENRES -->
@@ -53,21 +57,21 @@
             </div>
             <div class="col-8 full-centered">
               <div class="row full-centered margin-hori-10-5">
-                <label class="row no-margin genre-label margin-hori-10-5"
-                  style="background-color: blueviolet;margin-bottom: 5px;">
-                  Niña
-                </label>
-                <label class="row no-margin genre-label margin-hori-10-5"
+                <label *ngIf="actualProduct.gender == 0" class="row no-margin genre-label margin-hori-10-5"
                   style="background-color: #2b3de2;margin-bottom: 5px;">
                   Niño
                 </label>
+                <label *ngIf="actualProduct.gender == 1" class="row no-margin genre-label margin-hori-10-5"
+                  style="background-color: blueviolet;margin-bottom: 5px;">
+                  Niña
+                </label>
               </div>
               <div class="row full-centered margin-hori-10-5">
-                <label class="row no-margin genre-label margin-hori-10-5"
+                <label *ngIf="actualProduct.gender == 2" class="row no-margin genre-label margin-hori-10-5"
                   style="background-color: #e22bc3;margin-bottom: 5px;">
                   Mujer
                 </label>
-                <label class="row no-margin genre-label margin-hori-10-5"
+                <label *ngIf="actualProduct.gender == 3" class="row no-margin genre-label margin-hori-10-5"
                   style="background-color: #160e81;margin-bottom: 5px;">
                   Hombre
                 </label>
@@ -80,7 +84,7 @@
               <label class="no-margin">Unidades</label>
             </div>
             <div class="col-8 full-centered">
-              12
+              {{totalQuantities}}
             </div>
           </div>
           <!-- STATE -->
@@ -89,9 +93,17 @@
               <label>Estado</label>
             </div>
             <div class="col-8 full-centered">
-              <label class="row no-margin genre-label margin-hori-10-5"
-                style="background-color: #469b58;margin-bottom: 5px;">
+              <label *ngIf="statusText == 'agotado'" class="row no-margin genre-label margin-hori-10-5"
+                style="background-color: #b12d1c; margin-bottom: 5px;">
+                Agotado
+              </label>
+              <label *ngIf="statusText == 'activado'" class="row no-margin genre-label margin-hori-10-5"
+                style="background-color: #29852e; margin-bottom: 5px;">
                 Activado
+              </label>
+              <label *ngIf="statusText == 'pausado'" class="row no-margin genre-label margin-hori-10-5"
+                style="background-color: #1c44b1; margin-bottom: 5px;">
+                Pausado
               </label>
             </div>
           </div>
@@ -101,9 +113,24 @@
               <label class="no-margin">Precio</label>
             </div>
             <div class="col-8 full-centered">
-              $250.00
+              $ {{actualProduct.price.toFixed(2)}}
             </div>
           </div>
+
+          <div class="row pd-10-t-b">
+            <div class="col-12 full-centered">
+              <a [routerLink]="'/dashboard-admin/provider/'+actualProduct.idProvider" target="_blank"  class="btn mr-0 btn-outline-secondary button-options" type="button">
+                <div class="row full-centered">
+                  <i class="ti-id-badge"></i>
+                </div>
+                <div class="row full-centered font-normal">
+                  Ver <br>Proveedor
+                </div>
+              </a>
+            </div>
+          </div>
+
+          
         </div>
       </li>
     </ul>
@@ -128,76 +155,15 @@
       </div>
 
       <!-- ADD IMAGE -->
-      <!-- <div class="card-body border-top">
-        <form class="no-margin">
-          <div class="form-group no-margin">
-            <div class="row">
-              <div class="col-4">
-                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
-                  <div class="input-field m-t-0 m-b-0">
-                    <label class="control-label form-label">
-                      Añadir un nuevo sticker para este producto
-                    </label>
-                  </div>
-                </div>
-                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
-                  <div class="input-field m-t-0 m-b-0">
-                    <label class="control-label form-label">
-                      <span style="color: red;">*</span> Titulo
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="row">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">Subir</span>
-                    </div>
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="inputGroupFile01" />
-                      <label class="custom-file-label" for="inputGroupFile01">Añadir archivo PNG</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row full-centered">
-                  <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
-                    placeholder="Nombre del Sticker" />
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="row full-centered">
-                  <div class="col-12">
-                    <span class="card full-centered" style="
-                        background-image: url('assets/images/product/fondo-stiker.jpg');
-                        width: fit-content;
-                        background-size: cover;
-                      ">
-                      <img class="image-product" src="assets/images/product/chair2.png" alt="user" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 full-centered">
-                <button type="button" class="btn btn-info waves-effect waves-light">
-                  <i class="fas fa-upload"></i> Subir
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div> -->
-      <!-- ADD IMAGE -->
       <div class="card-body border-top">
-        <form class="no-margin">
+        <div class="no-margin">
           <div class="form-group no-margin">
             <div class="row">
               <div class="col-4">
                 <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
                   <div class="input-field m-t-0 m-b-0">
-                    <label class="control-label col-form-label form-label">Añadir un nuevo sticker para este producto</label>
+                    <label class="control-label col-form-label form-label">Añadir un nuevo sticker para este
+                      producto</label>
                   </div>
                 </div>
                 <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
@@ -217,32 +183,32 @@
                     <div class="custom-file">
                       <input (change)="updateSource($event)" type="file" accept="image/png" class="custom-file-input"
                         id="inputGroupFile01" />
-                      <label class="custom-file-label" for="inputGroupFile01">Añadir
+                      <label class="custom-file-label" for="inputGroupFile01">Seleccionar
                         archivo JPG</label>
                     </div>
                   </div>
                 </div>
                 <div class="row full-centered">
-                  <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
-                    placeholder="Nombre del sticker" />
+                  <input [(ngModel)]="newSticker.name" type="text" class="form-control text-capitalize" maxlength="50"
+                    id="maxval" aria-describedby="maxval" placeholder="Nombre del sticker" />
                 </div>
               </div>
               <div class="col-3">
                 <div class="row full-centered full-width full-height">
                   <div class="col-12 full-width full-height">
-                    <span *ngIf="source.length == 0" class="card full-centered full-height">
+                    <span *ngIf="newSticker.source.length == 0" class="card full-centered full-height">
                       <img class=" full-width full-height" style="object-fit: cover;"
                         src="assets/images/product/no-image.jpg" alt="Sin Imagen" />
                     </span>
 
-                    <span *ngIf="source.length > 0">
+                    <span *ngIf="newSticker.source.length > 0">
                       <div class="card">
                         <span class="card full-centered" style="
                             background-image: url('assets/images/product/fondo-stiker.jpg');
                             width: fit-content;
                           ">
-                          <img *ngIf="source.length > 0" class=" full-width full-height" style="object-fit: cover;"
-                            [src]="source">
+                          <img *ngIf="newSticker.source.length > 0" class=" full-width full-height"
+                            style="object-fit: cover;" [src]="newSticker.source">
                         </span>
                       </div>
                       <div class="full-width full-centered pd-10">
@@ -258,15 +224,15 @@
             </div>
             <div class="row">
               <div class="col-12 full-centered">
-                <button (click)="uploadImage()" type="button" class="btn mr-0 btn-outline-primary">
+                <button (click)="addImage()" type="button" class="btn mr-0 btn-outline-primary">
                   <i class="fas fa-upload"></i> Subir
                 </button>
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
-      <hr class="m-t-0" />
+      <!-- <hr class="m-t-0" />
       <form>
         <div class="form-group form-inline pd-10-l">
           <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
@@ -274,13 +240,13 @@
             type="text" />
           <i class="pd-10-l fas fa-search"></i>
         </div>
-      </form>
+      </form> -->
       <!-- EDIT IMAGES -->
       <div class="card-body p-t-0 p-r-0">
         <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
           <div class="text-white m-b-0 m-l-15 font-18">Stickers</div>
           <div class="text-white m-b-0 m-l-15 font-20 no-margin">
-            <label class="label-images-count">{{ images.length }}</label>
+            <label class="label-images-count">{{ stickers.length }}</label>
           </div>
         </div>
         <div class="chat-box p-r-15">
@@ -290,7 +256,7 @@
               <thead style="position: relative;">
                 <div style="position: sticky;top: 0;background: white;z-index: 2;">
                   <tr class="row">
-                    <th scope="col" class="col-2 full-centered">Imagen</th>
+                    <th scope="col" class="col-2 full-centered"></th>
                     <th scope="col" class="col-4 full-left">Nombre</th>
                     <th scope="col" class="col-3 full-centered">Posición</th>
                     <th scope="col" class="col-3 full-centered">Acciones</th>
@@ -298,14 +264,14 @@
                 </div>
               </thead>
 
-              <tbody class="dragndrop" [dragula]="'images-list'" [(dragulaModel)]="imagesFiltered">
+              <tbody class="dragndrop" [dragula]="'images-list'" [(dragulaModel)]="stickers">
 
                 <!-- <div >
                           <div *ngFor='let text of many2' [innerHtml]='text'></div>
                       </div> -->
-                <tr class="row" *ngFor="let image of imagesFiltered; index as i">
+                <tr class="row" *ngFor="let image of stickers; index as i">
                   <th scope="col" class="col-2 full-centered">
-                    <img [src]="image.image" class="mr-2" style="width: 40px;" />
+                    <img [src]="image.imageBlob" class="mr-2" style="width: 40px;" />
                   </th>
                   <th scope="col" class="col-4 full-left">{{ image.name }}</th>
                   <th scope="col" class="col-3 full-centered">
@@ -317,9 +283,10 @@
                     </span>
                   </th>
                   <th scope="col" class="col-3 full-centered">
-                    <button (click)="deleteImage(image.id)" class="btn mr-0 btn-outline-secondary" type="button">
+                    <button (click)="deleteStickerProductByID(image.idProductSticker)"
+                      class="btn mr-0 btn-outline-secondary" type="button">
                       <i class="fas fa-trash-alt"></i>
-                      Borrar esta imagen
+                      Borrar sticker
                     </button>
                   </th>
                 </tr>
@@ -335,10 +302,10 @@
           <div class="col-6 full-left">
             <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options" type="button">
               <div class="row full-centered">
-                <i class="fas fa-window-close "></i>
+                <i class="fas fa-arrow-circle-left"></i>
               </div>
               <div class="row full-centered font-normal">
-                Cancelar
+                Regresar
               </div>
             </button>
           </div>

@@ -6,13 +6,13 @@
             <div class="col-md-12">
                 <div class="card bg-light-info no-card-border">
                     <div class="card-body">
-                        <h5 class="card-title">Mujeres/Hombres</h5>
+                        <h5 class="card-title">Hombres/Mujeres/Sin indicar</h5>
                         <div class="d-flex no-block">
-                            <div class="align-self-center no-shrink">
-                                <h2 class="m-b-0">254 / 120</h2>
-                                <h6 class="text-muted">total de 520</h6>
+                            <div *ngIf="chartGenresCountData.length != 0" class="align-self-center no-shrink">
+                                <h4 class="m-b-0">{{chartGenresCountData[0][1]}} / {{chartGenresCountData[1][1]}} / {{chartGenresCountData[2][1]}}</h4>
+                                <h6 class="text-muted">Total de {{totalUsers}}</h6>
                             </div>
-                            <div class="ml-auto">
+                            <div *ngIf="chartGenresCountData.length != 0" class="ml-auto">
                                 <div id="sales" style="width:150px; height:140px;"></div>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
             <!-- Column -->
             <div class="col-md-12">
                 <div class="card bg-light-success no-card-border">
-                    <div class="card-body">
+                    <div *ngIf="radarChartData.length != 0" class="card-body">
                         <h4 class="card-title">Marcas mas vendidas</h4>
                         <!-- <h6 class="card-subtitle">This is the simple example of Radar chart</h6> -->
                         <canvas baseChart height="150px" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
@@ -41,7 +41,7 @@
         <div class="card o-income center-graph">
             <div class="card-body">
                 <div class="d-flex m-b-30 no-block">
-                    <h5 class="card-title m-b-0 align-self-center">Usuarios por edad</h5>
+                    <h5 class="card-title m-b-0 align-self-center">Ventas del Año </h5>
                     <!-- <div class="ml-auto">
                         <select class="custom-select b-0">
                             <option selected="">January</option>

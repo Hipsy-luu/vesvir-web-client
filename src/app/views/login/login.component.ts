@@ -1,9 +1,10 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { DataSessionService } from '../../services/dataSession/data-session.service';
 import { UtilitiesService } from '../../services/utilities/utilities.service';
-import { LogedResponse } from '../../classes/logedResponse.class';
+import { LoggedResponse } from '../../classes/loggedResponse.class';
 import { ServerMessage } from '../../classes/serverMessage.class';
 import { Validators } from '@angular/forms';
+import { User } from '../../classes/user.class';
 
 @Component({
   selector: 'app-login',
@@ -23,26 +24,31 @@ export class LoginComponent implements OnInit{
     this.clearData();
     // this.dataSessionService.logOut();
     // console.log(this.dataSessionService.user);
-    /* this.dataSessionService.checkLogin((logedResponse: LogedResponse) => {
-      // console.log(logedResponse);
-      if (this.dataSessionService.user.role != 0 && this.dataSessionService.user.role != 1 && this.dataSessionService.user.role != 2) {
+    this.dataSessionService.checkLogin((logedResponse: LoggedResponse) => {
+      //console.log(logedResponse);
+      if (this.dataSessionService.user.userType == 0 ) {
+        console.log("es admin");
+        //this.utilitiesService.showSuccessToast( logedResponse.message,"Exito!");
+        this.dataSessionService.navigateByUrl("/dashboard-admin/home");
+      } else if (this.dataSessionService.user.userType == 1 ) {
+        console.log("es provedor");
+        //this.utilitiesService.showSuccessToast( logedResponse.message,"Exito!");
+        this.dataSessionService.navigateByUrl("/dashboard-provider/home");
+      }else if (this.dataSessionService.user.userType == 2) {
+        this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.");
         this.dataSessionService.logOut();
+      }else{
         this.utilitiesService.showErrorToast( "Usuario desconocido.","Error!");
-      } else if (this.dataSessionService.user.role == 0 ) {
-        // console.log("es admin");
-        this.dataSessionService.navigateByUrl("/dashboard/admin/home");
-        
-      } else if (this.dataSessionService.user.role == 2 || this.dataSessionService.user.role == 0) {
-        this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.")
+        this.dataSessionService.logOut();
       }
-    }, (noLoginResponse: LogedResponse) => {
+    }, (noLoginResponse: LoggedResponse) => {
       //console.log(noLoginResponse);
-    }); */
+    });
   }
 
   clearData() {
-    this.email = "";
-    this.password = "";
+    this.email = "luismi.luu@gmail.com";
+    this.password = "qwertyuiop";
   }
 
   validateLoginData(): Boolean {
@@ -63,17 +69,29 @@ export class LoginComponent implements OnInit{
     if (this.validateLoginData()) {
       this.dataSessionService.loginUser(this.email, this.password).then((response: ServerMessage) => {
         //console.log(response);
-        this.clearData();
-        this.utilitiesService.showSuccessToast( response.message,"Exito!");
-        if (this.dataSessionService.user.role != 0 && this.dataSessionService.user.role != 1 && this.dataSessionService.user.role != 2) {
-          this.dataSessionService.logOut();
-          this.utilitiesService.showErrorToast( "Usuario desconocido.","Error!");
-        } else if (this.dataSessionService.user.role == 0 ) {
-          //console.log("es admin");
-          this.dataSessionService.navigateByUrl("/dashboard/admin/home");
-        } else if (this.dataSessionService.user.role == 1 || this.dataSessionService.user.role == 2) {
-          this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.")
+        if(response.error == true){
+          this.utilitiesService.showErrorToast( response.message,"Error!");
+        }else if(response.error == false){
+          //load user data
+          this.clearData();
+          this.dataSessionService.setUserData(response.data.user);
+          if (this.dataSessionService.user.userType != 0 && this.dataSessionService.user.userType != 1 && this.dataSessionService.user.userType != 2) {
+            this.utilitiesService.showErrorToast( "Usuario desconocido.","Error!");
+            this.dataSessionService.logOut();
+          } else if (this.dataSessionService.user.userType == 0 ) {
+            console.log("es admin");
+            this.utilitiesService.showSuccessToast( response.message,"Exito!");
+            this.dataSessionService.navigateByUrl("/dashboard-admin/home");
+          } else if (this.dataSessionService.user.userType == 1 ) {
+            console.log("es provedor");
+            this.utilitiesService.showSuccessToast( response.message,"Exito!");
+            this.dataSessionService.navigateByUrl("/dashboard-provider/home");
+          }else if (this.dataSessionService.user.userType == 2) {
+            this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.");
+            this.dataSessionService.logOut();
+          }
         }
+        
       }, (error) => {
         //console.log(error);
         this.utilitiesService.showErrorToast( error.message, "Error!");

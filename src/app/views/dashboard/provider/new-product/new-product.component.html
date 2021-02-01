@@ -57,7 +57,8 @@
                                     </div>
                                     <div class="col-6 full-left">
                                         <input [(ngModel)]="actualProduct.name"
-                                            placeholder="Ingrese el nombre del articulo" class="form-control">
+                                            placeholder="Ingrese el nombre del articulo"
+                                            class="form-control text-capitalize">
                                     </div>
                                 </div>
                                 <!-- <div class="row pd-10">
@@ -78,36 +79,86 @@
                                         <input placeholder="sdsd" class="form-control">
                                     </div>
                                 </div> -->
-                                <div class="row pd-10">
+                                <div class="row full-width pd-10">
                                     <div class="col-4  full-right">
                                         <label class="control-label col-form-label form-label">
-                                            <!-- <span style="color: red;">*</span> --> Código de Referencia
+                                            <span style="color: red;">*</span>
+                                            Clave producto SAT
                                         </label>
                                     </div>
                                     <div class="col-6 col-sm-6 full-left">
-                                        <input [(ngModel)]="actualProduct.referenceCode"
-                                            placeholder="Ingrese su código de referencia" class="form-control">
+                                        <input disabled [(ngModel)]="actualProduct.referenceCode"
+                                            placeholder="Ingrese el código del catalogo del SAT"
+                                            class="form-control text-capitalize">
+                                    </div>
+                                    <div class="col-2 full-right ">
+                                        <button (click)="openModalSearchSATCodes();searchSatType = 'product';" type="button" class="btn"
+                                            aria-label="Buscar">
+                                            <i class="fas fa-search"></i>
+                                            Buscar
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="row pd-10">
+
+                                <div class="row full-width pd-10">
                                     <div class="col-4  full-right">
                                         <label class="control-label col-form-label form-label">
-                                            <!-- <span style="color: red;">*</span> --> Código de Barras
+                                            <span style="color: red;">*</span>
+                                            Clave Unidad de medida SAT
                                         </label>
                                     </div>
                                     <div class="col-6 col-sm-6 full-left">
-                                        <input [(ngModel)]="actualProduct.barCode" placeholder="" class="form-control">
+                                        <input disabled [(ngModel)]="actualProduct.unitKey"
+                                            placeholder="Ingrese la unidad de medida del SAT"
+                                            class="form-control text-capitalize">
+                                    </div>
+                                    <div class="col-2 full-right ">
+                                        <button (click)="openModalSearchSATCodes();searchSatType = 'unit';" type="button" class="btn"
+                                            aria-label="Buscar">
+                                            <i class="fas fa-search"></i>
+                                            Buscar
+                                        </button>
                                     </div>
                                 </div>
+
+                                <div class="row pd-10">
+                                    <div class="col-4  full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <!-- <span style="color: red;">*</span> --> 
+                                            <a href="https://www.mecalux.com.mx/blog/sku-que-es-significado#:~:text=Un%20SKU%20es%20un%20c%C3%B3digo,habitualmente%20de%20letras%20y%20n%C3%BAmeros.&text=La%20deportiva%20blanca%20talla%2041,almacenado%20en%20un%20lugar%20determinado.">
+                                                SKU
+                                            </a>
+                                        </label>
+                                    </div>
+                                    <div class="col-6 col-sm-6 full-left">
+                                        <input [(ngModel)]="actualProduct.barCode" placeholder=""
+                                            class="form-control text-capitalize">
+                                    </div>
+                                </div>
+
                                 <div class="row pd-10">
                                     <div class="col-4 full-right">
                                         <label class="control-label col-form-label form-label">
-                                            <span style="color: red;">*</span> Marca
+                                            <!-- <span style="color: red;">*</span> --> Marca
                                         </label>
                                     </div>
                                     <div class="col-6 full-left">
-                                        <input [(ngModel)]="actualProduct.brand" placeholder="Marca del producto"
-                                            class="form-control">
+                                        <div ngbDropdown class="d-inline-block  full-width">
+                                            <button class="btn btn-outline-secondary mr-2 full-width"
+                                                id="dropdownBasic1" ngbDropdownAnchor ngbDropdownToggle>
+                                                <span *ngFor="let brand of activeBrands">
+                                                    <span *ngIf="actualProduct.idBrand == brand.idBrand">
+                                                        {{brand.name}}
+                                                    </span>
+                                                </span>
+                                            </button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
+                                                <button ngbDropdownItem *ngFor="let brand of activeBrands"
+                                                    (click)="actualProduct.idBrand = brand.idBrand">
+                                                    {{brand.name}}
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row pd-10">
@@ -130,14 +181,14 @@
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
                                                 <button disabled ngbDropdownItem
                                                     (click)="actualProduct.gender = -1">Elige un genero </button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.gender = 0;actualProduct.category = -1">Niño</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.gender = 1;actualProduct.category = -1">Niña</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.gender = 2;actualProduct.category = -1">Mujer</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.gender = 3;actualProduct.category = -1">Hombre</button>
+                                                <button ngbDropdownItem *ngIf="categoriesGenre.boys.length != 0"
+                                                    (click)="selectGenre(0)">Niño</button>
+                                                <button ngbDropdownItem *ngIf="categoriesGenre.girls.length != 0"
+                                                    (click)="selectGenre(1)">Niña</button>
+                                                <button ngbDropdownItem *ngIf="categoriesGenre.womens.length != 0"
+                                                    (click)="selectGenre(2)">Mujer</button>
+                                                <button ngbDropdownItem *ngIf="categoriesGenre.mens.length != 0"
+                                                    (click)="selectGenre(3)">Hombre</button>
                                             </div>
                                         </div>
                                     </div>
@@ -152,24 +203,76 @@
                                         <div ngbDropdown class="d-inline-block  full-width">
                                             <button class="btn btn-outline-secondary mr-2 full-width"
                                                 id="dropdownBasic1" ngbDropdownAnchor ngbDropdownToggle>
-                                                <span *ngIf="actualProduct.category == -1">Elige una categoría</span>
-                                                <span *ngIf="actualProduct.category == 0">Niño</span>
-                                                <span *ngIf="actualProduct.category == 1">Niña</span>
-                                                <span *ngIf="actualProduct.category == 2">Mujer</span>
-                                                <span *ngIf="actualProduct.category == 3">Hombre</span>
+                                                <span *ngIf="actualProduct.gender == -1">Primero elige un genero</span>
+                                                <span *ngIf="actualProduct.gender == 0">
+                                                    <span disabled *ngIf="actualProduct.idCategory == -1">Elige una
+                                                        categoría </span>
+                                                    <span *ngFor="let category of categoriesGenre.boys">
+                                                        <span
+                                                            *ngIf="category.idCategory == actualProduct.idCategory">{{category.name}}</span>
+                                                    </span>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 1">
+                                                    <span disabled *ngIf="actualProduct.idCategory == -1">Elige una
+                                                        categoría </span>
+                                                    <span *ngFor="let category of categoriesGenre.girls">
+                                                        <span
+                                                            *ngIf="category.idCategory == actualProduct.idCategory">{{category.name}}</span>
+                                                    </span>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 2">
+                                                    <span disabled *ngIf="actualProduct.idCategory == -1">Elige una
+                                                        categoría </span>
+                                                    <span *ngFor="let category of categoriesGenre.womens">
+                                                        <span
+                                                            *ngIf="category.idCategory == actualProduct.idCategory">{{category.name}}</span>
+                                                    </span>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 3">
+                                                    <span disabled *ngIf="actualProduct.idCategory == -1">Elige una
+                                                        categoría </span>
+                                                    <span *ngFor="let category of categoriesGenre.mens">
+                                                        <span
+                                                            *ngIf="category.idCategory == actualProduct.idCategory">{{category.name}}</span>
+                                                    </span>
+                                                </span>
                                             </button>
+
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
-                                                <button disabled ngbDropdownItem
-                                                    (click)="actualProduct.category = -1">Elige una categoría </button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.category = 0">Niño</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.category = 1">Niña</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.category = 2">Mujer</button>
-                                                <button ngbDropdownItem
-                                                    (click)="actualProduct.category = 3">Hombre</button>
+                                                <span *ngIf="actualProduct.gender == -1">
+                                                    <button disabled ngbDropdownItem>Primero elije un genero </button>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 0">
+                                                    <button disabled *ngIf="actualProduct.idCategory == -1"
+                                                        ngbDropdownItem>Elige una categoría </button>
+                                                    <button *ngFor="let category of categoriesGenre.boys"
+                                                        ngbDropdownItem
+                                                        (click)="actualProduct.idCategory = category.idCategory">{{category.name}}</button>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 1">
+                                                    <button disabled *ngIf="actualProduct.idCategory == -1"
+                                                        ngbDropdownItem>Elige una categoría </button>
+                                                    <button *ngFor="let category of categoriesGenre.girls"
+                                                        ngbDropdownItem
+                                                        (click)="actualProduct.idCategory = category.idCategory">{{category.name}}</button>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 2">
+                                                    <button disabled *ngIf="actualProduct.idCategory == -1"
+                                                        ngbDropdownItem>Elige una categoría </button>
+                                                    <button *ngFor="let category of categoriesGenre.womens"
+                                                        ngbDropdownItem
+                                                        (click)="actualProduct.idCategory = category.idCategory">{{category.name}}</button>
+                                                </span>
+                                                <span *ngIf="actualProduct.gender == 3">
+                                                    <button disabled *ngIf="actualProduct.idCategory == -1"
+                                                        ngbDropdownItem>Elige una categoría </button>
+                                                    <button *ngFor="let category of categoriesGenre.mens"
+                                                        ngbDropdownItem
+                                                        (click)="actualProduct.idCategory = category.idCategory">{{category.name}}</button>
+                                                </span>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -224,13 +327,14 @@
                                         </label>
                                     </div>
                                     <div class="col-6 full-left">
-                                        
+
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">$</span>
                                             </div>
-                                            <input [(ngModel)]="actualProduct.price" placeholder="Precio del producto"
-                                                class="form-control" type="number">
+                                            <input [(ngModel)]="actualProduct.price" matInput thousandSeparator=","
+                                                mask="separator.2" placeholder="Precio del producto"
+                                                class="form-control" type="text">
                                         </div>
                                     </div>
                                 </div>
@@ -274,24 +378,9 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">cm</span>
                                             </div>
-                                            <input [(ngModel)]="actualProduct.width" type="number"
-                                                placeholder="Anchura del paquete" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pd-10">
-                                    <div class="col-4 full-right">
-                                        <label class="control-label col-form-label form-label">
-                                            <span style="color: red;">*</span> Altura
-                                        </label>
-                                    </div>
-                                    <div class="col-6 full-left">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">cm</span>
-                                            </div>
-                                            <input [(ngModel)]="actualProduct.height" type="number"
-                                                placeholder="Altura del paquete" class="form-control">
+                                            <input [(ngModel)]="actualProduct.width" matInput thousandSeparator=","
+                                                mask="separator.2" type="text" placeholder="Anchura del paquete"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -307,9 +396,27 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">cm</span>
                                                 </div>
-                                                <input [(ngModel)]="actualProduct.depth" type="number"
-                                                    placeholder="Profundidad del paquete" class="form-control">
+                                                <input [(ngModel)]="actualProduct.depth" matInput thousandSeparator=","
+                                                    mask="separator.2" type="text" placeholder="Profundidad del paquete"
+                                                    class="form-control">
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-10">
+                                    <div class="col-4 full-right">
+                                        <label class="control-label col-form-label form-label">
+                                            <span style="color: red;">*</span> Altura
+                                        </label>
+                                    </div>
+                                    <div class="col-6 full-left">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">cm</span>
+                                            </div>
+                                            <input [(ngModel)]="actualProduct.height" matInput thousandSeparator=","
+                                                mask="separator.2" type="text" placeholder="Altura del paquete"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -324,8 +431,9 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Kg</span>
                                             </div>
-                                            <input [(ngModel)]="actualProduct.weight" type="number"
-                                                placeholder="Peso del Producto" class="form-control">
+                                            <input [(ngModel)]="actualProduct.weight" matInput thousandSeparator=","
+                                                mask="separator.2" type="text" placeholder="Peso del Producto"
+                                                class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -348,7 +456,7 @@
                                 <div class="col-12 full-centered full-left">
                                     <div class="m-b-0 font-18">
                                         <i class="fas fa-tasks"></i>
-                                        CANTIDADES DISPONIBLES PARA LA VENTA
+                                        CANTIDADES DISPONIBLES PARA LA VENTA {{actualProduct.quantities.length}}
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +470,7 @@
                                         <div class="row pd-10">
                                             <div class="col-4 full-right">
                                                 <label class="control-label col-form-label form-label">
-                                                    <span style="color: red;">*</span> Cantidad
+                                                    <!-- <span style="color: red;">*</span>  -->Cantidad
                                                 </label>
                                             </div>
                                             <div class="col full-left">
@@ -378,7 +486,8 @@
                                             </div>
                                             <div class="col full-left">
                                                 <input [(ngModel)]="newQuantity.size" type="text"
-                                                    placeholder="Nombre de la medida" class="form-control">
+                                                    placeholder="Nombre de la medida"
+                                                    class="form-control text-capitalize">
                                             </div>
                                         </div>
                                         <div class="row pd-10">
@@ -389,7 +498,8 @@
                                             </div>
                                             <div class="col full-left">
                                                 <input [(ngModel)]="newQuantity.color" type="text"
-                                                    placeholder="Color del producto" class="form-control">
+                                                    placeholder="Color del producto"
+                                                    class="form-control text-capitalize">
                                             </div>
                                         </div>
                                         <div class="row pd-10">
@@ -400,7 +510,7 @@
                                             </div>
                                             <div class="col full-left">
                                                 <input [(ngModel)]="newQuantity.description" type="text"
-                                                    placeholder="Nombre de la medida" class="form-control">
+                                                    placeholder="Descripción" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -428,11 +538,11 @@
                                             <table class="table table-hover">
                                                 <thead>
                                                     <tr class="row">
-                                                        <th scope="col" class="col-1 full-centered">ID</th>
+                                                        <!-- <th scope="col" class="col-1 full-centered">ID</th> -->
                                                         <th scope="col" class="col-2 full-left">Disponibles</th>
                                                         <th scope="col" class="col-2 full-left">Talla</th>
                                                         <th scope="col" class="col-2 full-left">Color</th>
-                                                        <th scope="col" class="col-5 full-left">Descripción</th>
+                                                        <th scope="col" class="col-6 full-left">Descripción</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -441,9 +551,9 @@
                                             </div> -->
                                                     <tr class="row"
                                                         *ngFor=" let quantity of actualProduct.quantities; index as i ">
-                                                        <th scope="col" class="col-1 full-centered">
+                                                        <!-- <th scope="col" class="col-1 full-centered">
                                                             {{quantity.idQuantity}}
-                                                        </th>
+                                                        </th> -->
                                                         <th scope="col" class="col-2 full-left">
                                                             <input [(ngModel)]="quantity.quantity" type="number"
                                                                 placeholder="Ingrese un numero" class="form-control">
@@ -457,7 +567,7 @@
                                                             <input [(ngModel)]="quantity.color" type="text"
                                                                 placeholder="Color del producto" class="form-control">
                                                         </th>
-                                                        <th scope="col" class="col-5 full-left">
+                                                        <th scope="col" class="col-6 full-left">
                                                             <input [(ngModel)]="quantity.description" type="text"
                                                                 placeholder="Ingrese una descripción"
                                                                 class="form-control">
@@ -473,7 +583,7 @@
 
                     </ng-template>
                 </li>
-                <!-- <li [ngbNavItem]="4" class="">
+                <li [ngbNavItem]="4" class="">
                     <a ngbNavLink>
                         <h4 class="no-margin ma-10-30">
                             <i class="fas fa-images ma-r-10"></i>
@@ -487,7 +597,7 @@
                                     <div class="m-b-0 font-18">
                                         <i class="fas fa-images"></i>
                                         IMÁGENES
-                                        
+
                                         <span class="no-margin genre-label margin-hori-10-5"
                                             style=" background-color: #fafafa;  margin-bottom: 5px; border: solid 1px #3f0058;border-radius: 10px !important; color: #1a1a1a;">
                                             {{actualProduct.images.length}}
@@ -498,15 +608,16 @@
                         </div>
 
                         <div class="card-body border-top">
-                            <form class="no-margin">
+                            <div class="no-margin">
                                 <div class="form-group no-margin">
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="row full-centered full-right"
                                                 style="height: 49px; margin-right: 10px;">
                                                 <div class="input-field m-t-0 m-b-0">
-                                                    <label class="control-label col-form-label form-label">Añadir una
-                                                        nueva imagen del producto</label>
+                                                    <label class="control-label col-form-label form-label">
+                                                        <span style="color: red;">*</span>Añadir una
+                                                        nueva imagen</label>
                                                 </div>
                                             </div>
                                             <div class="row full-centered full-right"
@@ -522,7 +633,7 @@
                                             <div class="row">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">Subir</span>
+                                                        <span class="input-group-text">Elegir</span>
                                                     </div>
                                                     <div class="custom-file">
                                                         <input (change)="updateSource($event)" type="file"
@@ -534,27 +645,25 @@
                                                 </div>
                                             </div>
                                             <div class="row full-centered">
-                                                <input type="text" class="form-control" maxlength="50" id="maxval"
-                                                    aria-describedby="maxval" placeholder="Nombre del Sticker" />
+                                                <input [(ngModel)]="newImage.name" type="text"
+                                                    class="form-control text-capitalize" maxlength="50" id="maxval"
+                                                    aria-describedby="maxval" placeholder="Nombre de la imagen" />
                                             </div>
                                         </div>
                                         <div class="col-3">
                                             <div class="row full-centered full-width full-height">
                                                 <div class="col-12 full-width full-height">
-                                                    <span *ngIf="source.length == 0"
+                                                    <span *ngIf="newImage.source.length == 0"
                                                         class="card full-centered full-height">
-                                                        <img class=" full-width full-height"
-                                                            style="object-fit: cover;"
-                                                            src="assets/images/product/no-image.jpg"
-                                                            alt="Sin Imagen" />
+                                                        <img class=" full-width full-height" style="object-fit: cover;"
+                                                            src="assets/images/product/no-image.jpg" alt="Sin Imagen" />
                                                     </span>
 
-                                                    <span *ngIf="source.length > 0">
+                                                    <span *ngIf="newImage.source.length > 0">
                                                         <div class="card">
-                                                            <img *ngIf="source.length > 0" 
+                                                            <img *ngIf="newImage.source.length > 0"
                                                                 class=" full-width full-height"
-                                                                style="object-fit: cover;"
-                                                                [src]="source">
+                                                                style="object-fit: cover;" [src]="newImage.source">
                                                         </div>
                                                         <div class="full-width full-centered pd-10">
                                                             <button (click)="cancelImage()"
@@ -570,13 +679,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 full-centered">
-                                            <button (click)="uploadImage()" type="button" class="btn mr-0 btn-outline-primary">
-                                                <i class="fas fa-upload"></i> Subir
+                                            <button (click)="addImage()" type="button"
+                                                class="btn mr-0 btn-outline-primary">
+                                                <i class="fas fa-plus-circle"></i> Añadir
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="card-body p-t-0 p-r-0">
                             <div class="chat-box p-r-15">
@@ -596,10 +706,10 @@
                                         </thead>
 
                                         <tbody class="dragndrop" [dragula]="'images-list'"
-                                            [(dragulaModel)]="imagesFiltered">
-                                            <tr class="row" *ngFor="let image of imagesFiltered; index as i">
+                                            [(dragulaModel)]="actualProduct.images">
+                                            <tr class="row" *ngFor="let image of actualProduct.images; index as i">
                                                 <th scope="col" class="col-2 full-centered">
-                                                    <img [src]="image.urlImage" class="mr-2" style="width: 40px;" />
+                                                    <img [src]="image.source" class="mr-2" style="width: 40px;" />
                                                 </th>
                                                 <th scope="col" class="col-4 full-left">{{ image.name }}</th>
                                                 <th scope="col" class="col-3 full-centered">
@@ -611,7 +721,7 @@
                                                     </span>
                                                 </th>
                                                 <th scope="col" class="col-3 full-centered">
-                                                    <button (click)="deleteImage(image.idProductImage)"
+                                                    <button (click)="deleteImageByPosition(image.position)"
                                                         class="btn mr-0 btn-outline-secondary" type="button">
                                                         <i class="fas fa-trash-alt"></i>
                                                         Borrar esta imagen
@@ -625,7 +735,7 @@
                         </div>
                         <hr class="m-t-0" />
                     </ng-template>
-                </li> -->
+                </li>
 
             </ul>
         </div>
@@ -633,10 +743,10 @@
             <div [ngbNavOutlet]="nav" class=""></div>
 
             <hr class="m-t-0" />
-            <div *ngIf="active != 4" class="card-body">
+            <div class="card-body">
                 <div class="row">
                     <div class="col-6 full-left">
-                        <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
+                        <!-- <button (click)="backClicked()" class="btn mr-0 btn-outline-secondary button-options"
                             type="button">
                             <div class="row full-centered">
                                 <i class="fas fa-window-close "></i>
@@ -644,15 +754,57 @@
                             <div class="row full-centered font-normal">
                                 Cancelar
                             </div>
-                        </button>
+                        </button> -->
                     </div>
                     <div class="col-6 full-right">
-                        <button class="btn mr-0 btn-outline-primary button-options" type="button">
+                        <button *ngIf="
+                                actualProduct.name.length != 0 &&
+                                actualProduct.referenceCode.length != 0 &&
+                                actualProduct.unitKey.length != 0 &&
+                                actualProduct.gender != -1 &&
+                                actualProduct.idCategory != -1 &&
+                                actualProduct.material.length != 0 &&
+                                actualProduct.shortDescription.length != 0 &&
+                                actualProduct.description.length != 0 &&
+                                actualProduct.specs.length != 0 &&
+                                actualProduct.price != 0 &&
+                                actualProduct.width != 0 &&
+                                actualProduct.height != 0 &&
+                                actualProduct.depth != 0 &&
+                                actualProduct.weight != 0 &&
+                                actualProduct.quantities.length != 0
+                            " (click)="save()" class="btn mr-0 btn-outline-primary button-options" type="button">
                             <div class="row full-centered">
                                 <i class="fas fa-save"></i>
                             </div>
                             <div class="row full-centered font-normal">
-                                Guardar
+                                Añadir
+                            </div>
+                        </button>
+
+                        <button *ngIf="
+                            actualProduct.name.length == 0 ||
+                            actualProduct.referenceCode.length == 0 ||
+                            actualProduct.unitKey.length == 0 ||
+                            actualProduct.gender == -1 ||
+                            actualProduct.idCategory == -1 ||
+                            actualProduct.material.length == 0 ||
+                            actualProduct.shortDescription.length == 0 ||
+                            actualProduct.description.length == 0 ||
+                            actualProduct.specs.length == 0 ||
+                            actualProduct.price == 0 ||
+                            actualProduct.width == 0 ||
+                            actualProduct.height == 0 ||
+                            actualProduct.depth == 0 ||
+                            actualProduct.weight == 0 ||
+                            actualProduct.quantities.length == 0 
+                            " (click)="showInvalidSave()" class="btn mr-0 btn-outline-secondary button-options"
+                            type="button">
+                            <div class="row full-centered">
+                                <i class="fas fa-save"></i>
+                            </div>
+                            <div class="row full-centered font-normal">
+                                Añadir
                             </div>
                         </button>
                     </div>
@@ -661,3 +813,85 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL consultar códigos SAT -->
+<ng-template #modalSeeSATProductCatalogCodes let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Consultar catalogo del SAT</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row ma-10-30">
+            <div class="col-4 full-left">
+                <div ngbDropdown class="d-inline-block  full-width">
+                    <button disabled class="btn btn-outline-secondary mr-2 full-width" id="dropdownBasicSat" ngbDropdownAnchor ngbDropdownToggle>
+                        <span *ngIf="searchSatType == 'product'">
+                            Productos y Servicios
+                        </span>
+                        <span *ngIf="searchSatType == 'unit'">
+                            Unidades de Medida
+                        </span>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasicSat" class="full-width">
+                        <button ngbDropdownItem (click)="searchSatType = 'product'">
+                            Productos y Servicios
+                        </button>
+                        <button ngbDropdownItem (click)="searchSatType = 'unit'">
+                            Unidades de Medida
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 full-left">
+                <input [(ngModel)]="searchSat"
+                    placeholder="Escriba las palabras clave a buscar" (keyup.enter)="searchSAT()"
+                    class="form-control text-capitalize">
+            </div>
+            <div class="col-2 full-right ">
+                <button (click)="searchSAT()" type="button" class="btn mr-0 btn-outline-primary"
+                    aria-label="Eliminar">
+                    <i class="fas fa-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </div>
+        <div class="row ma-10-30">
+            <div class="col-8 full-left">
+                Nombre
+            </div>
+            <div class="col-4 full-right">
+                Clave
+            </div>
+        </div>
+        <div  >
+            <button *ngFor="let code of codesResultSat" class="row btn-outline-dark" style="width: 100%;" (click)="selectSatCode(code.key)" >
+                <div class="col-10 full-left">
+                    <h6>
+                        {{code.description}}
+                    </h6>
+                </div>
+                <div class="col-2 full-right">
+                    <h5>
+                        {{code.key}}
+                    </h5>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+            <div class="row full-centered font-normal" style="margin: 0px;">
+                <i class="fas fa-window-close ma-0-10"></i> Cancelar
+            </div>
+        </button>
+        <button (click)="deleteProduct()"
+            class="btn mr-0 btn-success button-reset " type="button">
+            <div class="row full-centered font-normal " style="margin: 0px;">
+                <i class="fas fa-trash ma-0-10"></i> Eliminar
+            </div>
+        </button> -->
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+    </div>
+</ng-template>

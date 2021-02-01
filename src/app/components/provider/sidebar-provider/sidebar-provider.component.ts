@@ -16,18 +16,16 @@ export class SidebarProviderComponent implements OnInit {
   showMenu = '';
   showSubMenu = '';
   public sidebarnavItems: any[];
-  userData : User;
 
   constructor(
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private dataSessionService : DataSessionService
+    public dataSessionService : DataSessionService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.userData = this.dataSessionService.user;
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
   }
 

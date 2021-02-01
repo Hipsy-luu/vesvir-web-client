@@ -1,7 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UtilitiesService } from './../../../../services/utilities/utilities.service';
-import { orderDetail } from './orderDetails';
+import { ApiDataService } from '../../../../services/apiData/api-data.service';
+import { User, Direction } from '../../../../classes/user.class';
+import { ServerMessage } from '../../../../classes/serverMessage.class';
+import { DataSessionService } from '../../../../services/dataSession/data-session.service';
+import { ActivatedRoute } from '@angular/router';
+import { LoggedResponse } from '../../../../classes/loggedResponse.class';
+import { Order, StatusHistory, ShippingPackage } from '../../../../classes/order.class';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-order',
@@ -10,54 +17,213 @@ import { orderDetail } from './orderDetails';
 })
 export class OrderComponent implements OnInit {
 
-  orderDetail : any;
+  orderDetail: Order;
+  totalProducts : number;
+  totalPayment : number;
+  noTotalOrders : number;
+  shippingPackagesTotal : number;
 
   active = 1;
-
-  //
-  newStatusSelected : number = -1;
+  activeModal = 1;
 
   //Modal variables
-  selectedShippingDetails;
-  
+  newStatusSelected: StatusHistory;
+  selectedShippingPackage : ShippingPackage;
+
   @ViewChild("modalShippingDetails") modalShippingDetails;
+  @ViewChild("modalNewState") modalNewState;
 
-  constructor(private modalService: NgbModal,public utilitiesService : UtilitiesService) {
-    this.orderDetail = orderDetail;
-   }
+  public config: PerfectScrollbarConfigInterface = {};
 
-  ngOnInit(): void {
-    this.newStatusSelected = -1;
+  constructor(private modalService: NgbModal, public utilitiesService: UtilitiesService, public apiDataService: ApiDataService,
+    private dataSessionService: DataSessionService, private activatedRoute: ActivatedRoute,) {
+    this.orderDetail = new Order();
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.orderDetail = new Order();
+      this.totalProducts = 0;
+      this.totalPayment = 0;
+      this.noTotalOrders = 0;
+      this.shippingPackagesTotal = 0;
+      this.newStatusSelected = new StatusHistory();
+      this.selectedShippingPackage = new ShippingPackage();
+      //this.customer = new User();
+      //this.selectedDirection = new Direction();
+      this.dataSessionService.checkLogin((logedResponse: LoggedResponse) => {
+        //console.log(logedResponse);
+        if (this.dataSessionService.user.userType == 0) {
+          //Cosas para hacer si es admin
+          console.log("es admin");
+          let idOrder: number = parseInt(params.get('idOrder'));
+
+          if (idOrder == null || idOrder == undefined) {
+            this.dataSessionService.navigateByUrl("/dashboard-admin/orders");
+          } else {
+            this.loadData(idOrder);
+          }
+        } else if (this.dataSessionService.user.userType == 1) {
+          console.log("es provedor");
+          this.dataSessionService.navigateByUrl("/dashboard-provider/home");
+        } else if (this.dataSessionService.user.userType == 2) {
+          this.utilitiesService.showInfoToast("Aun no se cuenta con este servicio.");
+          this.dataSessionService.logOut();
+        } else {
+          this.utilitiesService.showErrorToast("Usuario desconocido.", "Error!");
+          this.dataSessionService.logOut();
+        }
+      }, (noLoginResponse: LoggedResponse) => {
+        //console.log(noLoginResponse);
+        this.dataSessionService.logOut();
+      });
+    });
   }
 
-  openModalShippingDetails( details /* modalDirection */) {
-    this.selectedShippingDetails = JSON.parse( JSON.stringify(details) );
-    this.selectedShippingDetails.date = new Date(details.date);
-    
-		this.modalService.open(this.modalShippingDetails, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-			//this.closeResult = `Closed with: ${result}`;
-		}, (reason) => {
-			//this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-		});
+  ngOnInit(): void {
+
+  }
+
+  loadData(idOrder: number) {
+    //this.customer = new User();
+    //this.selectedDirection = new Direction();
+    this.apiDataService.getAdminOrderById(idOrder).then((response: ServerMessage) => {
+      //console.log("exito");
+      //console.log(response);
+      if (response.error == true) {
+        console.log("error");
+        console.log(response);
+        
+        this.utilitiesService.showWarningToast(response.message, "Error");
+        this.dataSessionService.navigateByUrl("/dashboard-admin/orders");
+      } else if (response.error == false) {
+        console.log("paso");
+        console.log(response.data);
+        response.data.dataOrder.createDate = new Date(response.data.dataOrder.createDate); 
+        response.data.dataOrder.customer.createDate = new Date(response.data.dataOrder.customer.createDate); 
+
+        for (let index = 0; index < response.data.dataOrder.statusHistorys.length; index++) {
+          response.data.dataOrder.statusHistorys[index].createdAt = new Date(response.data.dataOrder.statusHistorys[index].createdAt);
+        }
+
+        for (let index = 0; index < response.data.dataOrder.shippingPackages.length; index++) {
+          response.data.dataOrder.shippingPackages[index].createDate = new Date(response.data.dataOrder.shippingPackages[index].createDate);
+        }
+
+        for (let index = 0; index < response.data.dataOrder.payments.length; index++) {
+          response.data.dataOrder.payments[index].createDate = new Date(response.data.dataOrder.payments[index].createDate);
+        }
+
+        this.orderDetail = response.data.dataOrder ;
+        for (let index = 0; index < response.data.statusHistorys.length; index++) {
+          response.data.statusHistorys[index].createdAt = new Date(response.data.statusHistorys[index].createdAt);
+        }
+        this.orderDetail.statusHistorys = response.data.statusHistorys ;
+        this.totalProducts = response.data.totalProducts ;
+        this.totalPayment = response.data.totalPayment.total ;
+        this.noTotalOrders = response.data.noTotalOrders;
+        this.shippingPackagesTotal = response.data.shippingPackagesTotal;
+        //response.data.birthDay = new Date(response.data.birthDay);
+        //response.data.createDate = new Date(response.data.createDate);
+        //response.data.lastLogin = new Date(response.data.lastLogin);
+        //this.customer = response.data;
+        //this.modelCustomerBirthDay = {
+        //  year: this.customer.birthDay.getFullYear(),
+        //  month: parseInt(this.customer.birthDay.toLocaleDateString("es-MX", { month: "2-digit" })),
+        //  day: parseInt(this.customer.birthDay.toLocaleDateString("es-MX", { day: "2-digit" }))
+        //}
+      }
+
+    }).catch((error) => {
+      console.log("error");
+      console.log(error);
+      this.utilitiesService.showErrorToast("A ocurrido un error", "Error");
+
+    });
+  }
+
+  openModalShippingDetails(selectedShippingPackage : ShippingPackage /* modalDirection */) {
+    this.selectedShippingPackage = JSON.parse(JSON.stringify(selectedShippingPackage));
+    this.selectedShippingPackage.createDate = new Date(selectedShippingPackage.createDate);
+    //console.log(this.selectedShippingPackage);
+
+    this.modalService.open(this.modalShippingDetails, { ariaLabelledBy: 'modal-basic-title', centered : true, size : 'lg'  }).result.then((result) => {
+      //this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   //Recibe el estatus del pedido que se quiere volver a notificar al usuario
-  resentEmail(typeEmailOpc : number){
-    this.utilitiesService.showSuccessToast("Se envió un email al usuario con el estado seleccionado","Éxito")
+  resentEmail(typeEmailOpc: number) {
+    this.utilitiesService.showSuccessToast("Se envió un email al usuario con el estado seleccionado", "Éxito")
   }
+
   //agrega un nuevo estado al historial del pedido
-  addNewStatus(newStatusOpc : number){
-    this.utilitiesService.showSuccessToast("Se actualizo el ultimo estado del pedido","Éxito");
-    this.newStatusSelected = -1;
+  openAddNewStatus() {
+    this.newStatusSelected = new StatusHistory();
+
+    this.newStatusSelected.idOrder = this.orderDetail.idOrder;
+    this.newStatusSelected.registerUserData = this.dataSessionService.user.name + " " + this.dataSessionService.user.surnames;
+    this.newStatusSelected.status = 6;
+
+    this.modalService.open(this.modalNewState, { ariaLabelledBy: 'modal-basic-title', centered : true, size : 'lg' }).result.then((result) => {
+      //this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
-  updatePrivateNote(){
-    this.orderDetail.privateNote = "";
-    this.utilitiesService.showSuccessToast("Se actualizo la nota privada","Éxito");
+  saveNewStatus(){
+    this.apiDataService.createNewOrderStatus(this.newStatusSelected).then(async (response: ServerMessage) => {
+      console.log("exito");
+      console.log(response);
+      if (response.error == true) {
+        this.utilitiesService.showWarningToast(response.message, "Error");
+      } else if (response.error == false) {
+        console.log("guardo");
+
+        this.loadData(this.orderDetail.idOrder);
+        await this.utilitiesService.sleep(1500);
+
+        this.utilitiesService.showSuccessToast("Se actualizo el ultimo estado del pedido", "Éxito");
+        this.modalService.dismissAll();
+        this.newStatusSelected = new StatusHistory();
+      }
+
+    }).catch((error) => {
+      console.log("error");
+      console.log(error);
+      this.utilitiesService.showErrorToast("A ocurrido un error", "Error");
+
+    });
   }
 
-  createInvoice(idPayment){
-    this.utilitiesService.showSuccessToast("Factura creada con exito","Éxito");
+  updatePrivateNote() {
+    this.apiDataService.updateOrderPrivateNote(this.orderDetail.idOrder , this.orderDetail.privateNote ).then(async (response: ServerMessage) => {
+      //console.log("exito");
+      //console.log(response);
+      if (response.error == true) {
+        console.log("error");
+        console.log(response);
+        
+        this.utilitiesService.showWarningToast(response.message, "Error");
+      } else if (response.error == false) {
+        //console.log("guardo");
+        //this.loadData(this.orderDetail.idOrder);
+        this.utilitiesService.showSuccessToast(response.message, "Éxito");
+      }
+
+    }).catch((error) => {
+      console.log("error");
+      console.log(error);
+      this.utilitiesService.showErrorToast("A ocurrido un error", "Error");
+    });
+  }
+
+  createInvoice(idPayment) {
+    this.utilitiesService.showSuccessToast("Factura creada con exito", "Éxito");
+  }
+
+  backClicked() {
+    this.dataSessionService.navigateByUrl("/dashboard-admin/orders");
   }
 
 }

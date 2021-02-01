@@ -41,6 +41,10 @@ body, p{
   margin: 0px !important;
 }
 
+.ma-b-10-i{
+  margin-bottom: 10px !important;
+}
+
 .full-height{
   height: 100%;
 }
@@ -91,6 +95,10 @@ body, p{
 
 .font-normal{
     font-size: medium;
+}
+
+.font-xx-large{
+  font-size: xx-large;
 }
 
 .no-padding{
@@ -145,6 +153,10 @@ body, p{
 
 
 .size-8 {
+  font-size: 1.5rem;
+}
+
+.size-2 {
   font-size: 1.5rem;
 }
 
@@ -213,6 +225,21 @@ body, p{
   align-items: center;
 }
 /*Buttons*/
+.btn-outline-primary-inverted {
+  
+
+  color: #fff;
+  background-color: #7460ee;
+  border-color: #7460ee;
+}
+
+.btn-outline-primary-inverted:hover {
+  color: #7460ee;
+  background-color: #cdd2dd;
+  /* background-image: none; */
+  border-color: #7460ee;
+}
+
 .white-btn:hover{
   cursor: pointer;
   background: #3b1283;
@@ -220,6 +247,18 @@ body, p{
 }
 .white-btn:focus{
   outline: none;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #60da66;
+  border-color: #60da66;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #efe66e;
+  border-color: #efe66e;
 }
 /*TEXT*/
 .justify-text{
@@ -253,6 +292,10 @@ body, p{
 }
 .white-25{
   font-size: 25px;
+  color: white;
+}
+.white-20{
+  font-size: 20px;
   color: white;
 }
 .black-40{
@@ -299,6 +342,10 @@ body, p{
 .fs-30{
   font-size: 30px;
 }
+
+.fs-0-7{
+  font-size: 0.7rem;
+}
 /*PADDINGS*/
 .p-t-120{
   padding-top: 120px;
@@ -334,6 +381,14 @@ body, p{
 .form-label{
   padding: 0px 10px;
   background-color: #e7f9ff;
+}
+
+.text-capitalize{
+  text-transform: capitalize;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
 }
 
 /*  */

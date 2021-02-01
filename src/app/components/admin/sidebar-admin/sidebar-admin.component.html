@@ -8,7 +8,7 @@
                     <img src="assets/images/users/no-user-image.jpg" alt="users" class="rounded-circle img-fluid" />
                 </div>
                 <div class="user-content hide-menu m-t-10">
-                    <h5 class="m-b-10 user-name font-medium">{{userData.name}}</h5>
+                    <h5 class="m-b-10 user-name font-medium">{{dataSessionService.user.name}}</h5>
                     <!-- <a ngbDropdownToggle href="javascript:void(0)" class="btn btn-circle btn-sm m-r-5" id="Userdd" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <i class="ti-settings"></i>
@@ -37,7 +37,8 @@
         <!-- First level menu -->
         <!-- <li class="sidebar-item" [class.selected]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
             [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'"> -->
-        <li class="sidebar-item" *ngFor="let sidebarnavItem of sidebarnavItems" class="sidebar-item"
+        <li class="sidebar-item" 
+            *ngFor="let sidebarnavItem of dataSessionService.sidebarNavItemsAdmin" class="sidebar-item"
             [class.selected]="showMenu === sidebarnavItem.title && sidebarnavItem.submenu.length != 0"
             [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'selected active'">
             <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">
@@ -64,7 +65,7 @@
                         <li class="sidebar-item" *ngFor="let sidebarnavSubsubItem of sidebarnavSubItem.submenu" routerLinkActive="active" [ngClass]="[sidebarnavSubsubItem.class]">
                             <a class="sidebar-link" [routerLink]="[sidebarnavSubsubItem.path]" *ngIf="!sidebarnavSubsubItem.extralink;" [routerLinkActive]="sidebarnavSubsubItem.submenu.length > 0 ? '' : 'selected active'">
                                 <i [ngClass]="[sidebarnavSubsubItem.icon]"></i>
-                                <span class="hide-menu" style="color: #abafb9;">{{sidebarnavSubsubItem.title}}</span>
+                                <span class="hide-menu" style="color: #abafb9;">{{sidebarnavSubsubItem.title.toUpperCase()}}</span>
                             </a>
                         </li>
                     </ul>

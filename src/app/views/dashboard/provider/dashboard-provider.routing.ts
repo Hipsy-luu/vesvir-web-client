@@ -31,7 +31,7 @@ export const DashboardProviderRoutes: Routes = [
         data: {
           title: 'Añadiendo Nuevo Producto',
           urls: [
-            { title: 'Inicio', url: '/dashboard/admin-home' },
+            { title: 'Inicio', url: '/dashboard/provider-home' },
             { title: 'Pedidos' }
           ]
         }
@@ -42,13 +42,13 @@ export const DashboardProviderRoutes: Routes = [
         data: {
           title: 'Productos',
           urls: [
-            { title: 'Inicio', url: '/dashboard/admin-home' },
+            { title: 'Inicio', url: '/dashboard/provider-home' },
             { title: 'Pedidos' }
           ]
         }
       },
       {
-        path: 'product/:id',
+        path: 'product/:idProduct',
         component: ProductComponent,
         data: {
           title: 'Editando producto',
@@ -64,18 +64,18 @@ export const DashboardProviderRoutes: Routes = [
         data: {
           title: 'Pedidos',
           urls: [
-            { title: 'Inicio', url: '/dashboard/admin-home' },
+            { title: 'Inicio', url: '/dashboard/provider-home' },
             { title: 'Pedidos' }
           ]
         }
       },
       {
-        path: 'order/:id',
+        path: 'order/:idOrder',
         component: OrderComponent,
         data: {
           title: '',
           urls: [
-            { title: 'Inicio', url: '/dashboard/admin-home' },
+            { title: 'Inicio', url: '/dashboard/provider-home' },
             { title: 'Pedido' }
           ]
         }
@@ -86,7 +86,7 @@ export const DashboardProviderRoutes: Routes = [
         data: {
           title: 'Ajustes de la cuenta',
           urls: [
-            { title: 'Inicio', url: '/dashboard/admin-home' },
+            { title: 'Inicio', url: '/dashboard/provider-home' },
             { title: 'Ajustes de la cuenta' }
           ]
         }

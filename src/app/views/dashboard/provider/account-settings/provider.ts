@@ -22,12 +22,16 @@ export const dataCustomer =
     userType : 2,
     createDate : new Date("01/18/2020"),
     lastLogin : new Date("05/20/2020"),
+    deleted : false, 
+    active : true, 
+    conektaClientId : "", 
+    userFacebookImage : "",
     billingInformation : {
       idBillingInformation : 2,
       businessName : "Equipos integrados de seguridad",
       rfc : "EIS981217B24",
-      phone : "6394740742",
-      email : "luismi.luu@gmail.com",
+      phoneBilling : "6394740742",
+      emailBilling : "luismi.luu@gmail.com",
       state : "Chihuahua",
       city : "Delicias",
       postalCode : "33000",
@@ -48,6 +52,7 @@ export const dataCustomer =
       postalCode : "33000",
       colony : "Magistral",
       default : false,
+      deleted : false
     },{
       idDirection : 1,
       name : "Luis David",
@@ -61,6 +66,7 @@ export const dataCustomer =
       postalCode : "31125",
       colony : "Campo Bello",
       default : true,
+      deleted : false
     }],
 
   }

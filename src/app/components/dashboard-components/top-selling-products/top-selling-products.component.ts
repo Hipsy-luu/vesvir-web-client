@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ApiDataService } from '../../../services/apiData/api-data.service';
 
 @Component({
   selector: 'app-top-selling-products',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopSellingProductsComponent implements OnInit {
 
-  constructor() { }
+  @Input() top10SoldProducts : any[];
+
+  constructor(public apiDataService : ApiDataService) { 
+    this.top10SoldProducts = [];
+  }
 
   ngOnInit(): void {
   }

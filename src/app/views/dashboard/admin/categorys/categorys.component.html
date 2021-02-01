@@ -3,152 +3,93 @@
     <div class="card">
       <!-- TITLE -->
       <div class="p-l-20 p-r-25 p-t-10 p-b-10 bg-header-images d-flex align-items-center">
-        <div class="text-white m-b-0 m-l-15 font-18">Añadiendo Categoría</div>
-        <div class="text-white m-b-0 m-l-15 font-20 no-margin">
-          <!-- <label class="label-images-count">{{ images.length }}</label> -->
+        <div class="row full-width">
+          <div class="col-6 full-centered full-left">
+            <div class="text-white m-b-0 m-l-15 font-18">
+              <i class="fas fa-sitemap"></i>
+              Categorías
+              <span class="no-margin genre-label margin-hori-10-5"
+                style=" background-color: #230031;  margin-bottom: 5px; border-color: #3f0058; ">
+                {{categoriesGenres.length}}</span>
+            </div>
+          </div>
+          <div class="col-6 full-right">
+            <button type="button" class="btn mr-0 btn-outline-primary-inverted" aria-label="Eliminar"
+              (click)="openModalAddCategory()">
+              <!-- <span aria-hidden="true">&times;</span> -->
+              <!-- <i class="fas fa-trash"></i> -->
+              <i class="fas fa-plus-square ma-0-10"></i>
+              Nueva categoría
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- ADD IMAGE -->
-      <div class="card-body border-top">
-        <form class="no-margin">
-          <div class="form-group no-margin">
-            <div class="row">
-              <div class="col-4">
-                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
-                  <div class="input-field m-t-0 m-b-0">
-                    <label class="control-label form-label">
-                      <span style="color: red;">*</span> Nombre de la categoría
-                    </label>
-                  </div>
-                </div>
-                <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
-                  <div class="input-field m-t-0 m-b-0">
-                    <label class="control-label form-label">
-                      <span style="color: red;">*</span> Seleccione Genero
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-5">
-                <div class="row">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" maxlength="50" id="maxval" aria-describedby="maxval"
-                      placeholder="Nombre de la categoría" />
-                  </div>
-                </div>
-                <div class="row full-centered full-right">
-                  <div class="col-5">
-                    <div ngbDropdown class="d-inline-block">
-                      <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1"
-                        ngbDropdownToggle>
-                        <span *ngIf="actualCategory.genre == 0">Hombres</span>
-                        <span *ngIf="actualCategory.genre == 1">Mujeres</span>
-                        <span *ngIf="actualCategory.genre == 2">Niños</span>
-                        <span *ngIf="actualCategory.genre == 3">Niñas</span>
-                      </button>
-                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button (click)="actualCategory.genre = 0" ngbDropdownItem>Hombres</button>
-                        <button (click)="actualCategory.genre = 1" ngbDropdownItem>Mujeres</button>
-                        <button (click)="actualCategory.genre = 2" ngbDropdownItem>Niños</button>
-                        <button (click)="actualCategory.genre = 3" ngbDropdownItem>Niñas</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-2 full-centered full-right">
-                    <div class="input-field m-t-0 m-b-0">
-                      <label class="control-label form-label">
-                        <span style="color: red;">*</span> Estatus
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col-5">
-                    <div ngbDropdown class="d-inline-block">
-                      <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1"
-                        ngbDropdownToggle>
-                        <span *ngIf="actualCategory.active == true">Activo</span>
-                        <span *ngIf="actualCategory.active == false">Desactivado</span>
-                      </button>
-                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button (click)="actualCategory.active = true" ngbDropdownItem>Activado</button>
-                        <button (click)="actualCategory.active = false" ngbDropdownItem>Desactivado</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="row full-centered">
-                  <div class="col-12">
-                    <button class="btn mr-0 btn-outline-secondary button-options" type="button">
-                      <div class="row full-centered">
-                        <i class="fas fa-save"></i>
-                      </div>
-                      <div class="row full-centered font-normal">
-                        Guardar
-                      </div>
-                    </button>
-                  </div>
-                </div>
-                <div class="row full-centered">
-                  <div class="col-12">
-                    <button class="btn mr-0 btn-outline-secondary button-options" type="button">
-                      <div class="row full-centered">
-                        <i class="fas fa-save"></i>
-                      </div>
-                      <div class="row full-centered font-normal">
-                        Eliminar
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+
       <hr class="m-t-0" />
       <form>
-        <div class="form-group form-inline pd-10-l">
-          <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
-            (ngModelChange)="filterByName($event)" placeholder="Buscar por nombre" class="form-control ml-2"
-            type="text" />
-          <i class="pd-10-l fas fa-search"></i>
-          <!-- Filtrar por genero -->
-          <div ngbDropdown class="d-inline-block">
-            <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
-              <span *ngIf="selectedGenre == -1">Todos</span>
-              <span *ngIf="selectedGenre == 0">Hombres</span>
-              <span *ngIf="selectedGenre == 1">Mujeres</span>
-              <span *ngIf="selectedGenre == 2">Niños</span>
-              <span *ngIf="selectedGenre == 3">Niñas</span>
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button (click)="changeGenreSelected(-1)" ngbDropdownItem>Todos</button>
-              <button (click)="changeGenreSelected(0)" ngbDropdownItem>Hombres</button>
-              <button (click)="changeGenreSelected(1)" ngbDropdownItem>Mujeres</button>
-              <button (click)="changeGenreSelected(2)" ngbDropdownItem>Niños</button>
-              <button (click)="changeGenreSelected(3)" ngbDropdownItem>Niñas</button>
+        <div class="row">
+          <div class="col-sm-12 col-md-3">
+            <div class="form-group pd-10-l">
+              <label class="control-label form-label ma-b-10-i">
+                <!-- <span style="color: red;">*</span> --> Buscar por nombre
+              </label>
+              <div class="form-inline">
+                <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchValue"
+                  (ngModelChange)="filterByName($event)" placeholder="Ingrese nombre a buscar"
+                  class="form-control text-capitalize" type="text" />
+                <i class="pd-10-l fas fa-search"></i>
+              </div>
             </div>
           </div>
-
-          <div ngbDropdown class="d-inline-block">
-            <button class="outline-btn btn btn-outline-secondary ma-l-70" id="dropdownBasic1" ngbDropdownToggle>
-              <span *ngIf="selectedStatus == -1">Activos y Desactivados</span>
-              <span *ngIf="selectedStatus == 0">Activos</span>
-              <span *ngIf="selectedStatus == 1">Desactivados</span>
-            </button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button (click)="changeStatusSelected(-1)" ngbDropdownItem>Activos y Desactivados</button>
-              <button (click)="changeStatusSelected(0)" ngbDropdownItem>Activos</button>
-              <button (click)="changeStatusSelected(1)" ngbDropdownItem>Desactivados</button>
+          <div class="col-sm-12 col-md-2">
+            <div class="form-group pd-10-l">
+              <label class="control-label form-label ma-b-10-i">
+                <!-- <span style="color: red;">*</span> --> Filtrar por genero
+              </label>
+              <div ngbDropdown class="">
+                <button class="outline-btn btn btn-outline-secondary" id="dropdownBasic11" ngbDropdownToggle>
+                  <span *ngIf="selectedGenre == -1">Todos los géneros</span>
+                  <span *ngIf="selectedGenre == 0">Hombres</span>
+                  <span *ngIf="selectedGenre == 1">Mujeres</span>
+                  <span *ngIf="selectedGenre == 2">Niños</span>
+                  <span *ngIf="selectedGenre == 3">Niñas</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic11">
+                  <button (click)="changeGenreSelected(-1,selectedStatus)" ngbDropdownItem>Todos los géneros</button>
+                  <button (click)="changeGenreSelected(0,selectedStatus)" ngbDropdownItem>Hombres</button>
+                  <button (click)="changeGenreSelected(1,selectedStatus)" ngbDropdownItem>Mujeres</button>
+                  <button (click)="changeGenreSelected(2,selectedStatus)" ngbDropdownItem>Niños</button>
+                  <button (click)="changeGenreSelected(3,selectedStatus)" ngbDropdownItem>Niñas</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-2">
+            <div class="form-group pd-10-l">
+              <label class="control-label form-label ma-b-10-i">
+                <!-- <span style="color: red;">*</span> --> Filtrar por Estado
+              </label>
+              <div ngbDropdown class="">
+                <button class="outline-btn btn btn-outline-secondary" id="dropdownBasic12" ngbDropdownToggle>
+                  <span *ngIf="selectedStatus == -1">Activos y Desactivados</span>
+                  <span *ngIf="selectedStatus == 0">Activos</span>
+                  <span *ngIf="selectedStatus == 1">Desactivados</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic12">
+                  <button (click)="changeStatusSelected(-1,selectedGenre)" ngbDropdownItem>Activos y
+                    Desactivados</button>
+                  <button (click)="changeStatusSelected(0,selectedGenre)" ngbDropdownItem>Activos</button>
+                  <button (click)="changeStatusSelected(1,selectedGenre)" ngbDropdownItem>Desactivados</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </form>
       <!-- EDIT IMAGES -->
       <div class="card-body p-t-0 p-r-0">
-        <div class="chat-box p-r-15" style="height: calc(100vh - 550px); position: relative;"
+        <div class="chat-box p-r-15" style="height: calc(100vh - 300px); position: relative;"
           [perfectScrollbar]="config">
           <!-- ITEMS -->
 
@@ -157,19 +98,21 @@
               <thead>
                 <tr class="row">
                   <th scope="col" class="col-1 full-centered">Id</th>
-                  <th scope="col" class="col-5 full-left">Nombre</th>
+                  <th scope="col" class="col-3 full-left">Nombre</th>
+                  <th scope="col" class="col-1 full-centered">No Productos</th>
                   <th scope="col" class="col-2 full-centered">Genero</th>
                   <th scope="col" class="col-2 full-centered">Estatus</th>
-                  <th scope="col" class="col-2 full-centered">Acciones</th>
+                  <th scope="col" class="col-3 full-centered"></th>
                 </tr>
               </thead>
-              <tbody class="dragndrop" [dragula]="'images-list'" [(dragulaModel)]="categorysFiltered">
+              <tbody>
                 <!-- <div >
                     <div *ngFor='let text of many2' [innerHtml]='text'></div>
                  </div> -->
-                <tr class="row" *ngFor="let category of categorysFiltered; index as i">
+                <tr class="row" *ngFor="let category of categoriesFiltered; index as i">
                   <th scope="col" class="col-1 full-centered">{{category.idCategory}}</th>
-                  <th scope="col" class="col-5 full-left">{{ category.name }}</th>
+                  <th scope="col" class="col-3 full-left text-capitalize">{{ category.name }}</th>
+                  <th scope="col" class="col-1 full-centered">{{category.noProducts}}</th>
                   <th scope="col" class="col-2 full-centered">
                     <label *ngIf="category.genre == 3" class="row no-margin genre-label margin-hori-10-5"
                       style="background-color: blueviolet;margin-bottom: 5px;">
@@ -198,15 +141,21 @@
                       Desactivado
                     </label>
                   </th>
-                  <th scope="col" class="col-2 full-centered">
-                    <button class="btn mr-0 btn-outline-secondary" type="button">
-                      <i class="fas fa-trash-alt"></i>
-                      Desactivar
-                    </button>
-                    <button class="btn mr-0 btn-outline-secondary" type="button">
-                      <i class="fas fa-trash-alt"></i>
-                      Editar
-                    </button>
+                  <th scope="col" class="col-3 full-centered">
+                    <div class="row">
+                      <div class="col-6">
+                        <button (click)="openModalEditCategory(category)" class="btn mr-0 btn-outline-primary" type="button">
+                          <i class="fas fa-edit"></i>
+                          Editar
+                        </button>
+                      </div>
+                      <div class="col-6">
+                        <button (click)="openModalConfirmDeleteCategory(category)" class="btn mr-0 btn-outline-secondary" type="button">
+                          <i class="fas fa-trash-alt"></i>
+                          Eliminar
+                        </button>
+                      </div>
+                    </div>
                   </th>
                 </tr>
               </tbody>
@@ -217,3 +166,146 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal Add category Reset Password Client -->
+<ng-template #modalAddCategory let-modal>
+  <div class="modal-header">
+    <h4 *ngIf="selectedCategory.idCategory == -1" class="modal-title" id="modal-basic-title">Crear nueva categoría</h4>
+    <h4 *ngIf="selectedCategory.idCategory != -1" class="modal-title" id="modal-basic-title">Editando categoría</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+    <button *ngIf="selectedCategory.idCategory != -1" type="button" class="close" aria-label="Close"
+      (click)="openModalConfirmDeleteCategory(selectedCategory)">
+      <!-- <span aria-hidden="true">&times;</span> -->
+      <i class="fas fa-trash"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- ADD IMAGE -->
+    <div class="card-body border-top">
+      <div class="no-margin">
+        <div class="form-group no-margin">
+          <div class="row">
+            <div class="col-4">
+              <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
+                <div class="input-field m-t-0 m-b-0">
+                  <label class="control-label form-label">
+                    <span style="color: red;">*</span> Nombre de la categoría
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="row">
+                <div class="input-group mb-3">
+                  <input [(ngModel)]="selectedCategory.name" type="text" class="form-control text-capitalize"
+                    maxlength="50" id="maxval" aria-describedby="maxval" placeholder="Nombre de la categoría" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="row full-centered full-right" style="height: 49px; margin-right: 10px;">
+                <div class="input-field m-t-0 m-b-0">
+                  <label class="control-label form-label">
+                    <span style="color: red;">*</span> Seleccione Genero
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-8">
+              <div ngbDropdown class="d-inline-block full-width">
+                <button class="outline-btn btn btn-outline-secondary full-width" id="dropdownBasic1" ngbDropdownToggle>
+                  <span *ngIf="selectedCategory.genre == -1">Sin Selección</span>
+                  <span *ngIf="selectedCategory.genre == 0">Hombre</span>
+                  <span *ngIf="selectedCategory.genre == 1">Mujer</span>
+                  <span *ngIf="selectedCategory.genre == 2">Niño</span>
+                  <span *ngIf="selectedCategory.genre == 3">Niña</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="full-width">
+                  <button (click)="selectedCategory.genre = -1" ngbDropdownItem disabled>Sin Selección</button>
+                  <button (click)="selectedCategory.genre = 0" ngbDropdownItem>Hombre</button>
+                  <button (click)="selectedCategory.genre = 1" ngbDropdownItem>Mujer</button>
+                  <button (click)="selectedCategory.genre = 2" ngbDropdownItem>Niño</button>
+                  <button (click)="selectedCategory.genre = 3" ngbDropdownItem>Niña</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 full-centered full-right">
+              <div class="input-field m-t-0 m-b-0">
+                <label class="control-label form-label">
+                  <span style="color: red;">*</span> Estatus
+                </label>
+              </div>
+            </div>
+            <div class="col-8">
+              <div ngbDropdown class="d-inline-block full-width">
+                <button class="outline-btn btn btn-outline-secondary full-width" id="dropdownBasic2" ngbDropdownToggle>
+                  <span *ngIf="selectedCategory.active == true">Activo</span>
+                  <span *ngIf="selectedCategory.active == false">Desactivado</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="full-width">
+                  <button (click)="selectedCategory.active = true" ngbDropdownItem>Activado</button>
+                  <button (click)="selectedCategory.active = false" ngbDropdownItem>Desactivado</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+      <div class="row full-centered font-normal">
+        <i class="fas fa-window-close ma-0-10"></i> Cancelar
+      </div>
+    </button>
+    <button class="btn mr-0 btn-success button-reset " type="button">
+      <div *ngIf="selectedCategory.idCategory == -1" (click)="addCategory()" class="row full-centered font-normal">
+        <i class="fas fa-save ma-0-10"></i>
+        Añadir
+      </div>
+      <div *ngIf="selectedCategory.idCategory != -1" (click)="editCategory()" class="row full-centered font-normal">
+        <i class="fas fa-save ma-0-10"></i>
+        Guardar
+      </div>
+    </button>
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+  </div>
+</ng-template>
+
+<!-- Modal Confirm Delete Category -->
+<ng-template #modalConfirmDeleteCategory let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmar Eliminación</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <label class="control-label form-label">
+        <span style="color: red;">Se borrara la categoría y ademas los productos asociados a ella.</span>
+      </label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close('Save click');" class="btn mr-0 btn-danger button-reset " type="button">
+      <div class="row full-centered font-normal">
+        <i class="fas fa-window-close ma-0-10"></i> Cancelar
+      </div>
+    </button>
+    <button (click)="deleteCategory()" class="btn mr-0 btn-success button-reset " type="button">
+      <div class="row full-centered font-normal">
+        <i class="fas fa-trash ma-0-10"></i> Eliminar
+      </div>
+    </button>
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button> -->
+  </div>
+</ng-template>

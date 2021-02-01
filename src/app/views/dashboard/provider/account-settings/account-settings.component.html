@@ -34,7 +34,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Nombre de la empresa/Razón social
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.businessName}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.businessName}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
@@ -42,7 +42,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> RFC
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.rfc}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.rfc}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
@@ -50,7 +50,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Teléfono
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.phone}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.phoneBilling}}</label>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Correo Electrónico
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.email}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.emailBilling}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
@@ -68,7 +68,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Estado
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.state}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.state}}</label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4">
@@ -76,7 +76,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Ciudad
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.city}}</label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.city}}</label>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Código postal
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.postalCode}} </label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.postalCode}} </label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-2">
@@ -94,7 +94,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Colonia
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.colony}} </label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.colony}} </label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-2">
@@ -102,7 +102,7 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Numero
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.number}} </label>
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.number}} </label>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
@@ -110,8 +110,8 @@
                                     <label class="control-label form-label">
                                         <span style="color: red;">*</span> Calle
                                     </label><br>
-                                    <label for="incol2" class="control-label col-form-label form-control">{{customer.billingInformation.street}} </label>
-                                    <!-- <input [(ngModel)]="customer.billingInformation.street" type="text" class="form-control" 
+                                    <label for="incol2" class="control-label col-form-label">{{userData.billingInformation.street}} </label>
+                                    <!-- <input [(ngModel)]="userData.billingInformation.street" type="text" class="form-control" 
                                         id="instreet" placeholder="Escriba la dirección aquí"> -->
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Nombre
                                         </label>
-                                        <input [(ngModel)]="customer.name" type="text" class="form-control" id="idnom" placeholder="Escriba su nombre aqui">
+                                        <input [(ngModel)]="userData.name" type="text" class="form-control" id="idnom" placeholder="Escriba su nombre aqui">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -162,7 +162,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Apellidos
                                         </label>
-                                        <input [(ngModel)]="customer.surnames" type="text" class="form-control" id="insur" placeholder="Escriba sus apellidos aquí">
+                                        <input [(ngModel)]="userData.surnames" type="text" class="form-control" id="insur" placeholder="Escriba sus apellidos aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -170,7 +170,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Correo Electrónico
                                         </label>
-                                        <input [(ngModel)]="customer.email" type="text" class="form-control" id="inele" placeholder="Escriba un email valido aquí">
+                                        <input [(ngModel)]="userData.email" type="text" class="form-control" id="inele" placeholder="Escriba un email valido aquí">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -178,7 +178,7 @@
                                         <label class="control-label form-label">
                                             Fecha de nacimiento
                                         </label>
-                                       <!--  <input [(ngModel)]="customer.birthDay"  type="date" class="form-control" >
+                                       <!--  <input [(ngModel)]="userData.birthDay"  type="date" class="form-control" >
                                         <input [(ngModel)]="customeBirthDay" (change)="setBirthDay()" type="date" id="infech" class="form-control"> -->
                                         <div class="input-group">
                                             <input 
@@ -198,7 +198,7 @@
                                         <label class="control-label form-label">
                                             <span style="color: red;">*</span> Teléfono
                                         </label>
-                                        <input [(ngModel)]="customer.phone"  type="text" class="form-control" id="inputcom" placeholder="Company Here">
+                                        <input [(ngModel)]="userData.phone"  type="text" class="form-control" id="inputcom" placeholder="Company Here">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
@@ -212,16 +212,19 @@
                                               id="dropdownGenre"
                                               ngbDropdownToggle
                                             >
-                                                <span *ngIf="customer.genre == 3">Niña</span>
-                                                <span *ngIf="customer.genre == 2">Niño</span>
-                                                <span *ngIf="customer.genre == 1">Mujer</span>
-                                                <span *ngIf="customer.genre == 0">Hombre</span>
+                                                <span *ngIf="userData.gender == 3">Niña</span>
+                                                <span *ngIf="userData.gender == 2">Niño</span>
+                                                <span *ngIf="userData.gender == 1">Mujer</span>
+                                                <span *ngIf="userData.gender == 0">Hombre</span>
+                                                <span *ngIf="userData.gender == -1">Seleccione un genero</span>
                                             </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownGenre">
-                                                <button ngbDropdownItem (click)="customer.genre = 3">Niña</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 2">Niño</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 1">Mujer</button>
-                                                <button ngbDropdownItem (click)="customer.genre = 0">Hombre</button>
+                                                <button disabled ngbDropdownItem
+                                                    (click)="userData.gender = -1">Seleccione un genero</button>
+                                                <!-- <button ngbDropdownItem (click)="userData.gender = 3">Niña</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 2">Niño</button> -->
+                                                <button ngbDropdownItem (click)="userData.gender = 1">Mujer</button>
+                                                <button ngbDropdownItem (click)="userData.gender = 0">Hombre</button>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +282,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Nombre
                         </label>
-                        <input [(ngModel)]="customer.directions[0].name" type="text" class="form-control" id="idnamem" placeholder="Nombre de la persona que recibe">
+                        <input [(ngModel)]="userData.directions[0].name" type="text" class="form-control" id="idnamem" placeholder="Nombre de la persona que recibe">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -287,7 +290,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Apellidos
                         </label>
-                        <input [(ngModel)]="customer.directions[0].surnames" type="text" class="form-control" id="idsurm" placeholder="Escriba sus apellidos">
+                        <input [(ngModel)]="userData.directions[0].surnames" type="text" class="form-control" id="idsurm" placeholder="Escriba sus apellidos">
                     </div>
                 </div>
             </div>
@@ -297,7 +300,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Calle
                         </label>
-                        <textarea [(ngModel)]="customer.directions[0].street" type="text" class="form-control" id="iddirm" placeholder="Escriba la calle aquí"></textarea>
+                        <textarea [(ngModel)]="userData.directions[0].street" type="text" class="form-control" id="iddirm" placeholder="Escriba la calle aquí"></textarea>
                     </div>
                 </div>
             </div>
@@ -307,7 +310,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Teléfono
                         </label>
-                        <input [(ngModel)]="customer.directions[0].phone" type="text" class="form-control" id="idtelm" placeholder="Escriba su teléfono">
+                        <input [(ngModel)]="userData.directions[0].phone" type="text" class="form-control" id="idtelm" placeholder="Escriba su teléfono">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
@@ -315,7 +318,7 @@
                         <label class="control-label form-label">
                             <!-- <span style="color: red;">*</span>  -->No Interior
                         </label>
-                        <input [(ngModel)]="customer.directions[0].number"  type="text" class="form-control" id="idintm" placeholder="Numero interior">
+                        <input [(ngModel)]="userData.directions[0].number"  type="text" class="form-control" id="idintm" placeholder="Numero interior">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
@@ -323,7 +326,7 @@
                         <label class="control-label form-label">
                             <!-- <span style="color: red;">*</span>  -->No Exterior
                         </label>
-                        <input [(ngModel)]="customer.directions[0].extNumber"  type="text" class="form-control" id="idnoem" placeholder="Numero exterior">
+                        <input [(ngModel)]="userData.directions[0].extNumber"  type="text" class="form-control" id="idnoem" placeholder="Numero exterior">
                     </div>
                 </div>
             </div>
@@ -334,7 +337,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Estado
                         </label>
-                        <input [(ngModel)]="customer.directions[0].state" type="text" class="form-control" id="idestm" placeholder="Company Here">
+                        <input [(ngModel)]="userData.directions[0].state" type="text" class="form-control" id="idestm" placeholder="Company Here">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -342,7 +345,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Ciudad
                         </label>
-                        <input [(ngModel)]="customer.directions[0].city" type="text" class="form-control" id="idcium" placeholder="Company Here">
+                        <input [(ngModel)]="userData.directions[0].city" type="text" class="form-control" id="idcium" placeholder="Company Here">
                     </div>
                 </div>
             </div>
@@ -353,7 +356,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Colonia
                         </label>
-                        <input [(ngModel)]="customer.directions[0].colony" type="text" class="form-control" id="idcolm" placeholder="Company Here">
+                        <input [(ngModel)]="userData.directions[0].colony" type="text" class="form-control" id="idcolm" placeholder="Company Here">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
@@ -361,7 +364,7 @@
                         <label class="control-label form-label">
                             <span style="color: red;">*</span> Código postal
                         </label>
-                        <input [(ngModel)]="customer.directions[0].postalCode" type="text" class="form-control" id="idcodm" placeholder="Company Here">
+                        <input [(ngModel)]="userData.directions[0].postalCode" type="text" class="form-control" id="idcodm" placeholder="Company Here">
                     </div>
                 </div>
             </div>
@@ -403,7 +406,7 @@
                 </button> -->
             </div>
             <div class="col-6 full-right">
-                <button class="btn mr-0 btn-outline-secondary button-options" type="button">
+                <button (click)="save()" class="btn mr-0 btn-outline-primary button-options" type="button">
                     <div class="row full-centered">
                         <i class="fas fa-save"></i>
                     </div>
